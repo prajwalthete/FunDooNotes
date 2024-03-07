@@ -1,0 +1,12 @@
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\bin\Debug\net8.0\RepositoryLayer.deps.json
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\bin\Debug\net8.0\RepositoryLayer.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\bin\Debug\net8.0\RepositoryLayer.pdb
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.csproj.AssemblyReference.cache
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.GeneratedMSBuildEditorConfig.editorconfig
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.AssemblyInfoInputs.cache
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.AssemblyInfo.cs
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.csproj.CoreCompileInputs.cache
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\refint\RepositoryLayer.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.pdb
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\ref\RepositoryLayer.dll
