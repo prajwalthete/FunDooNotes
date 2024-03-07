@@ -1,0 +1,13 @@
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\bin\Debug\net8.0\ModelLayer.deps.json
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\bin\Debug\net8.0\ModelLayer.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\bin\Debug\net8.0\ModelLayer.pdb
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\obj\Debug\net8.0\ModelLayer.csproj.AssemblyReference.cache
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\obj\Debug\net8.0\ModelLayer.GeneratedMSBuildEditorConfig.editorconfig
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\obj\Debug\net8.0\ModelLayer.AssemblyInfoInputs.cache
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\obj\Debug\net8.0\ModelLayer.AssemblyInfo.cs
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\obj\Debug\net8.0\ModelLayer.csproj.CoreCompileInputs.cache
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\obj\Debug\net8.0\ModelLayer.sourcelink.json
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\obj\Debug\net8.0\ModelLayer.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\obj\Debug\net8.0\refint\ModelLayer.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\obj\Debug\net8.0\ModelLayer.pdb
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\ModelLayer\obj\Debug\net8.0\ref\ModelLayer.dll

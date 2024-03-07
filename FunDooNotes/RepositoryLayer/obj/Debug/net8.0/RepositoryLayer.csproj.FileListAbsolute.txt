@@ -10,3 +10,7 @@ E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNote
 E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\refint\RepositoryLayer.dll
 E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.pdb
 E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\ref\RepositoryLayer.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\bin\Debug\net8.0\ModelLayer.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\bin\Debug\net8.0\ModelLayer.pdb
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.sourcelink.json
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\RepositoryLayer\obj\Debug\net8.0\Reposito.A0A61804.Up2Date

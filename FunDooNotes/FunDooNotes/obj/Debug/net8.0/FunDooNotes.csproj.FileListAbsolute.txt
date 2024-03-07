@@ -68,3 +68,8 @@ E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNote
 E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\obj\Debug\net8.0\FunDooNotes.pdb
 E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\obj\Debug\net8.0\FunDooNotes.genruntimeconfig.cache
 E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\obj\Debug\net8.0\ref\FunDooNotes.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\BusinessLayer.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\ModelLayer.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\BusinessLayer.pdb
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\ModelLayer.pdb
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\obj\Debug\net8.0\FunDooNotes.sourcelink.json

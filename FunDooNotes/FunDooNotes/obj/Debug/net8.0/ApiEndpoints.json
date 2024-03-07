@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "ContainingType": "FunDooNotes.Controllers.FunDooController",
+    "Method": "AddNewUser",
+    "RelativePath": "api/FunDoo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "ModelLayer.Models.UserRegistrationModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

@@ -1,9 +1,16 @@
+using BusinessLayer.Interfaces;
+using BusinessLayer.Services;
 using RepositoryLayer.Context;
+using RepositoryLayer.Interfaces;
+using RepositoryLayer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSingleton<DapperContext>();
+builder.Services.AddScoped<IUserRegistrationBL, UserRegistrationBL>();
+builder.Services.AddScoped<IUserRegistrationRL, UserRegistrationRL>();
+
 
 
 
