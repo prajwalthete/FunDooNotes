@@ -43,14 +43,13 @@ namespace RepositoryLayer.Services
                 if (!tableExists)
                 {
                     await connection.ExecuteAsync(
-                        @" CREATE TABLE Users (
-                                            Id INT IDENTITY(1, 1) PRIMARY KEY,
-                                            FirstName NVARCHAR(100) NOT NULL,
-                                            LastName NVARCHAR(100) NOT NULL,
-                                            Email NVARCHAR(100) NOT NULL,
-                                            Password NVARCHAR(100) NOT NULL
-                                            )"
-                                                );
+                                                    @" CREATE TABLE Users (
+                                                             Id INT IDENTITY(1, 1) PRIMARY KEY,
+                                                             FirstName NVARCHAR(100) NOT NULL,
+                                                             LastName NVARCHAR(100) NOT NULL,
+                                                             Email NVARCHAR(100) UNIQUE NOT NULL,
+                                                             Password NVARCHAR(100) UNIQUE NOT NULL )"
+                                                 );
                 }
 
                 // Insert new user
@@ -60,5 +59,29 @@ namespace RepositoryLayer.Services
             return true;
         }
 
+        public async Task<bool> UserLogin(UserLoginModel userLogin)
+        {
+
+
+            using (var connection = _Context.CreateConnection())
+            {
+                string query = @"
+                                 SELECT * FROM Users WHERE Email = @Email AND Password = @Password;
+                                ";
+
+                var parameters = new
+                {
+                    userLogin.Email,
+                    userLogin.Password
+                };
+
+
+                var user = await connection.QueryFirstOrDefaultAsync<UserRegistrationModel>(query, parameters);
+
+                return user != null;
+            }
+
+
+        }
     }
 }

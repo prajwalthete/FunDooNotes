@@ -18,5 +18,10 @@ namespace BusinessLayer.Services
             // return Task.FromResult(true);
             return _userRegistrationRl.AddNewUser(userRegistrationModel);
         }
+
+        public Task<bool> UserLogin(UserLoginModel userLogin)
+        {
+            return _userRegistrationRl.UserLogin(userLogin);
+        }
     }
 }

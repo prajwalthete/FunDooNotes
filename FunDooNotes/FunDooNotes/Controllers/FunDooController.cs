@@ -17,7 +17,7 @@ namespace FunDooNotes.Controllers
 
 
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> AddNewUser(UserRegistrationModel user)
         {
             try
@@ -31,5 +31,33 @@ namespace FunDooNotes.Controllers
             }
 
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> UserLogin(UserLoginModel userLogin)
+        {
+            try
+            {
+
+                var userExists = await _registrationBL.UserLogin(userLogin);
+
+                if (userExists)
+                {
+
+                    return Ok("Login successful");
+                }
+                else
+                {
+
+                    return Unauthorized("Invalid email or password");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, $"An error occurred while processing the login request: {ex.Message}");
+            }
+        }
+
+
     }
 }

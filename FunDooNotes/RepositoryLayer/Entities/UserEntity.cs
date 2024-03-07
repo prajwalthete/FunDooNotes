@@ -1,10 +1,14 @@
-﻿namespace RepositoryLayer.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RepositoryLayer.Entities
 {
     public class UserEntity
     {
         public int UserId { get; set; }
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
+
+        [EmailAddress]
         public required string Email { get; set; }
         public required string Password { get; set; }
 
