@@ -24,24 +24,50 @@ namespace FunDooNotes.Controllers
             try
             {
                 var addedUser = await _registrationBL.AddNewUser(user);
-
-                var response = new ResponseModel<UserRegistrationModel>
+                if (addedUser)
                 {
-                    StatusCode = 200,
-                    Message = "User Registration Successful"
-                };
-                return Ok(response);
-
+                    var response = new ResponseModel<UserRegistrationModel>
+                    {
+                        StatusCode = 200,
+                        Message = "User Registration Successful"
+                    };
+                    return Ok(response);
+                }
+                else
+                {
+                    //var response = new ResponseModel<UserRegistrationModel>
+                    //{
+                    //    StatusCode = 400,
+                    //    Message = "invalid input"
+                    //};
+                    //return BadRequest(response);
+                    return BadRequest("invalid input");
+                }
             }
             catch (Exception ex)
             {
                 if (ex is DuplicateEmailException)
                 {
-                    return Conflict("User with given email already exists");
+                    var response = new ResponseModel<UserRegistrationModel>
+                    {
+                        StatusCode = 400,
+                        IsSuccess = false,
+                        Message = ex.Message
+                    };
+                    return BadRequest(response);
+                    // return BadRequest("User with given email already exists");
+
                 }
                 else if (ex is InvalidEmailFormatException)
                 {
-                    return BadRequest("Invalid email format");
+                    var response = new ResponseModel<UserRegistrationModel>
+                    {
+                        StatusCode = 400,
+                        IsSuccess = false,
+                        Message = ex.Message
+                    };
+                    return BadRequest(response);
+                    // return BadRequest("Invalid email format");
                 }
                 else
                 {
@@ -49,10 +75,6 @@ namespace FunDooNotes.Controllers
                 }
             }
         }
-
-
-
-
 
         [HttpPost("login")]
         public async Task<IActionResult> UserLogin(UserLoginModel userLogin)
@@ -65,7 +87,6 @@ namespace FunDooNotes.Controllers
                 var response = new ResponseModel<UserRegistrationModel>
                 {
                     StatusCode = 200,
-                    IsSuccess = true,
                     Message = "Login Sucessfull",
 
                 };
@@ -76,11 +97,27 @@ namespace FunDooNotes.Controllers
             {
                 if (ex is UserNotFoundException)
                 {
-                    return Conflict($"User with email '{userLogin.Email}' not found.");
+                    var response = new ResponseModel<UserRegistrationModel>
+                    {
+                        StatusCode = 409,
+                        IsSuccess = false,
+                        Message = ex.Message
+
+                    };
+                    return Conflict(response);
+                    // return Conflict($"User with email '{userLogin.Email}' not found.");
                 }
                 else if (ex is InvalidPasswordException)
                 {
-                    return BadRequest($"User with Password '{userLogin.Password}' not Found.");
+                    var response = new ResponseModel<UserRegistrationModel>
+                    {
+                        StatusCode = 400,
+                        IsSuccess = false,
+                        Message = ex.Message
+
+                    };
+                    return BadRequest(response);
+                    // return BadRequest($"User with Password '{userLogin.Password}' not Found.");
                 }
                 else
                 {

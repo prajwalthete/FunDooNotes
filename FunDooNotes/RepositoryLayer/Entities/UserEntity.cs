@@ -1,13 +1,22 @@
-﻿namespace RepositoryLayer.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace RepositoryLayer.Entities
 {
     public class UserEntity
     {
         public int UserId { get; set; }
-        public required string FirstName { get; set; }
-        public required string LastName { get; set; }
 
-        public required string Email { get; set; }
-        public required string Password { get; set; }
+        [Required(ErrorMessage = "First name is required.")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "Last name is required.")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Email is required.")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Password is required.")]
+        public string Password { get; set; }
 
     }
 }

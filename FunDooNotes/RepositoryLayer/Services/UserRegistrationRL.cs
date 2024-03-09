@@ -20,6 +20,15 @@ namespace RepositoryLayer.Services
 
         public async Task<bool> AddNewUser(UserRegistrationModel userRegModel)
         {
+            //if (string.IsNullOrWhiteSpace(userRegModel?.FirstName) ||
+            //    string.IsNullOrWhiteSpace(userRegModel?.LastName) ||
+            //    string.IsNullOrWhiteSpace(userRegModel?.Email) ||
+            //    string.IsNullOrWhiteSpace(userRegModel?.Password))
+            //{
+            //    throw new ArgumentException("Input fields cannot be empty");
+            //    // or return BadRequest("Input fields cannot be empty");
+            //}
+
 
             var queryCheckEmail = @"
                 SELECT COUNT(*)
@@ -46,6 +55,7 @@ namespace RepositoryLayer.Services
 
                 throw new InvalidEmailFormatException("Invalid email format");
             }
+
             parameters.Add("Email", userRegModel.Email, DbType.String);
 
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(userRegModel.Password);
@@ -56,15 +66,7 @@ namespace RepositoryLayer.Services
 
             using (var connection = _Context.CreateConnection())
             {
-                // Check if email already exists
-                bool emailExists = await connection.QueryFirstOrDefaultAsync<bool>(queryCheckEmail, parametersCheckEmail);
 
-                if (emailExists)
-                {
-
-                    throw new DuplicateEmailException("Email address is already in use");
-
-                }
 
 
                 // Check if table exists
@@ -87,6 +89,16 @@ namespace RepositoryLayer.Services
                                                              Email NVARCHAR(100) UNIQUE NOT NULL,
                                                              Password NVARCHAR(100) UNIQUE NOT NULL )"
                                                  );
+                }
+
+                // Check if email already exists
+                bool emailExists = await connection.QueryFirstOrDefaultAsync<bool>(queryCheckEmail, parametersCheckEmail);
+
+                if (emailExists)
+                {
+
+                    throw new DuplicateEmailException("Email address is already in use");
+
                 }
 
                 // Insert new user
@@ -116,7 +128,7 @@ namespace RepositoryLayer.Services
 
                 if (!BCrypt.Net.BCrypt.Verify(userLogin.Password, user.Password))
                 {
-                    throw new InvalidPasswordException("Invalid password.");
+                    throw new InvalidPasswordException($"User with Password '{userLogin.Password}' not Found.");
                 }
 
                 return true;
