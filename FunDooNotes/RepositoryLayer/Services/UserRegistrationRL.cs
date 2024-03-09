@@ -1,6 +1,8 @@
 ﻿using Dapper;
 using ModelLayer.Models;
 using RepositoryLayer.Context;
+using RepositoryLayer.GlobleExceptionhandler;
+using RepositoryLayer.GlobleExeptionhandler;
 using RepositoryLayer.Interfaces;
 using System.Data;
 using System.Text.RegularExpressions;
@@ -18,6 +20,16 @@ namespace RepositoryLayer.Services
 
         public async Task<bool> AddNewUser(UserRegistrationModel userRegModel)
         {
+
+            var queryCheckEmail = @"
+                SELECT COUNT(*)
+                FROM Users
+                WHERE Email = @Email;
+            ";
+
+            var parametersCheckEmail = new DynamicParameters();
+            parametersCheckEmail.Add("Email", userRegModel.Email, DbType.String);
+
             var query = @"
                           INSERT INTO Users (FirstName, LastName, Email, Password)
                           VALUES (@FirstName, @LastName, @Email, @Password);
@@ -27,10 +39,12 @@ namespace RepositoryLayer.Services
             parameters.Add("FirstName", userRegModel.FirstName, DbType.String);
             parameters.Add("LastName", userRegModel.LastName, DbType.String);
 
+
             if (!IsValidEmail(userRegModel.Email))
             {
                 Console.WriteLine("Invalid email format");
-                return false;
+
+                throw new InvalidEmailFormatException("Invalid email format");
             }
             parameters.Add("Email", userRegModel.Email, DbType.String);
 
@@ -38,8 +52,22 @@ namespace RepositoryLayer.Services
 
             parameters.Add("Password", hashedPassword, DbType.String);
 
+
+
             using (var connection = _Context.CreateConnection())
             {
+                // Check if email already exists
+                bool emailExists = await connection.QueryFirstOrDefaultAsync<bool>(queryCheckEmail, parametersCheckEmail);
+
+                if (emailExists)
+                {
+
+                    throw new DuplicateEmailException("Email address is already in use");
+
+                    //  return false;
+                }
+
+
                 // Check if table exists
                 bool tableExists = await connection.QueryFirstOrDefaultAsync<bool>(
                     @"
@@ -71,29 +99,31 @@ namespace RepositoryLayer.Services
 
         public async Task<bool> UserLogin(UserLoginModel userLogin)
         {
-            //if (!IsValidEmail(userLogin.Email))
-            //{
-            //    //Console.WriteLine("Invalid email format");
-            //    return false;
-            //}
-
             using (var connection = _Context.CreateConnection())
             {
                 string query = @"
-                                 SELECT * FROM Users WHERE Email = @Email ;
-                                ";
+                        SELECT * FROM Users WHERE Email = @Email ;
+                       ";
 
                 var parameters = new DynamicParameters();
                 parameters.Add("Email", userLogin.Email);
 
-
                 var user = await connection.QueryFirstOrDefaultAsync<UserRegistrationModel>(query, parameters);
 
-                return user != null && BCrypt.Net.BCrypt.Verify(userLogin.Password, user.Password); ;
+                if (user == null)
+                {
+                    throw new UserNotFoundException($"User with email '{userLogin.Email}' not found.");
+                }
+
+                if (!BCrypt.Net.BCrypt.Verify(userLogin.Password, user.Password))
+                {
+                    throw new InvalidPasswordException("Invalid password.");
+                }
+
+                return true;
             }
-
-
         }
+
 
         private bool IsValidEmail(string email)
         {

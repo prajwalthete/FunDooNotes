@@ -7,31 +7,59 @@
       "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\services\\userregistrationrl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\interfaces\\iuserregistrationrl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\interfaces\\iuserregistrationrl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\context\\dappercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\context\\dappercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D91F1EB-C9C2-4570-B8E6-35F4409E6B36}|FunDooNotes\\FunDooNotes.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\fundoonotes\\controllers\\fundoocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D91F1EB-C9C2-4570-B8E6-35F4409E6B36}|FunDooNotes\\FunDooNotes.csproj|solutionrelative:fundoonotes\\controllers\\fundoocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\businesslayer\\services\\userregistrationbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|solutionrelative:businesslayer\\services\\userregistrationbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\modellayer\\models\\userregistrationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|solutionrelative:modellayer\\models\\userregistrationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__ProjectModels/FUNDOO_DB/True/SqlTable/dbo.Users.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\globleexceptionhandler\\usernotfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\globleexceptionhandler\\usernotfoundexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\globleexceptionhandler\\invalidpasswordexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\globleexceptionhandler\\invalidpasswordexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\globleexceptionhandler\\invalidemailformatexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\globleexceptionhandler\\invalidemailformatexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\businesslayer\\businesslayer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|solutionrelative:businesslayer\\businesslayer.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\globleexceptionhandler\\duplicateemailexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\globleexceptionhandler\\duplicateemailexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\modellayer\\models\\userloginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|solutionrelative:modellayer\\models\\userloginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__ProjectModels/FUNDOO_DB/True/SqlTable/dbo.Users.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+      "AbsoluteMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\modellayer\\models\\userregistrationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|solutionrelative:modellayer\\models\\userregistrationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\modellayer\\models\\responsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|solutionrelative:modellayer\\models\\responsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\interfaces\\iuserregistrationrl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\interfaces\\iuserregistrationrl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\entities\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\entities\\userentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8D91F1EB-C9C2-4570-B8E6-35F4409E6B36}|FunDooNotes\\FunDooNotes.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\fundoonotes\\controllers\\fundoocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8D91F1EB-C9C2-4570-B8E6-35F4409E6B36}|FunDooNotes\\FunDooNotes.csproj|solutionrelative:fundoonotes\\controllers\\fundoocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -41,7 +69,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -57,77 +85,64 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "dbo.Users [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__ProjectModels/FUNDOO_DB/True/SqlTable/dbo.Users.sql",
-              "ToolTip": "dbo.Users [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-03-08T12:40:19.528Z",
+              "DocumentIndex": 1,
+              "Title": "DapperContext.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Context\\DapperContext.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\Context\\DapperContext.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Context\\DapperContext.cs",
+              "RelativeToolTip": "RepositoryLayer\\Context\\DapperContext.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAoAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-09T07:45:11.262Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "UserLoginModel.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\UserLoginModel.cs",
-              "RelativeDocumentMoniker": "ModelLayer\\Models\\UserLoginModel.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\UserLoginModel.cs",
-              "RelativeToolTip": "ModelLayer\\Models\\UserLoginModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAABAAAA",
+              "Title": "dbo.Users [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__ProjectModels/FUNDOO_DB/True/SqlTable/dbo.Users.sql",
+              "ToolTip": "dbo.Users [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-03-09T07:36:23.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserNotFoundException.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\GlobleExceptionhandler\\UserNotFoundException.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\GlobleExceptionhandler\\UserNotFoundException.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\GlobleExceptionhandler\\UserNotFoundException.cs",
+              "RelativeToolTip": "RepositoryLayer\\GlobleExceptionhandler\\UserNotFoundException.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-08T11:47:34.748Z",
+              "WhenOpened": "2024-03-09T07:33:37.047Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "UserRegistrationModel.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\UserRegistrationModel.cs",
-              "RelativeDocumentMoniker": "ModelLayer\\Models\\UserRegistrationModel.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\UserRegistrationModel.cs",
-              "RelativeToolTip": "ModelLayer\\Models\\UserRegistrationModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAyAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-08T11:38:35.397Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UserEntity.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Entities\\UserEntity.cs",
-              "RelativeDocumentMoniker": "RepositoryLayer\\Entities\\UserEntity.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Entities\\UserEntity.cs",
-              "RelativeToolTip": "RepositoryLayer\\Entities\\UserEntity.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-07T18:29:33.582Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "UserRegistrationBL.cs",
               "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\Services\\UserRegistrationBL.cs",
               "RelativeDocumentMoniker": "BusinessLayer\\Services\\UserRegistrationBL.cs",
               "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\Services\\UserRegistrationBL.cs",
               "RelativeToolTip": "BusinessLayer\\Services\\UserRegistrationBL.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAA1AAAA",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAgwAQAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-07T18:18:39.503Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IUserRegistrationRL.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Interfaces\\IUserRegistrationRL.cs",
-              "RelativeDocumentMoniker": "RepositoryLayer\\Interfaces\\IUserRegistrationRL.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Interfaces\\IUserRegistrationRL.cs",
-              "RelativeToolTip": "RepositoryLayer\\Interfaces\\IUserRegistrationRL.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
+              "DocumentIndex": 2,
+              "Title": "FunDooController.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\FunDooNotes\\Controllers\\FunDooController.cs",
+              "RelativeDocumentMoniker": "FunDooNotes\\Controllers\\FunDooController.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\FunDooNotes\\Controllers\\FunDooController.cs",
+              "RelativeToolTip": "FunDooNotes\\Controllers\\FunDooController.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAzwCIAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-07T16:53:50.294Z",
+              "WhenOpened": "2024-03-07T18:20:58.984Z",
               "EditorCaption": ""
             },
             {
@@ -138,23 +153,122 @@
               "RelativeDocumentMoniker": "RepositoryLayer\\Services\\UserRegistrationRL.cs",
               "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Services\\UserRegistrationRL.cs",
               "RelativeToolTip": "RepositoryLayer\\Services\\UserRegistrationRL.cs",
-              "ViewState": "AQIAAEUAAAAAAAAAAAAowEwAAAAfAAAA",
+              "ViewState": "AQIAADIAAAAAAAAAAAAAwCQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-07T13:23:54.353Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "FunDooController.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\FunDooNotes\\Controllers\\FunDooController.cs",
-              "RelativeDocumentMoniker": "FunDooNotes\\Controllers\\FunDooController.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\FunDooNotes\\Controllers\\FunDooController.cs",
-              "RelativeToolTip": "FunDooNotes\\Controllers\\FunDooController.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAAAwDsAAAAAAAAA",
+              "DocumentIndex": 6,
+              "Title": "InvalidPasswordException.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\GlobleExceptionhandler\\InvalidPasswordException.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\GlobleExceptionhandler\\InvalidPasswordException.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\GlobleExceptionhandler\\InvalidPasswordException.cs",
+              "RelativeToolTip": "RepositoryLayer\\GlobleExceptionhandler\\InvalidPasswordException.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-07T18:20:58.984Z",
+              "WhenOpened": "2024-03-09T07:34:01.45Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "InvalidEmailFormatException.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\GlobleExceptionhandler\\InvalidEmailFormatException.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\GlobleExceptionhandler\\InvalidEmailFormatException.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\GlobleExceptionhandler\\InvalidEmailFormatException.cs",
+              "RelativeToolTip": "RepositoryLayer\\GlobleExceptionhandler\\InvalidEmailFormatException.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAABOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-09T06:56:06.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DuplicateEmailException.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\GlobleExceptionhandler\\DuplicateEmailException.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\GlobleExceptionhandler\\DuplicateEmailException.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\GlobleExceptionhandler\\DuplicateEmailException.cs",
+              "RelativeToolTip": "RepositoryLayer\\GlobleExceptionhandler\\DuplicateEmailException.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-09T07:24:19.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "BusinessLayer.csproj",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\BusinessLayer.csproj",
+              "RelativeDocumentMoniker": "BusinessLayer\\BusinessLayer.csproj",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\BusinessLayer.csproj",
+              "RelativeToolTip": "BusinessLayer\\BusinessLayer.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-03-09T06:46:09.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserLoginModel.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\UserLoginModel.cs",
+              "RelativeDocumentMoniker": "ModelLayer\\Models\\UserLoginModel.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\UserLoginModel.cs",
+              "RelativeToolTip": "ModelLayer\\Models\\UserLoginModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-08T11:47:34.748Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UserRegistrationModel.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\UserRegistrationModel.cs",
+              "RelativeDocumentMoniker": "ModelLayer\\Models\\UserRegistrationModel.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\UserRegistrationModel.cs",
+              "RelativeToolTip": "ModelLayer\\Models\\UserRegistrationModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-08T11:38:35.397Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ResponseModel.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\ResponseModel.cs",
+              "RelativeDocumentMoniker": "ModelLayer\\Models\\ResponseModel.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\ResponseModel.cs",
+              "RelativeToolTip": "ModelLayer\\Models\\ResponseModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-09T04:53:05.21Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "IUserRegistrationRL.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Interfaces\\IUserRegistrationRL.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\Interfaces\\IUserRegistrationRL.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Interfaces\\IUserRegistrationRL.cs",
+              "RelativeToolTip": "RepositoryLayer\\Interfaces\\IUserRegistrationRL.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-07T16:53:50.294Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "UserEntity.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Entities\\UserEntity.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\Entities\\UserEntity.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Entities\\UserEntity.cs",
+              "RelativeToolTip": "RepositoryLayer\\Entities\\UserEntity.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-07T18:29:33.582Z"
             }
           ]
         }
