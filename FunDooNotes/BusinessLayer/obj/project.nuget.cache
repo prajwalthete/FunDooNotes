@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Yb+ItmCqKvEcc9VbCDV5CcgurvMLRizUtlEnofD5nnLagIoG5vjjW2oB4FWtGbAPBsKJXIZt45bTHpBQxXIu4g==",
+  "dgSpecHash": "qxFVKERXO9EGRTu8xshXvcPphcQMSW0+b7q/+Jm62jwTwVGbnUgpbo59btocl+bhjzcze4MBkKXNgfNNHTzAcw==",
   "success": true,
   "projectFilePath": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\BusinessLayer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\prajw\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\prajw\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\prajw\\.nuget\\packages\\bcrypt.net\\0.1.0\\bcrypt.net.0.1.0.nupkg.sha512",
     "C:\\Users\\prajw\\.nuget\\packages\\dapper\\2.1.35\\dapper.2.1.35.nupkg.sha512",
     "C:\\Users\\prajw\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\prajw\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
@@ -45,5 +46,16 @@
     "C:\\Users\\prajw\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512",
     "C:\\Users\\prajw\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'BCrypt.Net 0.1.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "libraryId": "BCrypt.Net",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

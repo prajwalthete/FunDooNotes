@@ -15,7 +15,7 @@ namespace BusinessLayer.Services
 
         public Task<bool> AddNewUser(UserRegistrationModel userRegistrationModel)
         {
-            // return Task.FromResult(true);
+
             return _userRegistrationRl.AddNewUser(userRegistrationModel);
         }
 

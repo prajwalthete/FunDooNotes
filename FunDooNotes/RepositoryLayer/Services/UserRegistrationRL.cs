@@ -3,6 +3,7 @@ using ModelLayer.Models;
 using RepositoryLayer.Context;
 using RepositoryLayer.Interfaces;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace RepositoryLayer.Services
 {
@@ -25,8 +26,17 @@ namespace RepositoryLayer.Services
             var parameters = new DynamicParameters();
             parameters.Add("FirstName", userRegModel.FirstName, DbType.String);
             parameters.Add("LastName", userRegModel.LastName, DbType.String);
+
+            if (!IsValidEmail(userRegModel.Email))
+            {
+                Console.WriteLine("Invalid email format");
+                return false;
+            }
             parameters.Add("Email", userRegModel.Email, DbType.String);
-            parameters.Add("Password", userRegModel.Password, DbType.String);
+
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(userRegModel.Password);
+
+            parameters.Add("Password", hashedPassword, DbType.String);
 
             using (var connection = _Context.CreateConnection())
             {
@@ -61,27 +71,39 @@ namespace RepositoryLayer.Services
 
         public async Task<bool> UserLogin(UserLoginModel userLogin)
         {
-
+            //if (!IsValidEmail(userLogin.Email))
+            //{
+            //    //Console.WriteLine("Invalid email format");
+            //    return false;
+            //}
 
             using (var connection = _Context.CreateConnection())
             {
                 string query = @"
-                                 SELECT * FROM Users WHERE Email = @Email AND Password = @Password;
+                                 SELECT * FROM Users WHERE Email = @Email ;
                                 ";
 
-                var parameters = new
-                {
-                    userLogin.Email,
-                    userLogin.Password
-                };
+                var parameters = new DynamicParameters();
+                parameters.Add("Email", userLogin.Email);
 
 
                 var user = await connection.QueryFirstOrDefaultAsync<UserRegistrationModel>(query, parameters);
 
-                return user != null;
+                return user != null && BCrypt.Net.BCrypt.Verify(userLogin.Password, user.Password); ;
             }
 
 
+        }
+
+        private bool IsValidEmail(string email)
+        {
+
+            // string pattern = @"^[a-zA-Z]([\w]|\.[\w]+)\@[a-zA-Z0-9]+\.[a-z]{2,3}$";
+            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+
+
+
+            return Regex.IsMatch(email, pattern);
         }
     }
 }

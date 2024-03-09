@@ -23,7 +23,7 @@ namespace FunDooNotes.Controllers
             try
             {
                 var addedUser = await _registrationBL.AddNewUser(user);
-                return Ok(addedUser); // Return the added user
+                return Ok(addedUser);
             }
             catch (Exception ex)
             {
