@@ -64,7 +64,6 @@ namespace RepositoryLayer.Services
 
                     throw new DuplicateEmailException("Email address is already in use");
 
-                    //  return false;
                 }
 
 
