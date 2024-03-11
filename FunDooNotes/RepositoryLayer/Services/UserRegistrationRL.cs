@@ -108,6 +108,8 @@ namespace RepositoryLayer.Services
             return true;
         }
 
+
+
         public async Task<bool> UserLogin(UserLoginModel userLogin)
         {
             using (var connection = _Context.CreateConnection())
@@ -134,6 +136,38 @@ namespace RepositoryLayer.Services
                 return true;
             }
         }
+
+        public async Task<UserRegistrationModel> AuthenticateUser(string email, string password)
+        {
+            using (var connection = _Context.CreateConnection())
+            {
+                string query = @"
+                      SELECT * FROM Users WHERE Email = @Email ;
+                       ";
+
+                var parameters = new DynamicParameters();
+                parameters.Add("Email", email);
+
+                var user = await connection.QueryFirstOrDefaultAsync<UserRegistrationModel>(query, parameters);
+
+                if (user == null)
+                {
+                    throw new UserNotFoundException($"User with email '{email}' not found.");
+                }
+
+                if (!BCrypt.Net.BCrypt.Verify(password, user.Password))
+                {
+                    throw new InvalidPasswordException($"Invalid password for user with email '{email}'.");
+                }
+
+                return user;
+            }
+        }
+
+
+
+
+
 
 
         private bool IsValidEmail(string email)
