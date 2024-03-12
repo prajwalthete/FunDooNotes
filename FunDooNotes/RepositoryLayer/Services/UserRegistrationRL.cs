@@ -12,32 +12,26 @@ namespace RepositoryLayer.Services
     public class UserRegistrationRL : IUserRegistrationRL
     {
         private readonly DapperContext _Context;
+        private readonly IAuthService _authService;
 
-        public UserRegistrationRL(DapperContext context)
+        public UserRegistrationRL(DapperContext context, IAuthService authService)
         {
             _Context = context;
+            _authService = authService;
         }
 
-        public async Task<bool> AddNewUser(UserRegistrationModel userRegModel)
+        public async Task<bool> RegisterUser(UserRegistrationModel userRegModel)
         {
-            //if (string.IsNullOrWhiteSpace(userRegModel?.FirstName) ||
-            //    string.IsNullOrWhiteSpace(userRegModel?.LastName) ||
-            //    string.IsNullOrWhiteSpace(userRegModel?.Email) ||
-            //    string.IsNullOrWhiteSpace(userRegModel?.Password))
-            //{
-            //    throw new ArgumentException("Input fields cannot be empty");
-            //    // or return BadRequest("Input fields cannot be empty");
-            //}
 
+            var parametersToCheckEmailIsValid = new DynamicParameters();
+            parametersToCheckEmailIsValid.Add("Email", userRegModel.Email, DbType.String);
 
-            var queryCheckEmail = @"
+            var querytoCheckEmailIsNotDuplicate = @"
                 SELECT COUNT(*)
                 FROM Users
                 WHERE Email = @Email;
             ";
 
-            var parametersCheckEmail = new DynamicParameters();
-            parametersCheckEmail.Add("Email", userRegModel.Email, DbType.String);
 
             var query = @"
                           INSERT INTO Users (FirstName, LastName, Email, Password)
@@ -48,7 +42,7 @@ namespace RepositoryLayer.Services
             parameters.Add("FirstName", userRegModel.FirstName, DbType.String);
             parameters.Add("LastName", userRegModel.LastName, DbType.String);
 
-
+            //Check Emailformat Using Regex
             if (!IsValidEmail(userRegModel.Email))
             {
                 Console.WriteLine("Invalid email format");
@@ -58,6 +52,7 @@ namespace RepositoryLayer.Services
 
             parameters.Add("Email", userRegModel.Email, DbType.String);
 
+            //convert Plain Password into crytpographic String 
             string hashedPassword = BCrypt.Net.BCrypt.HashPassword(userRegModel.Password);
 
             parameters.Add("Password", hashedPassword, DbType.String);
@@ -66,8 +61,6 @@ namespace RepositoryLayer.Services
 
             using (var connection = _Context.CreateConnection())
             {
-
-
 
                 // Check if table exists
                 bool tableExists = await connection.QueryFirstOrDefaultAsync<bool>(
@@ -92,7 +85,7 @@ namespace RepositoryLayer.Services
                 }
 
                 // Check if email already exists
-                bool emailExists = await connection.QueryFirstOrDefaultAsync<bool>(queryCheckEmail, parametersCheckEmail);
+                bool emailExists = await connection.QueryFirstOrDefaultAsync<bool>(querytoCheckEmailIsNotDuplicate, parametersToCheckEmailIsValid);
 
                 if (emailExists)
                 {
@@ -110,18 +103,20 @@ namespace RepositoryLayer.Services
 
 
 
-        public async Task<bool> UserLogin(UserLoginModel userLogin)
+        public async Task<string> UserLogin(UserLoginModel userLogin)
         {
             using (var connection = _Context.CreateConnection())
             {
+                var parameters = new DynamicParameters();
+                parameters.Add("Email", userLogin.Email);
+
+
                 string query = @"
                         SELECT * FROM Users WHERE Email = @Email ;
                        ";
 
-                var parameters = new DynamicParameters();
-                parameters.Add("Email", userLogin.Email);
 
-                var user = await connection.QueryFirstOrDefaultAsync<UserRegistrationModel>(query, parameters);
+                var user = await connection.QueryFirstOrDefaultAsync<UserLoginModel>(query, parameters);
 
                 if (user == null)
                 {
@@ -133,41 +128,11 @@ namespace RepositoryLayer.Services
                     throw new InvalidPasswordException($"User with Password '{userLogin.Password}' not Found.");
                 }
 
-                return true;
+                //if password enterd from user and password in db match then generate Token 
+                var token = _authService.GenerateJwtToken(user);
+                return token;
             }
         }
-
-        public async Task<UserRegistrationModel> AuthenticateUser(string email, string password)
-        {
-            using (var connection = _Context.CreateConnection())
-            {
-                string query = @"
-                      SELECT * FROM Users WHERE Email = @Email ;
-                       ";
-
-                var parameters = new DynamicParameters();
-                parameters.Add("Email", email);
-
-                var user = await connection.QueryFirstOrDefaultAsync<UserRegistrationModel>(query, parameters);
-
-                if (user == null)
-                {
-                    throw new UserNotFoundException($"User with email '{email}' not found.");
-                }
-
-                if (!BCrypt.Net.BCrypt.Verify(password, user.Password))
-                {
-                    throw new InvalidPasswordException($"Invalid password for user with email '{email}'.");
-                }
-
-                return user;
-            }
-        }
-
-
-
-
-
 
 
         private bool IsValidEmail(string email)

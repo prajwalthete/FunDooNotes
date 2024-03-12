@@ -17,7 +17,7 @@ namespace RepositoryLayer.Services
             _configuration = configuration;
         }
 
-        public string GenerateJwtToken(UserRegistrationModel user)
+        public string GenerateJwtToken(UserLoginModel user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_configuration["JwtSettings:Secret"]);
@@ -32,7 +32,7 @@ namespace RepositoryLayer.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.Email.ToString()), // Include user ID as a claim
+                    new Claim(ClaimTypes.NameIdentifier, user.Email), // Include user ID as a claim
                                                             // We can add  more claims if needed
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),

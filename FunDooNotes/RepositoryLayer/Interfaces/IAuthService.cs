@@ -4,7 +4,7 @@ namespace RepositoryLayer.Interfaces
 {
     public interface IAuthService
     {
-        public string GenerateJwtToken(UserRegistrationModel user);
+        public string GenerateJwtToken(UserLoginModel user);
 
     }
 }

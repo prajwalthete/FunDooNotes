@@ -1,9 +1,10 @@
 ﻿using BusinessLayer.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModelLayer.Models;
 using RepositoryLayer.GlobleExceptionhandler;
 using RepositoryLayer.GlobleExeptionhandler;
-using RepositoryLayer.Interfaces;
+using System.Security.Claims;
 
 namespace FunDooNotes.Controllers
 {
@@ -12,21 +13,21 @@ namespace FunDooNotes.Controllers
     public class FunDooController : ControllerBase
     {
         private readonly IUserRegistrationBL _registrationBL;
-        private readonly IAuthService _authService;
 
-        public FunDooController(IUserRegistrationBL registrationBL, IAuthService authService)
+
+        public FunDooController(IUserRegistrationBL registrationBL)
         {
             _registrationBL = registrationBL;
-            _authService = authService;
+
         }
 
 
         [HttpPost("register")]
-        public async Task<IActionResult> AddNewUser(UserRegistrationModel user)
+        public async Task<IActionResult> UserRegistration(UserRegistrationModel user)
         {
             try
             {
-                var addedUser = await _registrationBL.AddNewUser(user);
+                var addedUser = await _registrationBL.RegisterUser(user);
                 if (addedUser)
                 {
                     var response = new ResponseModel<UserRegistrationModel>
@@ -38,12 +39,7 @@ namespace FunDooNotes.Controllers
                 }
                 else
                 {
-                    //var response = new ResponseModel<UserRegistrationModel>
-                    //{
-                    //    StatusCode = 400,
-                    //    Message = "invalid input"
-                    //};
-                    //return BadRequest(response);
+
                     return BadRequest("invalid input");
                 }
             }
@@ -84,31 +80,14 @@ namespace FunDooNotes.Controllers
         {
             try
             {
-
                 // Authenticate the user and generate JWT token
-                // UserRegistrationModel authenticatedUser = await _registrationBL.AuthenticateUser(userLogin.Email, userLogin.Password);
+                var token = await _registrationBL.UserLogin(userLogin);
 
-                var authenticatedUser = await _registrationBL.AuthenticateUser(userLogin.Email, userLogin.Password);
-
-                if (authenticatedUser == null)
-                {
-                    return Unauthorized("Invalid username or password");
-                }
-
-                var token = _authService.GenerateJwtToken(authenticatedUser);
-
-
-
-
-
-                var userExists = await _registrationBL.UserLogin(userLogin);
-
-                var response = new ResponseModel<UserRegistrationModel>
+                var response = new ResponseModel<UserLoginModel>
                 {
                     StatusCode = 200,
                     Message = "Login Sucessfull",
                     Token = token
-
 
                 };
                 return Ok(response);
@@ -118,7 +97,7 @@ namespace FunDooNotes.Controllers
             {
                 if (ex is UserNotFoundException)
                 {
-                    var response = new ResponseModel<UserRegistrationModel>
+                    var response = new ResponseModel<UserLoginModel>
                     {
                         StatusCode = 409,
                         IsSuccess = false,
@@ -130,7 +109,7 @@ namespace FunDooNotes.Controllers
                 }
                 else if (ex is InvalidPasswordException)
                 {
-                    var response = new ResponseModel<UserRegistrationModel>
+                    var response = new ResponseModel<UserLoginModel>
                     {
                         StatusCode = 400,
                         IsSuccess = false,
@@ -146,6 +125,31 @@ namespace FunDooNotes.Controllers
 
                 }
             }
+
+        }
+
+
+
+        [Authorize]
+        [HttpGet("protected")]
+        public IActionResult ProtectedEndpoint(string expectedUserEmail)
+        {
+            // Extract user Email claim from the token
+            var userEmailClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userEmailClaim == null)
+            {
+                return Unauthorized("Invalid token");
+            }
+
+            // Compare the user email from the token with the expectedEmail
+            if (!expectedUserEmail.Equals(userEmailClaim))
+            {
+                return Unauthorized("You are not authorized to access this resource.");
+            }
+
+            // This endpoint can only be accessed with a valid JWT token and the correct user ID
+            return Ok("Welcome to the FundooNotes!");
 
         }
 

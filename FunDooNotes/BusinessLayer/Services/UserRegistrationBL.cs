@@ -13,23 +13,21 @@ namespace BusinessLayer.Services
             _userRegistrationRl = userRegistrationRl;
         }
 
-        public Task<bool> AddNewUser(UserRegistrationModel userRegistrationModel)
+        public Task<bool> RegisterUser(UserRegistrationModel userRegistrationModel)
         {
 
-            return _userRegistrationRl.AddNewUser(userRegistrationModel);
+            return _userRegistrationRl.RegisterUser(userRegistrationModel);
         }
 
 
 
-        public Task<bool> UserLogin(UserLoginModel userLogin)
+        public Task<string> UserLogin(UserLoginModel userLogin)
         {
             return _userRegistrationRl.UserLogin(userLogin);
         }
 
-        Task<UserRegistrationModel> IUserRegistrationBL.AuthenticateUser(string email, string password)
-        {
-            return _userRegistrationRl.AuthenticateUser(email, password);
 
-        }
+
+
     }
 }
