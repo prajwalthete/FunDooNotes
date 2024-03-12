@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using ModelLayer.Models;
 using RepositoryLayer.Context;
+using RepositoryLayer.Entities;
 using RepositoryLayer.GlobleExceptionhandler;
 using RepositoryLayer.GlobleExeptionhandler;
 using RepositoryLayer.Interfaces;
@@ -111,12 +112,16 @@ namespace RepositoryLayer.Services
                 parameters.Add("Email", userLogin.Email);
 
 
+                //string query = @"
+                //        SELECT * FROM Users WHERE Email = @Email ;
+                //       ";
                 string query = @"
-                        SELECT * FROM Users WHERE Email = @Email ;
-                       ";
+                            SELECT Id, Email, Password -- Add more fields if needed
+                            FROM Users 
+                            WHERE Email = @Email;
+                            ";
 
-
-                var user = await connection.QueryFirstOrDefaultAsync<UserLoginModel>(query, parameters);
+                var user = await connection.QueryFirstOrDefaultAsync<UserEntity>(query, parameters);
 
                 if (user == null)
                 {

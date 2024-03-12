@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "FunDooNotes.Controllers.FunDooController",
+    "Method": "UserRegistration",
+    "RelativePath": "api/FunDoo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "ModelLayer.Models.UserRegistrationModel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FunDooNotes.Controllers.FunDooController",
     "Method": "UserLogin",
     "RelativePath": "api/FunDoo/login",
     "HttpMethod": "POST",
@@ -27,22 +43,6 @@
         "Name": "expectedUserEmail",
         "Type": "System.String",
         "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FunDooNotes.Controllers.FunDooController",
-    "Method": "UserRegistration",
-    "RelativePath": "api/FunDoo/register",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "user",
-        "Type": "ModelLayer.Models.UserRegistrationModel",
-        "IsRequired": true
       }
     ],
     "ReturnTypes": []

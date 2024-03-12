@@ -1,10 +1,10 @@
-﻿using ModelLayer.Models;
+﻿using RepositoryLayer.Entities;
 
 namespace RepositoryLayer.Interfaces
 {
     public interface IAuthService
     {
-        public string GenerateJwtToken(UserLoginModel user);
+        public string GenerateJwtToken(UserEntity user);
 
     }
 }
