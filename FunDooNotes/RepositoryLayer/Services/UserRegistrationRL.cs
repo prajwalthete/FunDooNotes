@@ -58,8 +58,6 @@ namespace RepositoryLayer.Services
 
             parameters.Add("Password", hashedPassword, DbType.String);
 
-
-
             using (var connection = _Context.CreateConnection())
             {
 
@@ -90,9 +88,7 @@ namespace RepositoryLayer.Services
 
                 if (emailExists)
                 {
-
                     throw new DuplicateEmailException("Email address is already in use");
-
                 }
 
                 // Insert new user
@@ -107,14 +103,10 @@ namespace RepositoryLayer.Services
         public async Task<string> UserLogin(UserLoginModel userLogin)
         {
 
-
             var parameters = new DynamicParameters();
             parameters.Add("Email", userLogin.Email);
 
 
-            //string query = @"
-            //        SELECT * FROM Users WHERE Email = @Email ;
-            //       ";
             string query = @"
                             SELECT UserId, Email, Password -- Add more fields if needed
                             FROM Users 
@@ -123,8 +115,6 @@ namespace RepositoryLayer.Services
 
             using (var connection = _Context.CreateConnection())
             {
-
-
                 var user = await connection.QueryFirstOrDefaultAsync<UserEntity>(query, parameters);
 
                 if (user == null)
@@ -147,12 +137,8 @@ namespace RepositoryLayer.Services
 
         private bool IsValidEmail(string email)
         {
-
             // string pattern = @"^[a-zA-Z]([\w]|\.[\w]+)\@[a-zA-Z0-9]+\.[a-z]{2,3}$";
             string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
-
-
-
             return Regex.IsMatch(email, pattern);
         }
     }
