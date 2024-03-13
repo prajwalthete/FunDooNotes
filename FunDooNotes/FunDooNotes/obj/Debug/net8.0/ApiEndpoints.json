@@ -1,8 +1,8 @@
 [
   {
-    "ContainingType": "FunDooNotes.Controllers.FunDooController",
+    "ContainingType": "FunDooNotes.Controllers.UserController",
     "Method": "UserRegistration",
-    "RelativePath": "api/FunDoo",
+    "RelativePath": "api/user",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -16,9 +16,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "FunDooNotes.Controllers.FunDooController",
+    "ContainingType": "FunDooNotes.Controllers.UserController",
     "Method": "UserLogin",
-    "RelativePath": "api/FunDoo/login",
+    "RelativePath": "api/user/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -32,9 +32,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "FunDooNotes.Controllers.FunDooController",
+    "ContainingType": "FunDooNotes.Controllers.UserController",
     "Method": "ProtectedEndpoint",
-    "RelativePath": "api/FunDoo/protected",
+    "RelativePath": "api/user/protected",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

@@ -15,6 +15,8 @@ builder.Services.AddSingleton<DapperContext>();
 builder.Services.AddScoped<IUserRegistrationBL, UserRegistrationBL>();
 builder.Services.AddScoped<IUserRegistrationRL, UserRegistrationRL>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<INoteServiceBL, NoteServiceBL>();
+builder.Services.AddScoped<INoteServiceRL, NoteServiceRL>();
 
 // Get the secret key from the configuration
 var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSettings:Secret"]);

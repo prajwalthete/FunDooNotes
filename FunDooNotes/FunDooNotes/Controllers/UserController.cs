@@ -8,13 +8,13 @@ using System.Security.Claims;
 
 namespace FunDooNotes.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
-    public class FunDooController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IUserRegistrationBL _registrationBL;
 
-        public FunDooController(IUserRegistrationBL registrationBL)
+        public UserController(IUserRegistrationBL registrationBL)
         {
             _registrationBL = registrationBL;
 

@@ -77,7 +77,7 @@ namespace RepositoryLayer.Services
                 {
                     await connection.ExecuteAsync(
                                                     @" CREATE TABLE Users (
-                                                             Id INT IDENTITY(1, 1) PRIMARY KEY,
+                                                             UserId INT IDENTITY(1, 1) PRIMARY KEY,
                                                              FirstName NVARCHAR(100) NOT NULL,
                                                              LastName NVARCHAR(100) NOT NULL,
                                                              Email NVARCHAR(100) UNIQUE NOT NULL,
@@ -106,20 +106,24 @@ namespace RepositoryLayer.Services
 
         public async Task<string> UserLogin(UserLoginModel userLogin)
         {
-            using (var connection = _Context.CreateConnection())
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("Email", userLogin.Email);
 
 
-                //string query = @"
-                //        SELECT * FROM Users WHERE Email = @Email ;
-                //       ";
-                string query = @"
-                            SELECT Id, Email, Password -- Add more fields if needed
+            var parameters = new DynamicParameters();
+            parameters.Add("Email", userLogin.Email);
+
+
+            //string query = @"
+            //        SELECT * FROM Users WHERE Email = @Email ;
+            //       ";
+            string query = @"
+                            SELECT UserId, Email, Password -- Add more fields if needed
                             FROM Users 
                             WHERE Email = @Email;
                             ";
+
+            using (var connection = _Context.CreateConnection())
+            {
+
 
                 var user = await connection.QueryFirstOrDefaultAsync<UserEntity>(query, parameters);
 
@@ -132,6 +136,7 @@ namespace RepositoryLayer.Services
                 {
                     throw new InvalidPasswordException($"User with Password '{userLogin.Password}' not Found.");
                 }
+                Console.WriteLine(user.UserId);
 
                 //if password enterd from user and password in db match then generate Token 
                 var token = _authService.GenerateJwtToken(user);
