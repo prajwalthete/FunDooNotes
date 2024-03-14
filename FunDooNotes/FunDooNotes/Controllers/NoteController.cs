@@ -117,6 +117,61 @@ namespace FunDooNotes.Controllers
         }
 
 
+        [Authorize]
+        [HttpDelete("{noteId}")]
+        public async Task<IActionResult> DeleteNoteAsync(int noteId)
+        {
+            try
+            {
+
+                var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+
+                int userId = Convert.ToInt32(userIdClaim);
+
+
+                bool isDeleted = await noteServiceBL.DeleteNoteAsync(noteId, userId);
+
+                if (isDeleted)
+                {
+                    return Ok(new ResponseModel<string>
+                    {
+                        StatusCode = 200,
+                        Message = "Note deleted successfully",
+                        Data = null,
+
+                    });
+                }
+                else
+                {
+                    return NotFound(new ResponseModel<string>
+                    {
+                        StatusCode = 404,
+                        Message = "Note not found",
+                        Data = null
+                    });
+                }
+            }
+            catch (DatabaseException ex)
+            {
+                return NotFound(new ResponseModel<string>
+                {
+                    StatusCode = 404,
+                    Message = ex.Message,
+                    Data = null
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResponseModel<string>
+                {
+                    StatusCode = 500,
+                    Message = $"An error occurred: {ex.Message}",
+                    Data = null
+                });
+            }
+        }
+
 
 
     }

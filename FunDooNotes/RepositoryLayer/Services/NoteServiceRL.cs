@@ -169,6 +169,34 @@ namespace RepositoryLayer.Services
             return string.IsNullOrEmpty(newValue) ? previousValue : newValue;
         }
 
+
+
+
+        public async Task<bool> DeleteNoteAsync(int noteId, int userId)
+        {
+            var deleteQuery = "DELETE FROM Notes WHERE NoteId = @NoteId AND UserId = @UserId";
+
+            try
+            {
+                using (var connection = _Context.CreateConnection())
+                {
+                    var rowsAffected = await connection.ExecuteAsync(deleteQuery, new { NoteId = noteId, UserId = userId });
+                    return rowsAffected > 0;
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                throw new DatabaseException("An error occurred while deleting the note from the database", ex);
+            }
+            catch (Exception ex)
+            {
+
+                throw new RepositoryException("An error occurred in the repository layer", ex);
+            }
+        }
+
+
     }
 }
 

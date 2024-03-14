@@ -26,5 +26,11 @@ namespace BusinessLayer.Services
 
         }
 
+        public Task<bool> DeleteNoteAsync(int noteId, int userId)
+        {
+            return _noteServiceRL.DeleteNoteAsync(noteId, userId);
+
+        }
+
     }
 }
