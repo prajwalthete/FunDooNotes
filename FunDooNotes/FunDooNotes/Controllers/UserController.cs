@@ -94,7 +94,7 @@ namespace FunDooNotes.Controllers
             }
             catch (Exception ex)
             {
-                if (ex is UserNotFoundException)
+                if (ex is NotFoundException)
                 {
                     var response = new ResponseModel<UserLoginModel>
                     {

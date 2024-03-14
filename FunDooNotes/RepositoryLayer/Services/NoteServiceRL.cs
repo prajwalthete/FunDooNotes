@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using ModelLayer.Models.Note;
 using RepositoryLayer.Context;
+using RepositoryLayer.GlobleExceptionhandler;
 using RepositoryLayer.Interfaces;
 using System.Data;
 using static Dapper.SqlMapper;
@@ -87,5 +88,89 @@ namespace RepositoryLayer.Services
             }
         }
 
+
+
+        public async Task<NoteResponse> UpdateNoteAsync(int noteId, int userId, CreateNoteRequest updatedNote)
+        {
+            // SQL query to select the note details
+            var selectQuery = "SELECT NoteId, Description, Title, Colour FROM Notes WHERE UserId = @UserId AND NoteId = @NoteId";
+
+            // SQL query to update the note
+            var updateQuery = @"
+                UPDATE Notes 
+                SET Description = @Description, 
+                    Title = @Title, 
+                    Colour = @Colour 
+                WHERE UserId = @UserId AND NoteId = @NoteId;
+            ";
+
+            string prevTitle, prevDescription, prevColour;
+
+            try
+            {
+                using (var connection = _Context.CreateConnection())
+                {
+                    // Retrieve the current note details from the database
+                    var note = await connection.QueryFirstOrDefaultAsync<NoteResponse>(selectQuery, new { UserId = userId, NoteId = noteId });
+
+                    // If the note is not found, throw a custom exception
+                    if (note == null)
+                    {
+                        throw new NotFoundException("Note not found");
+                    }
+
+                    // Store the previous values of the note
+                    prevTitle = note.Title;
+                    prevDescription = note.Description;
+                    prevColour = note.Colour;
+
+                    // Execute the update query with the provided parameters
+                    await connection.ExecuteAsync(updateQuery, new
+                    {
+                        Description = CheckInput(updatedNote.Description, prevDescription),
+                        Title = CheckInput(updatedNote.Title, prevTitle),
+                        Colour = CheckInput(updatedNote.Colour, prevColour),
+                        UserId = userId,
+                        NoteId = noteId
+                    });
+
+                    // Retrieve the updated note
+                    var updatedNoteResponse = await connection.QueryFirstOrDefaultAsync<NoteResponse>(selectQuery, new { UserId = userId, NoteId = noteId });
+
+                    // If the updated note is still null, throw a custom exception
+                    if (updatedNoteResponse == null)
+                    {
+                        throw new DatabaseException("Failed to retrieve the updated note");
+                    }
+
+                    return updatedNoteResponse;
+                }
+            }
+            catch (SqlException ex)
+            {
+                // Handle SQL exceptions
+                throw new DatabaseException("An error occurred while updating the note in the database", ex);
+            }
+            catch (NotFoundException ex)
+            {
+                // Handle not found exceptions
+                throw new NotFoundException(ex.Message, ex);
+            }
+            catch (Exception ex)
+            {
+                //  other exceptions
+                throw new RepositoryException("An error occurred in the repository layer", ex);
+            }
+        }
+
+        // method to check if the input value is empty and return the appropriate value
+        private string CheckInput(string newValue, string previousValue)
+        {
+            return string.IsNullOrEmpty(newValue) ? previousValue : newValue;
+        }
+
     }
 }
+
+
+

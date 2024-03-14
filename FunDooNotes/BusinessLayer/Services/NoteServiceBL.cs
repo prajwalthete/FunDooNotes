@@ -17,5 +17,14 @@ namespace BusinessLayer.Services
         {
             return _noteServiceRL.CreateNoteAndGetNotesAsync(createNoteRequest, UserId);
         }
+
+
+
+        Task<NoteResponse> INoteServiceBL.UpdateNoteAsync(int noteId, int UserId, CreateNoteRequest updatedNote)
+        {
+            return _noteServiceRL.UpdateNoteAsync(noteId, UserId, updatedNote);
+
+        }
+
     }
 }

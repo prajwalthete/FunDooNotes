@@ -119,7 +119,7 @@ namespace RepositoryLayer.Services
 
                 if (user == null)
                 {
-                    throw new UserNotFoundException($"User with email '{userLogin.Email}' not found.");
+                    throw new NotFoundException($"User with email '{userLogin.Email}' not found.");
                 }
 
                 if (!BCrypt.Net.BCrypt.Verify(userLogin.Password, user.Password))

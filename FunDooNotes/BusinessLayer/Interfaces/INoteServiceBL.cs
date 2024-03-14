@@ -6,5 +6,8 @@ namespace BusinessLayer.Interfaces
     {
         Task<IEnumerable<NoteResponse>> CreateNoteAndGetNotesAsync(CreateNoteRequest createNoteRequest, int UserId);
 
+        Task<NoteResponse> UpdateNoteAsync(int noteId, int UserId, CreateNoteRequest updatedNote);
+
+
     }
 }
