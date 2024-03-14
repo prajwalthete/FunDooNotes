@@ -1,6 +1,7 @@
 ﻿using BusinessLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using ModelLayer.Models;
 using ModelLayer.Models.Note;
 using RepositoryLayer.GlobleExceptionhandler;
@@ -173,9 +174,47 @@ namespace FunDooNotes.Controllers
         }
 
 
+        [Authorize]
+        [HttpGet("GetAllNotes")]
+        public async Task<IActionResult> GetAllNotes()
+        {
+            try
+            {
+
+                var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                int userId = Convert.ToInt32(userIdClaim);
+                var notes = await noteServiceBL.GetAllNoteAsync(userId);
+                return Ok(new ResponseModel<IEnumerable<NoteResponse>>
+                {
+                    StatusCode = 200,
+                    Message = "Notes retrieved successfully",
+                    Data = notes.ToList()
+                });
+            }
+            catch (Exception ex)
+            {
+                if (ex is SqlException)
+                {
+                    return StatusCode(500, new ResponseModel<IEnumerable<NoteResponse>>
+                    {
+                        StatusCode = 500,
+                        Message = "An error occurred while retrieving notes from the database.",
+                        Data = null
+                    });
+                }
+                else
+                {
+                    return StatusCode(500, new ResponseModel<IEnumerable<NoteResponse>>
+                    {
+                        StatusCode = 500,
+                        Message = "An error occurred.",
+                        Data = null
+                    });
+                }
+            }
+        }
 
     }
-
 
 }
 

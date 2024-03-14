@@ -7,7 +7,7 @@ namespace ModelLayer.Models.Note
         [Required]
         public string Title { get; set; }
 
-        public string? Description { get; set; }
+        public string? Description { get; set; } = string.Empty;
 
         public string Colour { get; set; } = string.Empty;
     }

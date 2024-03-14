@@ -196,6 +196,23 @@ namespace RepositoryLayer.Services
             }
         }
 
+        public async Task<IEnumerable<NoteResponse>> GetAllNoteAsync(int userId)
+        {
+            var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId";
+
+            using (var connection = _Context.CreateConnection())
+            {
+                try
+                {
+                    var notes = await connection.QueryAsync<NoteResponse>(selectQuery, new { UserId = userId });
+                    return notes.Reverse().ToList();
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception("An error occurred while retrieving notes from the database.", ex);
+                }
+            }
+        }
 
     }
 }

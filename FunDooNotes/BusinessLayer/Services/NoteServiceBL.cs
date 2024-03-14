@@ -32,5 +32,9 @@ namespace BusinessLayer.Services
 
         }
 
+        public Task<IEnumerable<NoteResponse>> GetAllNoteAsync(int userId)
+        {
+            return _noteServiceRL.GetAllNoteAsync(userId);
+        }
     }
 }
