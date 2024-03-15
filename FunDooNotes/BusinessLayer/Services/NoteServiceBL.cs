@@ -36,5 +36,10 @@ namespace BusinessLayer.Services
         {
             return _noteServiceRL.GetAllNoteAsync(userId);
         }
+
+        public Task<bool> IsArchive(int UserId, int NoteId)
+        {
+            return _noteServiceRL.IsArchive(UserId, NoteId);
+        }
     }
 }

@@ -170,8 +170,6 @@ namespace RepositoryLayer.Services
         }
 
 
-
-
         public async Task<bool> DeleteNoteAsync(int noteId, int userId)
         {
             var deleteQuery = "DELETE FROM Notes WHERE NoteId = @NoteId AND UserId = @UserId";
@@ -210,6 +208,29 @@ namespace RepositoryLayer.Services
                 catch (SqlException ex)
                 {
                     throw new Exception("An error occurred while retrieving notes from the database.", ex);
+                }
+            }
+        }
+
+        public async Task<bool> IsArchive(int UserId, int NoteId)
+        {
+            var IsArchiveQuery = @"
+                            UPDATE Notes 
+                            SET IsArchived = 1 
+                            WHERE UserId = @UserId AND NoteId = @NoteId
+                             ";
+
+            using (var connection = _Context.CreateConnection())
+            {
+                try
+                {
+                    var rowsAffected = await connection.ExecuteAsync(IsArchiveQuery, new { UserId = UserId, NoteId = NoteId });
+                    return rowsAffected <= 0 ? false : true;
+
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception("An error occurred while updating the note in the database.", ex);
                 }
             }
         }

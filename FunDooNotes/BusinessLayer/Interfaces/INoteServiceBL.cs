@@ -9,6 +9,7 @@ namespace BusinessLayer.Interfaces
         Task<NoteResponse> UpdateNoteAsync(int noteId, int UserId, CreateNoteRequest updatedNote);
         Task<bool> DeleteNoteAsync(int noteId, int userId);
         Task<IEnumerable<NoteResponse>> GetAllNoteAsync(int userId);
+        Task<bool> IsArchive(int UserId, int NoteId);
 
 
     }

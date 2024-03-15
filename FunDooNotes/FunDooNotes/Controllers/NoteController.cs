@@ -214,6 +214,71 @@ namespace FunDooNotes.Controllers
             }
         }
 
+
+        [Authorize]
+        [HttpGet("IsArchived")]
+
+        public async Task<IActionResult> IsArchived(int NoteId)
+        {
+            try
+            {
+
+                var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                int userId = Convert.ToInt32(userIdClaim);
+
+                var IsArchived = await noteServiceBL.IsArchive(userId, NoteId);
+
+                if (IsArchived)
+                {
+                    return Ok(new ResponseModel<string>
+                    {
+                        StatusCode = 200,
+                        Message = "Note Archive successfully",
+                        Data = null,
+
+                    });
+                }
+                else
+                {
+                    return NotFound(new ResponseModel<string>
+                    {
+                        IsSuccess = false,
+                        StatusCode = 404,
+                        Message = "Note not found",
+                        Data = null
+                    });
+                }
+
+            }
+            catch (Exception ex)
+            {
+                if (ex is SqlException)
+                {
+                    return StatusCode(500, new ResponseModel<IEnumerable<NoteResponse>>
+                    {
+                        IsSuccess = false,
+                        StatusCode = 500,
+                        Message = "An error occurred while retrieving notes from the database.",
+                        Data = null
+                    });
+                }
+                else
+                {
+                    return StatusCode(500, new ResponseModel<IEnumerable<NoteResponse>>
+                    {
+                        IsSuccess = false,
+                        StatusCode = 500,
+                        Message = "An error occurred while archiving the Note",
+                        Data = null
+                    });
+                }
+            }
+        }
+
+
+
+
+
     }
 
 }
