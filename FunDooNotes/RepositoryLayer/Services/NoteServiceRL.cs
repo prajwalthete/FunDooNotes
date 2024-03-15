@@ -37,9 +37,6 @@ namespace RepositoryLayer.Services
                                ";
 
 
-            var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId";
-
-
             using (var connection = _Context.CreateConnection())
             {
 
@@ -77,8 +74,10 @@ namespace RepositoryLayer.Services
                 // if the table exists then only Execute SELECT query
                 if (tableExists)
                 {
-                    var notes = await connection.QueryAsync<NoteResponse>(selectQuery, parameters);
-                    return notes.Reverse().ToList();
+                    //var notes = await connection.QueryAsync<NoteResponse>(selectQuery, parameters);
+                    // return notes.Reverse().ToList();
+
+                    return await GetAllNoteAsync(UserId);
                 }
                 else
                 {
@@ -92,10 +91,10 @@ namespace RepositoryLayer.Services
 
         public async Task<NoteResponse> UpdateNoteAsync(int noteId, int userId, CreateNoteRequest updatedNote)
         {
-            // SQL query to select the note details
+
             var selectQuery = "SELECT NoteId, Description, Title, Colour FROM Notes WHERE UserId = @UserId AND NoteId = @NoteId";
 
-            // SQL query to update the note
+
             var updateQuery = @"
                 UPDATE Notes 
                 SET Description = @Description, 
@@ -111,18 +110,18 @@ namespace RepositoryLayer.Services
                 using (var connection = _Context.CreateConnection())
                 {
                     // Retrieve the current note details from the database
-                    var note = await connection.QueryFirstOrDefaultAsync<NoteResponse>(selectQuery, new { UserId = userId, NoteId = noteId });
+                    var currentnote = await connection.QueryFirstOrDefaultAsync<NoteResponse>(selectQuery, new { UserId = userId, NoteId = noteId });
 
-                    // If the note is not found, throw a custom exception
-                    if (note == null)
+
+                    if (currentnote == null)
                     {
                         throw new NotFoundException("Note not found");
                     }
 
                     // Store the previous values of the note
-                    prevTitle = note.Title;
-                    prevDescription = note.Description;
-                    prevColour = note.Colour;
+                    prevTitle = currentnote.Title;
+                    prevDescription = currentnote.Description;
+                    prevColour = currentnote.Colour;
 
                     // Execute the update query with the provided parameters
                     await connection.ExecuteAsync(updateQuery, new
@@ -153,7 +152,7 @@ namespace RepositoryLayer.Services
             }
             catch (NotFoundException ex)
             {
-                // Handle not found exceptions
+
                 throw new NotFoundException(ex.Message, ex);
             }
             catch (Exception ex)
@@ -196,7 +195,9 @@ namespace RepositoryLayer.Services
 
         public async Task<IEnumerable<NoteResponse>> GetAllNoteAsync(int userId)
         {
-            var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId";
+            var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId AND IsDeleted = 0 AND IsArchived = 0";
+
+            // var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId ";
 
             using (var connection = _Context.CreateConnection())
             {
@@ -212,31 +213,74 @@ namespace RepositoryLayer.Services
             }
         }
 
-        public async Task<bool> IsArchive(int UserId, int NoteId)
+
+
+        public async Task<bool> IsArchivedAsync(int UserId, int NoteId)
         {
-            var IsArchiveQuery = @"
-                            UPDATE Notes 
-                            SET IsArchived = 1 
-                            WHERE UserId = @UserId AND NoteId = @NoteId
-                             ";
+
+
+            var selectQuery = "SELECT IsArchived FROM Notes WHERE UserId = @UserId AND NoteId = @NoteId";
+
+
+
+            var toggleQuery = @"
+                                 UPDATE Notes 
+                                 SET IsArchived = CASE WHEN IsArchived = 0 THEN 1 ELSE 0 END
+                                 WHERE UserId = @UserId AND NoteId = @NoteId AND IsDeleted = 0
+                                 ";
 
             using (var connection = _Context.CreateConnection())
             {
                 try
                 {
-                    var rowsAffected = await connection.ExecuteAsync(IsArchiveQuery, new { UserId = UserId, NoteId = NoteId });
-                    return rowsAffected <= 0 ? false : true;
+                    var wasArchived = await connection.QueryFirstOrDefaultAsync<bool>(selectQuery, new { UserId = UserId, NoteId = NoteId });
+
+                    var rowsAffected = await connection.ExecuteAsync(toggleQuery, new { UserId = UserId, NoteId = NoteId });
+
+                    return !wasArchived;
 
                 }
                 catch (SqlException ex)
                 {
-                    throw new Exception("An error occurred while updating the note in the database.", ex);
+                    throw new Exception("An error occurred while archiving the note in the database.", ex);
+                }
+            }
+        }
+
+
+        public async Task<bool> MoveToTrashAsync(int UserId, int NoteId)
+        {
+            var selectQuery = "SELECT IsDeleted FROM Notes WHERE UserId = @UserId AND NoteId = @NoteId";
+
+            var toggleQuery = @"
+                            UPDATE Notes 
+                            SET IsDeleted = CASE WHEN IsDeleted = 0 THEN 1 ELSE 0 END
+                            WHERE UserId = @UserId AND NoteId = @NoteId
+                            ";
+
+            using (var connection = _Context.CreateConnection())
+            {
+                try
+                {
+                    // Get the current state of IsDeleted (true if note is already in trash, false otherwise)
+                    var wasMovedToTrash = await connection.QueryFirstOrDefaultAsync<bool>(selectQuery, new { UserId = UserId, NoteId = NoteId });
+
+                    // Toggle the IsDeleted state to move the note to trash or restore it
+                    await connection.ExecuteAsync(toggleQuery, new { UserId = UserId, NoteId = NoteId });
+
+                    // Return updated state of IsDeleted
+                    return !wasMovedToTrash;
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception("An error occurred while moving note to Trash in the database.", ex);
                 }
             }
         }
 
     }
 }
+
 
 
 

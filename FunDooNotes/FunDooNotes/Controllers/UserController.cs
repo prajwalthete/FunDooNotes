@@ -82,11 +82,11 @@ namespace FunDooNotes.Controllers
                 // Authenticate the user and generate JWT token
                 var token = await _registrationBL.UserLogin(userLogin);
 
-                var response = new ResponseModel<UserLoginModel>
+                var response = new ResponseModel<string>
                 {
                     StatusCode = 200,
                     Message = "Login Sucessfull",
-                    Token = token
+                    Data = token
 
                 };
                 return Ok(response);

@@ -138,7 +138,7 @@ namespace FunDooNotes.Controllers
                     return Ok(new ResponseModel<string>
                     {
                         StatusCode = 200,
-                        Message = "Note deleted successfully",
+                        Message = "Note deleted  successfully",
                         Data = null,
 
                     });
@@ -183,7 +183,8 @@ namespace FunDooNotes.Controllers
 
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 int userId = Convert.ToInt32(userIdClaim);
-                var notes = await noteServiceBL.GetAllNoteAsync(userId);
+                var notes = await noteServiceBL.GetAllNoteAsync(userId)
+
                 return Ok(new ResponseModel<IEnumerable<NoteResponse>>
                 {
                     StatusCode = 200,
@@ -195,7 +196,7 @@ namespace FunDooNotes.Controllers
             {
                 if (ex is SqlException)
                 {
-                    return StatusCode(500, new ResponseModel<IEnumerable<NoteResponse>>
+                    return StatusCode(500, new ResponseModel<string>
                     {
                         StatusCode = 500,
                         Message = "An error occurred while retrieving notes from the database.",
@@ -204,7 +205,7 @@ namespace FunDooNotes.Controllers
                 }
                 else
                 {
-                    return StatusCode(500, new ResponseModel<IEnumerable<NoteResponse>>
+                    return StatusCode(500, new ResponseModel<string>
                     {
                         StatusCode = 500,
                         Message = "An error occurred.",
@@ -217,7 +218,6 @@ namespace FunDooNotes.Controllers
 
         [Authorize]
         [HttpGet("IsArchived")]
-
         public async Task<IActionResult> IsArchived(int NoteId)
         {
             try
@@ -226,58 +226,98 @@ namespace FunDooNotes.Controllers
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 int userId = Convert.ToInt32(userIdClaim);
 
-                var IsArchived = await noteServiceBL.IsArchive(userId, NoteId);
 
-                if (IsArchived)
+                var result = await noteServiceBL.IsArchivedAsync(userId, NoteId);
+
+                // Check if the note was moved to trash or restored
+                string message = result ? "Note Archived successfully" : "Note UnArchived successfully";
+
+                return Ok(new ResponseModel<string>
                 {
-                    return Ok(new ResponseModel<string>
-                    {
-                        StatusCode = 200,
-                        Message = "Note Archive successfully",
-                        Data = null,
-
-                    });
-                }
-                else
+                    StatusCode = 200,
+                    Message = message,
+                    Data = null
+                });
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(new ResponseModel<string>
                 {
-                    return NotFound(new ResponseModel<string>
-                    {
-                        IsSuccess = false,
-                        StatusCode = 404,
-                        Message = "Note not found",
-                        Data = null
-                    });
-                }
-
+                    IsSuccess = false,
+                    StatusCode = 404,
+                    Message = ex.Message,
+                    Data = null
+                });
+            }
+            catch (SqlException ex)
+            {
+                return StatusCode(500, new ResponseModel<string>
+                {
+                    IsSuccess = false,
+                    StatusCode = 500,
+                    Message = "An error occurred while Archiving note in database.",
+                    Data = null
+                });
             }
             catch (Exception ex)
             {
-                if (ex is SqlException)
+                return StatusCode(500, new ResponseModel<string>
                 {
-                    return StatusCode(500, new ResponseModel<IEnumerable<NoteResponse>>
-                    {
-                        IsSuccess = false,
-                        StatusCode = 500,
-                        Message = "An error occurred while retrieving notes from the database.",
-                        Data = null
-                    });
-                }
-                else
-                {
-                    return StatusCode(500, new ResponseModel<IEnumerable<NoteResponse>>
-                    {
-                        IsSuccess = false,
-                        StatusCode = 500,
-                        Message = "An error occurred while archiving the Note",
-                        Data = null
-                    });
-                }
+                    IsSuccess = false,
+                    StatusCode = 500,
+                    Message = "An error occurred while archiving the Note",
+                    Data = null
+                });
             }
         }
 
 
 
+        [Authorize]
+        [HttpGet("MoveToTrash")]
+        public async Task<IActionResult> MoveToTrashAsync(int NoteId)
+        {
+            try
+            {
+                var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                int userId = Convert.ToInt32(userIdClaim);
 
+                var result = await noteServiceBL.MoveToTrashAsync(userId, NoteId);
+
+                string message = result ? "Note Trashed successfully" : "Note Untrashed successfully";
+
+                return Ok(new ResponseModel<string>
+                {
+                    StatusCode = 200,
+                    Message = message,
+                    Data = null
+                });
+            }
+            catch (Exception ex)
+            {
+
+                if (ex is SqlException)
+                {
+                    return StatusCode(500, new ResponseModel<string>
+                    {
+                        IsSuccess = false,
+                        StatusCode = 500,
+                        Message = "An error occurred while moving note to Trash in the database.",
+                        Data = null
+                    });
+                }
+                else
+                {
+                    return StatusCode(500, new ResponseModel<string>
+                    {
+                        IsSuccess = false,
+                        StatusCode = 500,
+                        Message = "Unexpected error occurred while moving note to Trash",
+                        Data = null
+                    });
+                }
+            }
+        }
 
     }
 
