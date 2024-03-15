@@ -3,20 +3,51 @@
   "WorkspaceRootPath": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\businesslayer\\interfaces\\inoteservicebl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|solutionrelative:businesslayer\\interfaces\\inoteservicebl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\entities\\collaboration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\entities\\collaboration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\interfaces\\inoteservicerl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\interfaces\\inoteservicerl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\modellayer\\models\\collaboration\\collaborationinfomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|solutionrelative:modellayer\\models\\collaboration\\collaborationinfomodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\services\\collaborationrl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\services\\collaborationrl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D91F1EB-C9C2-4570-B8E6-35F4409E6B36}|FunDooNotes\\FunDooNotes.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\fundoonotes\\controllers\\collaborationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D91F1EB-C9C2-4570-B8E6-35F4409E6B36}|FunDooNotes\\FunDooNotes.csproj|solutionrelative:fundoonotes\\controllers\\collaborationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8D91F1EB-C9C2-4570-B8E6-35F4409E6B36}|FunDooNotes\\FunDooNotes.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\fundoonotes\\controllers\\notecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8D91F1EB-C9C2-4570-B8E6-35F4409E6B36}|FunDooNotes\\FunDooNotes.csproj|solutionrelative:fundoonotes\\controllers\\notecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\businesslayer\\services\\noteservicebl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|solutionrelative:businesslayer\\services\\noteservicebl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__ProjectModels/FUNDOO_DB/True/SqlTable/dbo.Collaboration.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\modellayer\\models\\responsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|solutionrelative:modellayer\\models\\responsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\businesslayer\\services\\collaborationbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|solutionrelative:businesslayer\\services\\collaborationbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\interfaces\\icollaborationrl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\interfaces\\icollaborationrl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\businesslayer\\interfaces\\icollaborationbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|solutionrelative:businesslayer\\interfaces\\icollaborationbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\businesslayer\\interfaces\\inoteservicebl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{08E92F0A-0667-47AE-B15B-153E722C67D4}|BusinessLayer\\BusinessLayer.csproj|solutionrelative:businesslayer\\interfaces\\inoteservicebl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8D91F1EB-C9C2-4570-B8E6-35F4409E6B36}|FunDooNotes\\FunDooNotes.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\fundoonotes\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8D91F1EB-C9C2-4570-B8E6-35F4409E6B36}|FunDooNotes\\FunDooNotes.csproj|solutionrelative:fundoonotes\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\services\\noteservicerl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -27,23 +58,8 @@
       "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\services\\userregistrationrl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\modellayer\\models\\responsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|solutionrelative:modellayer\\models\\responsemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_localdb__ProjectModels/FUNDOO_DB/True/SqlTable/dbo.Notes.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\modellayer\\models\\note\\createnoterequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|solutionrelative:modellayer\\models\\note\\createnoterequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\modellayer\\models\\note\\noteresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9F5BE79D-3BCD-44B7-A0A3-9D3CF959C265}|ModelLayer\\ModelLayer.csproj|solutionrelative:modellayer\\models\\note\\noteresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\entities\\noteentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\entities\\noteentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|e:\\.net workspace-1\\websites1\\2023\\2024\\google-keep-clone\\fundoonotes\\fundoonotes\\repositorylayer\\interfaces\\inoteservicerl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{35572D8C-A50C-43A5-BCF3-817BAB9FB5EC}|RepositoryLayer\\RepositoryLayer.csproj|solutionrelative:repositorylayer\\interfaces\\inoteservicerl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -53,7 +69,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 9,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -73,137 +89,192 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserRegistrationRL.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Services\\UserRegistrationRL.cs",
-              "RelativeDocumentMoniker": "RepositoryLayer\\Services\\UserRegistrationRL.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Services\\UserRegistrationRL.cs",
-              "RelativeToolTip": "RepositoryLayer\\Services\\UserRegistrationRL.cs",
-              "ViewState": "AQIAABMAAAAAAAAAAAAgwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-15T10:52:20.912Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "NoteController.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\FunDooNotes\\Controllers\\NoteController.cs",
-              "RelativeDocumentMoniker": "FunDooNotes\\Controllers\\NoteController.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\FunDooNotes\\Controllers\\NoteController.cs",
-              "RelativeToolTip": "FunDooNotes\\Controllers\\NoteController.cs",
-              "ViewState": "AQIAAF8AAAAAAAAAAAAwwI0AAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T05:04:08.213Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "NoteServiceBL.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\Services\\NoteServiceBL.cs",
-              "RelativeDocumentMoniker": "BusinessLayer\\Services\\NoteServiceBL.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\Services\\NoteServiceBL.cs",
-              "RelativeToolTip": "BusinessLayer\\Services\\NoteServiceBL.cs",
-              "ViewState": "AQIAABcAAAAAAAAAAAAwwCoAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T05:03:44.475Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "INoteServiceRL.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Interfaces\\INoteServiceRL.cs",
-              "RelativeDocumentMoniker": "RepositoryLayer\\Interfaces\\INoteServiceRL.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Interfaces\\INoteServiceRL.cs",
-              "RelativeToolTip": "RepositoryLayer\\Interfaces\\INoteServiceRL.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T04:59:00.874Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "NoteServiceRL.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Services\\NoteServiceRL.cs",
-              "RelativeDocumentMoniker": "RepositoryLayer\\Services\\NoteServiceRL.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Services\\NoteServiceRL.cs",
-              "RelativeToolTip": "RepositoryLayer\\Services\\NoteServiceRL.cs",
-              "ViewState": "AQIAAAoBAAAAAAAAAAAywB4BAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T04:58:53.098Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "INoteServiceBL.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\Interfaces\\INoteServiceBL.cs",
-              "RelativeDocumentMoniker": "BusinessLayer\\Interfaces\\INoteServiceBL.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\Interfaces\\INoteServiceBL.cs",
-              "RelativeToolTip": "BusinessLayer\\Interfaces\\INoteServiceBL.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAQwA4AAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T05:00:06.61Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 6,
               "Title": "ResponseModel.cs",
               "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\ResponseModel.cs",
               "RelativeDocumentMoniker": "ModelLayer\\Models\\ResponseModel.cs",
               "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\ResponseModel.cs",
               "RelativeToolTip": "ModelLayer\\Models\\ResponseModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T08:02:24.844Z"
+              "WhenOpened": "2024-03-15T18:08:44.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CollaborationRL.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Services\\CollaborationRL.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\Services\\CollaborationRL.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Services\\CollaborationRL.cs",
+              "RelativeToolTip": "RepositoryLayer\\Services\\CollaborationRL.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAwwBwAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T11:58:53.927Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CollaborationController.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\FunDooNotes\\Controllers\\CollaborationController.cs",
+              "RelativeDocumentMoniker": "FunDooNotes\\Controllers\\CollaborationController.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\FunDooNotes\\Controllers\\CollaborationController.cs",
+              "RelativeToolTip": "FunDooNotes\\Controllers\\CollaborationController.cs",
+              "ViewState": "AQIAADUAAAAAAAAAAAAswDsAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T12:59:08.811Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NoteController.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\FunDooNotes\\Controllers\\NoteController.cs",
+              "RelativeDocumentMoniker": "FunDooNotes\\Controllers\\NoteController.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\FunDooNotes\\Controllers\\NoteController.cs",
+              "RelativeToolTip": "FunDooNotes\\Controllers\\NoteController.cs",
+              "ViewState": "AQIAALIAAAAAAAAAAAA0wMEAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T12:11:30.383Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "dbo.Collaboration [Data]",
+              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__ProjectModels/FUNDOO_DB/True/SqlTable/dbo.Collaboration.sql",
+              "ToolTip": "dbo.Collaboration [Data]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-03-15T17:38:33.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CollaborationInfoModel.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\Collaboration\\CollaborationInfoModel.cs",
+              "RelativeDocumentMoniker": "ModelLayer\\Models\\Collaboration\\CollaborationInfoModel.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\Collaboration\\CollaborationInfoModel.cs",
+              "RelativeToolTip": "ModelLayer\\Models\\Collaboration\\CollaborationInfoModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T17:49:16.697Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Collaboration.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Entities\\Collaboration.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\Entities\\Collaboration.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Entities\\Collaboration.cs",
+              "RelativeToolTip": "RepositoryLayer\\Entities\\Collaboration.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA0AAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T11:45:58.473Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "dbo.Notes [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_localdb__ProjectModels/FUNDOO_DB/True/SqlTable/dbo.Notes.sql",
-              "ToolTip": "dbo.Notes [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2024-03-15T07:02:35.096Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "NoteResponse.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\Note\\NoteResponse.cs",
-              "RelativeDocumentMoniker": "ModelLayer\\Models\\Note\\NoteResponse.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\Note\\NoteResponse.cs",
-              "RelativeToolTip": "ModelLayer\\Models\\Note\\NoteResponse.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAvAAAA",
+              "Title": "CollaborationBL.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\Services\\CollaborationBL.cs",
+              "RelativeDocumentMoniker": "BusinessLayer\\Services\\CollaborationBL.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\Services\\CollaborationBL.cs",
+              "RelativeToolTip": "BusinessLayer\\Services\\CollaborationBL.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABcAAAA5AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T07:59:49.668Z"
+              "WhenOpened": "2024-03-15T12:52:49.848Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "CreateNoteRequest.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\Note\\CreateNoteRequest.cs",
-              "RelativeDocumentMoniker": "ModelLayer\\Models\\Note\\CreateNoteRequest.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\ModelLayer\\Models\\Note\\CreateNoteRequest.cs",
-              "RelativeToolTip": "ModelLayer\\Models\\Note\\CreateNoteRequest.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAABAAAA",
+              "Title": "ICollaborationRL.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Interfaces\\ICollaborationRL.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\Interfaces\\ICollaborationRL.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Interfaces\\ICollaborationRL.cs",
+              "RelativeToolTip": "RepositoryLayer\\Interfaces\\ICollaborationRL.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T08:01:45.285Z"
+              "WhenOpened": "2024-03-15T12:21:14.478Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ICollaborationBL.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\Interfaces\\ICollaborationBL.cs",
+              "RelativeDocumentMoniker": "BusinessLayer\\Interfaces\\ICollaborationBL.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\Interfaces\\ICollaborationBL.cs",
+              "RelativeToolTip": "BusinessLayer\\Interfaces\\ICollaborationBL.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T12:44:01.344Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "NoteEntity.cs",
-              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Entities\\NoteEntity.cs",
-              "RelativeDocumentMoniker": "RepositoryLayer\\Entities\\NoteEntity.cs",
-              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Entities\\NoteEntity.cs",
-              "RelativeToolTip": "RepositoryLayer\\Entities\\NoteEntity.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAkAAAASAAAA",
+              "Title": "INoteServiceBL.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\Interfaces\\INoteServiceBL.cs",
+              "RelativeDocumentMoniker": "BusinessLayer\\Interfaces\\INoteServiceBL.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\BusinessLayer\\Interfaces\\INoteServiceBL.cs",
+              "RelativeToolTip": "BusinessLayer\\Interfaces\\INoteServiceBL.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-14T07:53:38.769Z"
+              "WhenOpened": "2024-03-15T17:45:52.229Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\FunDooNotes\\Program.cs",
+              "RelativeDocumentMoniker": "FunDooNotes\\Program.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\FunDooNotes\\Program.cs",
+              "RelativeToolTip": "FunDooNotes\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T13:25:04.231Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UserRegistrationRL.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Services\\UserRegistrationRL.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\Services\\UserRegistrationRL.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Services\\UserRegistrationRL.cs",
+              "RelativeToolTip": "RepositoryLayer\\Services\\UserRegistrationRL.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAmwB8AAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T12:05:14.837Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "NoteServiceRL.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Services\\NoteServiceRL.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\Services\\NoteServiceRL.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Services\\NoteServiceRL.cs",
+              "RelativeToolTip": "RepositoryLayer\\Services\\NoteServiceRL.cs",
+              "ViewState": "AQIAAIEAAAAAAAAAAAAIwOIAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T12:09:31.324Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "INoteServiceRL.cs",
+              "DocumentMoniker": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Interfaces\\INoteServiceRL.cs",
+              "RelativeDocumentMoniker": "RepositoryLayer\\Interfaces\\INoteServiceRL.cs",
+              "ToolTip": "E:\\.NET WORKSPACE-1\\Websites1\\2023\\2024\\GOOGLE-KEEP-CLONE\\FunDooNotes\\FunDooNotes\\RepositoryLayer\\Interfaces\\INoteServiceRL.cs",
+              "RelativeToolTip": "RepositoryLayer\\Interfaces\\INoteServiceRL.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAB0AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-15T11:56:15.728Z"
             }
           ]
         }

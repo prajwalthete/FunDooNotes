@@ -183,7 +183,7 @@ namespace FunDooNotes.Controllers
 
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 int userId = Convert.ToInt32(userIdClaim);
-                var notes = await noteServiceBL.GetAllNoteAsync(userId)
+                var notes = await noteServiceBL.GetAllNoteAsync(userId);
 
                 return Ok(new ResponseModel<IEnumerable<NoteResponse>>
                 {

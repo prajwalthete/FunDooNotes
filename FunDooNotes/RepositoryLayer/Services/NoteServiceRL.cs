@@ -40,6 +40,7 @@ namespace RepositoryLayer.Services
             using (var connection = _Context.CreateConnection())
             {
 
+
                 bool tableExists = await connection.QueryFirstOrDefaultAsync<bool>(
 
                                  @"SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Notes';");

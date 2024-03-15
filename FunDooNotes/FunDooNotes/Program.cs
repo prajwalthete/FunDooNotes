@@ -17,6 +17,8 @@ builder.Services.AddScoped<IUserRegistrationRL, UserRegistrationRL>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<INoteServiceBL, NoteServiceBL>();
 builder.Services.AddScoped<INoteServiceRL, NoteServiceRL>();
+builder.Services.AddScoped<ICollaborationBL, CollaborationBL>();
+builder.Services.AddScoped<ICollaborationRL, CollaborationRL>();
 
 // Get the secret key from the configuration
 var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSettings:Secret"]);
