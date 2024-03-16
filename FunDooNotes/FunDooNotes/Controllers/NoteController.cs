@@ -175,7 +175,7 @@ namespace FunDooNotes.Controllers
 
 
         [Authorize]
-        [HttpGet("GetAllNotes")]
+        [HttpGet]
         public async Task<IActionResult> GetAllNotes()
         {
             try
@@ -215,17 +215,14 @@ namespace FunDooNotes.Controllers
             }
         }
 
-
         [Authorize]
-        [HttpGet("IsArchived")]
+        [HttpPatch("IsArchived")]
         public async Task<IActionResult> IsArchived(int NoteId)
         {
             try
             {
-
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 int userId = Convert.ToInt32(userIdClaim);
-
 
                 var result = await noteServiceBL.IsArchivedAsync(userId, NoteId);
 
@@ -273,8 +270,9 @@ namespace FunDooNotes.Controllers
 
 
 
+
         [Authorize]
-        [HttpGet("MoveToTrash")]
+        [HttpPatch("MoveToTrash")]
         public async Task<IActionResult> MoveToTrashAsync(int NoteId)
         {
             try
@@ -293,29 +291,35 @@ namespace FunDooNotes.Controllers
                     Data = null
                 });
             }
+            catch (NotFoundException ex)
+            {
+                return NotFound(new ResponseModel<string>
+                {
+                    IsSuccess = false,
+                    StatusCode = 404,
+                    Message = ex.Message,
+                    Data = null
+                });
+            }
+            catch (SqlException ex)
+            {
+                return StatusCode(500, new ResponseModel<string>
+                {
+                    IsSuccess = false,
+                    StatusCode = 500,
+                    Message = "An error occurred while Trashing note in database.",
+                    Data = null
+                });
+            }
             catch (Exception ex)
             {
-
-                if (ex is SqlException)
+                return StatusCode(500, new ResponseModel<string>
                 {
-                    return StatusCode(500, new ResponseModel<string>
-                    {
-                        IsSuccess = false,
-                        StatusCode = 500,
-                        Message = "An error occurred while moving note to Trash in the database.",
-                        Data = null
-                    });
-                }
-                else
-                {
-                    return StatusCode(500, new ResponseModel<string>
-                    {
-                        IsSuccess = false,
-                        StatusCode = 500,
-                        Message = "Unexpected error occurred while moving note to Trash",
-                        Data = null
-                    });
-                }
+                    IsSuccess = false,
+                    StatusCode = 500,
+                    Message = "An error occurred while Trashing the Note",
+                    Data = null
+                });
             }
         }
 

@@ -221,6 +221,7 @@ namespace RepositoryLayer.Services
 
 
             var selectQuery = "SELECT IsArchived FROM Notes WHERE UserId = @UserId AND NoteId = @NoteId";
+            var queryToCheckNoteIsInTrash = "SELECT IsDeleted FROM Notes WHERE UserId = @UserId AND NoteId = @NoteId";
 
 
 
@@ -234,17 +235,34 @@ namespace RepositoryLayer.Services
             {
                 try
                 {
-                    var wasArchived = await connection.QueryFirstOrDefaultAsync<bool>(selectQuery, new { UserId = UserId, NoteId = NoteId });
+                    var wasTrashed = await connection.ExecuteScalarAsync<bool?>(queryToCheckNoteIsInTrash, new { UserId = UserId, NoteId = NoteId });
+
+                    if (wasTrashed == true)
+                    {
+                        throw new NotFoundException($"Note with NoteId '{NoteId}' does not exist for User with UserId '{UserId} to Archive beacuse it is trashed'.");
+                    }
+
+
+
+                    var wasArchived = await connection.ExecuteScalarAsync<bool?>(selectQuery, new { UserId = UserId, NoteId = NoteId });
+
+                    if (wasArchived == null)
+                    {
+                        throw new NotFoundException($"Note with NoteId '{NoteId}' does not exist for User with UserId '{UserId}'.");
+                    }
+
+
 
                     var rowsAffected = await connection.ExecuteAsync(toggleQuery, new { UserId = UserId, NoteId = NoteId });
 
-                    return !wasArchived;
+                    return !(bool)wasArchived;
 
                 }
                 catch (SqlException ex)
                 {
                     throw new Exception("An error occurred while archiving the note in the database.", ex);
                 }
+
             }
         }
 
@@ -264,17 +282,28 @@ namespace RepositoryLayer.Services
                 try
                 {
                     // Get the current state of IsDeleted (true if note is already in trash, false otherwise)
-                    var wasMovedToTrash = await connection.QueryFirstOrDefaultAsync<bool>(selectQuery, new { UserId = UserId, NoteId = NoteId });
+                    var wasMovedToTrash = await connection.ExecuteScalarAsync<bool?>(selectQuery, new { UserId = UserId, NoteId = NoteId });
+
+                    if (wasMovedToTrash == null)
+                    {
+                        throw new NotFoundException($"Note with NoteId '{NoteId}' does not exist for User with UserId '{UserId}'.");
+                    }
+
 
                     // Toggle the IsDeleted state to move the note to trash or restore it
                     await connection.ExecuteAsync(toggleQuery, new { UserId = UserId, NoteId = NoteId });
 
                     // Return updated state of IsDeleted
-                    return !wasMovedToTrash;
+                    return !(bool)wasMovedToTrash;
                 }
                 catch (SqlException ex)
                 {
                     throw new Exception("An error occurred while moving note to Trash in the database.", ex);
+                }
+                catch (NotFoundException ex)
+                {
+
+                    throw new NotFoundException(ex.Message, ex);
                 }
             }
         }
