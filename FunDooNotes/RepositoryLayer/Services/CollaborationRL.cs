@@ -1,8 +1,11 @@
 ﻿using Dapper;
 using ModelLayer.Models.Collaboration;
 using RepositoryLayer.Context;
+using RepositoryLayer.GlobleExceptionhandler;
+using RepositoryLayer.GlobleExeptionhandler;
 using RepositoryLayer.Interfaces;
 using System.Data;
+using System.Text.RegularExpressions;
 
 namespace RepositoryLayer.Services
 {
@@ -28,24 +31,88 @@ namespace RepositoryLayer.Services
 
         }
 
-        async Task<bool> ICollaborationRL.AddCollaborator(int NoteId, CollaborationRequestModel Request, int UserId)
+
+
+        public async Task<bool> RemoveCollaborator(int NoteId, CollaborationRequestModel Request, int UserId)
         {
-
-
-
             var query = @"
-                            INSERT INTO Collaboration (UserId, NoteId, CollaboratorsEmail) 
-                            VALUES (@userId, @NoteId, @collaboratorsEmail);
+                 DELETE FROM Collaboration
+                 WHERE UserId = @userId
+                 AND NoteId = @NoteId
+                 AND CollaboratorEmail = @collaboratorEmail;
+                 ";
+
+            var emailExistsQuery = @"
+                 SELECT COUNT(*)
+                 FROM Users
+                 WHERE Email = @collaboratorEmail;
+                 ";
+
+            var parameters = new DynamicParameters();
+            parameters.Add("UserId", UserId, DbType.Int32);
+            parameters.Add("NoteId", NoteId, DbType.Int32);
+            parameters.Add("collaboratorEmail", Request.Email, DbType.String);
+
+            var emailExistsParams = new { collaboratorEmail = Request.Email };
+
+            using (var connection = _context.CreateConnection())
+            {
+                int emailCount = await connection.ExecuteScalarAsync<int>(emailExistsQuery, emailExistsParams);
+
+                if (emailCount == 0)
+                {
+                    throw new NotFoundException($"Collaborator with email '{Request.Email}' not found.");
+
+                }
+
+                int rowsAffected = await connection.ExecuteAsync(query, parameters);
+                return rowsAffected > 0;
+
+            }
+
+
+        }
+
+
+
+        public async Task<bool> AddCollaborator(int NoteId, CollaborationRequestModel Request, int UserId)
+        {
+            var query = @"
+                            INSERT INTO Collaboration (UserId, NoteId, CollaboratorEmail) 
+                            VALUES (@userId, @NoteId, @collaboratorEmail);
                             ";
+
+
 
             var parameters = new DynamicParameters();
             parameters.Add("userId", UserId, DbType.Int32);
             parameters.Add("NoteId", NoteId, DbType.Int32);
-            parameters.Add("collaboratorsEmail", Request.Email, DbType.String);
 
+
+            if (!IsValidEmail(Request.Email))
+            {
+
+                throw new InvalidEmailFormatException("Invalid email format");
+            }
+            parameters.Add("collaboratorEmail", Request.Email, DbType.String);
+
+            var emailExistsQuery = @"
+                 SELECT COUNT(*)
+                 FROM Users
+                 WHERE Email = @collaboratorEmail;
+                 ";
+            var emailExistsParams = new { collaboratorEmail = Request.Email };
 
             using (var connection = _context.CreateConnection())
             {
+                int emailCount = await connection.ExecuteScalarAsync<int>(emailExistsQuery, emailExistsParams);
+
+                if (emailCount == 0)
+                {
+                    throw new NotFoundException($"Collaborator with email '{Request.Email}' not Registerd User please Register and try Again.");
+
+                }
+
                 // Check if table exists
                 bool tableExists = await connection.QueryFirstOrDefaultAsync<bool>(
                     @"
@@ -63,9 +130,10 @@ namespace RepositoryLayer.Services
                             CollaborationId INT IDENTITY(1, 1) PRIMARY KEY,
                             UserId INT,
                             NoteId INT,
-                            CollaboratorsEmail VARCHAR(MAX),
+                            CollaboratorEmail NVARCHAR(100),
                             CONSTRAINT FK_UserId FOREIGN KEY (UserId) REFERENCES Users (UserId),
-                            CONSTRAINT FK_NoteId FOREIGN KEY (NoteId) REFERENCES Notes (NoteId)
+                            CONSTRAINT FK_NoteId FOREIGN KEY (NoteId) REFERENCES Notes (NoteId),
+                            CONSTRAINT FK_CollaboratorEmail FOREIGN KEY (CollaboratorEmail) REFERENCES Users (Email)
                         );"
                     );
                 }
@@ -75,6 +143,12 @@ namespace RepositoryLayer.Services
             }
 
             return true;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+            return Regex.IsMatch(email, pattern);
         }
     }
 }

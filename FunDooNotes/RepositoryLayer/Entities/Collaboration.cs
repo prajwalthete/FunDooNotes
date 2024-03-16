@@ -14,6 +14,7 @@ namespace RepositoryLayer.Entities
         [ForeignKey("Notes")]
         public int NoteId { get; set; }
 
+        [ForeignKey("Users")]
         public string CollaboratorEmail { get; set; }
 
     }

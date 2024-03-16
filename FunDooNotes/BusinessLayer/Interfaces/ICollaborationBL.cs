@@ -6,6 +6,8 @@ namespace BusinessLayer.Interfaces
     {
         Task<bool> AddCollaborator(int NoteId, CollaborationRequestModel Request, int UserId);
         Task<IEnumerable<CollaborationInfoModel>> GetAllCollaborators();
+        Task<bool> RemoveCollaborator(int NoteId, CollaborationRequestModel Request, int UserId);
+
 
 
     }

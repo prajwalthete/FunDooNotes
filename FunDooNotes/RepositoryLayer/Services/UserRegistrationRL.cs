@@ -135,7 +135,7 @@ namespace RepositoryLayer.Services
         }
 
 
-        private bool IsValidEmail(string email)
+        public bool IsValidEmail(string email)
         {
             // string pattern = @"^[a-zA-Z]([\w]|\.[\w]+)\@[a-zA-Z0-9]+\.[a-z]{2,3}$";
             string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";

@@ -23,5 +23,10 @@ namespace BusinessLayer.Services
         {
             return collaborationRL.GetAllCollaborators();
         }
+
+        public Task<bool> RemoveCollaborator(int NoteId, CollaborationRequestModel Request, int UserId)
+        {
+            return collaborationRL.RemoveCollaborator(NoteId, Request, UserId);
+        }
     }
 }
