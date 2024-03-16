@@ -188,8 +188,8 @@ namespace FunDooNotes.Controllers
                 return Ok(new ResponseModel<IEnumerable<NoteResponse>>
                 {
                     StatusCode = 200,
-                    Message = "Notes retrieved successfully",
-                    Data = notes.ToList()
+                    Message = notes != null && notes.Any() ? "Notes retrieved successfully" : "No notes found",
+                    Data = notes
                 });
             }
             catch (Exception ex)
@@ -208,6 +208,7 @@ namespace FunDooNotes.Controllers
                     return StatusCode(500, new ResponseModel<string>
                     {
                         StatusCode = 500,
+                        IsSuccess = false,
                         Message = "An error occurred.",
                         Data = null
                     });
@@ -256,7 +257,7 @@ namespace FunDooNotes.Controllers
                     Data = null
                 });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, new ResponseModel<string>
                 {

@@ -64,7 +64,7 @@ namespace RepositoryLayer.Services
 
                 try
                 {
-                    await connection.ExecuteAsync(insertQuery, parameters);
+                    var note = await connection.ExecuteAsync(insertQuery, parameters);
                 }
                 catch (SqlException ex)
                 {
@@ -79,6 +79,7 @@ namespace RepositoryLayer.Services
                     // return notes.Reverse().ToList();
 
                     return await GetAllNoteAsync(UserId);
+
                 }
                 else
                 {
@@ -163,7 +164,6 @@ namespace RepositoryLayer.Services
             }
         }
 
-        // method to check if the input value is empty and return the appropriate value
         private string CheckInput(string newValue, string previousValue)
         {
             return string.IsNullOrEmpty(newValue) ? previousValue : newValue;

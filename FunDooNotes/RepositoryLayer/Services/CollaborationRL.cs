@@ -31,8 +31,6 @@ namespace RepositoryLayer.Services
 
         }
 
-
-
         public async Task<bool> RemoveCollaborator(int NoteId, CollaborationRequestModel Request, int UserId)
         {
             var query = @"
@@ -69,11 +67,7 @@ namespace RepositoryLayer.Services
                 return rowsAffected > 0;
 
             }
-
-
         }
-
-
 
         public async Task<bool> AddCollaborator(int NoteId, CollaborationRequestModel Request, int UserId)
         {
@@ -82,25 +76,22 @@ namespace RepositoryLayer.Services
                             VALUES (@userId, @NoteId, @collaboratorEmail);
                             ";
 
-
-
             var parameters = new DynamicParameters();
             parameters.Add("userId", UserId, DbType.Int32);
             parameters.Add("NoteId", NoteId, DbType.Int32);
 
-
             if (!IsValidEmail(Request.Email))
             {
-
                 throw new InvalidEmailFormatException("Invalid email format");
             }
             parameters.Add("collaboratorEmail", Request.Email, DbType.String);
 
             var emailExistsQuery = @"
-                 SELECT COUNT(*)
-                 FROM Users
-                 WHERE Email = @collaboratorEmail;
-                 ";
+                                     SELECT COUNT(*)
+                                     FROM Users
+                                     WHERE Email = @collaboratorEmail;
+                                     ";
+
             var emailExistsParams = new { collaboratorEmail = Request.Email };
 
             using (var connection = _context.CreateConnection())
@@ -109,10 +100,8 @@ namespace RepositoryLayer.Services
 
                 if (emailCount == 0)
                 {
-                    throw new NotFoundException($"Collaborator with email '{Request.Email}' not Registerd User please Register and try Again.");
-
+                    throw new NotFoundException($"Collaborator with email '{Request.Email}' Is Not A Registerd User please Register First and try Again.");
                 }
-
                 // Check if table exists
                 bool tableExists = await connection.QueryFirstOrDefaultAsync<bool>(
                     @"

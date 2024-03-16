@@ -16,9 +16,7 @@ namespace BusinessLayer.Services
         public Task<bool> AddCollaborator(int NoteId, CollaborationRequestModel Request, int UserId)
         {
             return collaborationRL.AddCollaborator(NoteId, Request, UserId);
-
         }
-
         public Task<IEnumerable<CollaborationInfoModel>> GetAllCollaborators()
         {
             return collaborationRL.GetAllCollaborators();
