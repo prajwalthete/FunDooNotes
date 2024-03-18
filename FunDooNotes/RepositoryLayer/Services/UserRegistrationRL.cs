@@ -14,11 +14,13 @@ namespace RepositoryLayer.Services
     {
         private readonly DapperContext _Context;
         private readonly IAuthService _authService;
+        private readonly IEmailRL _emailService;
 
-        public UserRegistrationRL(DapperContext context, IAuthService authService)
+        public UserRegistrationRL(DapperContext context, IAuthService authService, IEmailRL emailService)
         {
             _Context = context;
             _authService = authService;
+            _emailService = emailService;
         }
 
         public async Task<bool> RegisterUser(UserRegistrationModel userRegModel)
@@ -46,8 +48,6 @@ namespace RepositoryLayer.Services
             //Check Emailformat Using Regex
             if (!IsValidEmail(userRegModel.Email))
             {
-                Console.WriteLine("Invalid email format");
-
                 throw new InvalidEmailFormatException("Invalid email format");
             }
 
@@ -141,5 +141,85 @@ namespace RepositoryLayer.Services
             string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
             return Regex.IsMatch(email, pattern);
         }
+
+        public async Task<bool> ForgetPassword(string email)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("Email", email);
+
+
+            string query = @"
+                            SELECT UserId, Email, Password -- Add more fields if needed
+                            FROM Users 
+                            WHERE Email = @Email;
+                            ";
+
+            using (var connection = _Context.CreateConnection())
+            {
+                var user = await connection.QueryFirstOrDefaultAsync<UserEntity>(query, parameters);
+
+                if (user == null)
+                {
+                    throw new NotFoundException($"User with email '{email}' not found.");
+                }
+                //if password enterd from user and password in db match then generate Token 
+                var _token = _authService.GenerateJwtToken(user);
+
+                // Generate password reset link
+                var Url = $"https://localhost:7258/api/User/ResetPassword?token={_token}";
+
+
+                return await _emailService.SendEmailAsync(email, "Reset Password", Url);
+
+            }
+        }
+
+
+
+        public async Task<bool> ResetPassword(string newPassword, int userId)
+        {
+            try
+            {
+                var query = @"
+                                 SELECT *
+                                 FROM Users
+                                 WHERE UserId = @UserId;
+                                  ";
+
+                using (var connection = _Context.CreateConnection())
+                {
+                    var user = await connection.QueryFirstOrDefaultAsync<UserRegistrationModel>(query, new { UserId = userId });
+
+                    if (user == null)
+                    {
+                        throw new NotFoundException($"User with ID '{userId}' not found.");
+                    }
+
+
+                    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+
+                    user.Password = hashedPassword;
+
+
+
+                    var updateQuery = @"
+                                         UPDATE Users
+                                         SET Password = @Password
+                                         WHERE UserId = @UserId;
+                                          ";
+
+                    await connection.ExecuteAsync(updateQuery, new { Password = hashedPassword, UserId = userId });
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw new RepositoryException("An error occurred while resetting the password.", ex);
+            }
+        }
+
     }
 }

@@ -1,10 +1,13 @@
 ﻿using BusinessLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using ModelLayer.Models;
 using RepositoryLayer.GlobleExceptionhandler;
 using RepositoryLayer.GlobleExeptionhandler;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 
 namespace FunDooNotes.Controllers
 {
@@ -13,12 +16,12 @@ namespace FunDooNotes.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRegistrationBL _registrationBL;
-        private readonly IEmailBL _emailBL;
+        private readonly IConfiguration _config;
 
-        public UserController(IUserRegistrationBL registrationBL, IEmailBL emailBL)
+        public UserController(IUserRegistrationBL registrationBL, IConfiguration config)//, IEmailBL emailBL)
         {
             _registrationBL = registrationBL;
-            _emailBL = emailBL;
+            _config = config;
 
         }
 
@@ -155,65 +158,74 @@ namespace FunDooNotes.Controllers
         }
 
 
-        /*
-        [HttpGet("sendMail")]
-        public async Task<IActionResult> GetEmail(string to)
+
+
+        //[HttpPost("send")]
+        //public async Task<IActionResult> GetEmail(string to)
+        //{
+        //    try
+        //    {
+        //        string subject = "Mail Subject";
+        //        string message = "Hello Prajwal, Welcome To the Dot Net Core Web Api SMTP SendEmail";
+
+        //        bool isEmailSent = await _emailBL.SendEmailAsync(to, subject, message);
+
+        //        if (isEmailSent)
+        //        {
+        //            var response = new ResponseModel<string>
+        //            {
+        //                StatusCode = 200,
+        //                Message = "Email sent successfully.",
+        //                Data = "Email sent successfully will end token."
+        //            };
+        //            return Ok(response);
+        //        }
+        //        else
+        //        {
+        //            var response = new ResponseModel<string>
+        //            {
+        //                StatusCode = 400,
+        //                IsSuccess = false,
+        //                Message = "Failed to send email.",
+        //                Data = null
+        //            };
+        //            return BadRequest(response);
+        //        }
+        //    }
+        //    catch (EmailSendingException ex)
+        //    {
+        //        var response = new ResponseModel<string>
+        //        {
+        //            StatusCode = 500,
+        //            IsSuccess = false,
+        //            Message = $"Error sending email: {ex.Message}",
+        //            Data = null
+        //        };
+        //        return StatusCode(500, response);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var response = new ResponseModel<string>
+        //        {
+        //            IsSuccess = false,
+        //            StatusCode = 500,
+        //            Message = $"An unexpected error occurred: {ex.Message}",
+        //            Data = null
+        //        };
+        //        return StatusCode(500, response);
+        //    }
+        //}
+
+
+
+
+        [HttpPost("sendemail")]
+        public async Task<IActionResult> ForgetPassword(string email)
         {
             try
             {
-                // Define email subject and message
-                string subject = "Mail Subject";
-                string message = "Hello Prajwal, Welcome To the Dot Net Core Web Api SMTP SendEmail";
 
-                // Call the email service to send the email
-                var result = await _emailBL.SendEmailAsync(to, subject, message);
-
-                // Check if the email was sent successfully
-                if (result)
-                {
-                    var response = new ResponseModel<string>
-                    {
-                        StatusCode = 200,
-                        Message = "Email sent successfully.",
-                       // Data = token
-
-                    };
-                    return Ok(response);
-                  
-                }
-                else
-                {
-                    var response = new ResponseModel<UserLoginModel>
-                    {
-                        StatusCode = 500,
-                        IsSuccess = false,
-                        Message = "Failed to send email."
-                    };
-                    return BadRequest(response);
-                 
-                }
-            }
-            catch (Exception ex)
-            {
-                // Log the exception
-                Console.WriteLine($"Error sending email: {ex.Message}");
-
-                // Return internal server error response
-                return StatusCode(500, new { Message = "Internal server error." });
-            }
-        }
-
-        */
-
-        [HttpPost("send")]
-        public async Task<IActionResult> GetEmail(string to)
-        {
-            try
-            {
-                string subject = "Mail Subject";
-                string message = "Hello Prajwal, Welcome To the Dot Net Core Web Api SMTP SendEmail";
-
-                bool isEmailSent = await _emailBL.SendEmailAsync(to, subject, message);
+                bool isEmailSent = await _registrationBL.ForgetPassword(email);
 
                 if (isEmailSent)
                 {
@@ -221,7 +233,7 @@ namespace FunDooNotes.Controllers
                     {
                         StatusCode = 200,
                         Message = "Email sent successfully.",
-                        Data = "Email sent successfully will end token."
+
                     };
                     return Ok(response);
                 }
@@ -230,17 +242,30 @@ namespace FunDooNotes.Controllers
                     var response = new ResponseModel<string>
                     {
                         StatusCode = 400,
+                        IsSuccess = false,
                         Message = "Failed to send email.",
                         Data = null
                     };
                     return BadRequest(response);
                 }
             }
+            catch (NotFoundException ex)
+            {
+                var response = new ResponseModel<string>
+                {
+                    StatusCode = 500,
+                    IsSuccess = false,
+                    Message = $"Error sending email: {ex.Message}",
+                    Data = null
+                };
+                return StatusCode(500, response);
+            }
             catch (EmailSendingException ex)
             {
                 var response = new ResponseModel<string>
                 {
                     StatusCode = 500,
+                    IsSuccess = false,
                     Message = $"Error sending email: {ex.Message}",
                     Data = null
                 };
@@ -250,6 +275,7 @@ namespace FunDooNotes.Controllers
             {
                 var response = new ResponseModel<string>
                 {
+                    IsSuccess = false,
                     StatusCode = 500,
                     Message = $"An unexpected error occurred: {ex.Message}",
                     Data = null
@@ -260,6 +286,85 @@ namespace FunDooNotes.Controllers
 
 
 
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword(string token, string password)
+        {
+            try
+            {
+
+                var handler = new JwtSecurityTokenHandler();
+                var validationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = _config["JwtSettings:Issuer"],
+                    ValidAudience = _config["JwtSettings:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JwtSettings:Key"]))
+                };
+
+                SecurityToken validatedToken;
+                var principal = handler.ValidateToken(token, validationParameters, out validatedToken);
+
+                // Extract claims
+                var userId = principal.FindFirstValue("UserId");
+                int _userId = Convert.ToInt32(userId);
+
+
+
+                bool isPassWordReset = await _registrationBL.ResetPassword(password, _userId);
+
+                //  bool isPassWordReset = await _registrationBL.ResetPassword(password, 1006);
+
+
+                var response = new ResponseModel<bool>
+                {
+                    StatusCode = 200,
+                    IsSuccess = true,
+                    Message = "Password reset successfully",
+                    Data = isPassWordReset
+                };
+
+                return Ok(response);
+            }
+            catch (NotFoundException ex)
+            {
+                var response = new ResponseModel<bool>
+                {
+                    StatusCode = 404,
+                    IsSuccess = false,
+                    Message = ex.Message,
+                    Data = false
+                };
+
+                return NotFound(response);
+            }
+            catch (RepositoryException ex)
+            {
+                var response = new ResponseModel<bool>
+                {
+                    StatusCode = 500,
+                    IsSuccess = false,
+                    Message = ex.Message,
+                    Data = false
+                };
+
+                return StatusCode(500, response);
+            }
+            catch (Exception ex)
+            {
+                var response = new ResponseModel<bool>
+                {
+                    StatusCode = 500,
+                    IsSuccess = false,
+                    Message = "An unexpected error occurred.",
+                    Data = false
+                };
+
+                return StatusCode(500, response);
+            }
+        }
 
 
 

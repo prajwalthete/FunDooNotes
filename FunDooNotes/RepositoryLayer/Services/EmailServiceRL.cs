@@ -11,6 +11,10 @@ namespace RepositoryLayer.Services
     {
         private readonly EmailSettings _emailSettings;
 
+        public EmailServiceRL()
+        {
+        }
+
         public EmailServiceRL(EmailSettings emailSettings)
         {
             _emailSettings = emailSettings;
@@ -41,19 +45,17 @@ namespace RepositoryLayer.Services
             }
             catch (SmtpException smtpEx)
             {
-                Console.WriteLine($"SMTP error occurred: {smtpEx.Message}");
-                // Optionally, you can log more information or cleanup here
+                // Console.WriteLine($"SMTP error occurred: {smtpEx.Message}");
                 throw new EmailSendingException("SMTP error occurred while sending email", smtpEx);
             }
             catch (InvalidOperationException invalidOpEx)
             {
-                Console.WriteLine($"Invalid operation error occurred: {invalidOpEx.Message}");
-                // Optionally, you can log more information or cleanup here
+                // Console.WriteLine($"Invalid operation error occurred: {invalidOpEx.Message}");
                 throw new EmailSendingException("Invalid operation occurred while sending email", invalidOpEx);
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error sending email: {ex.Message}");
+                // Console.WriteLine($"Error sending email: {ex.Message}");
                 return false;
             }
         }

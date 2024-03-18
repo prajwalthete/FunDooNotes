@@ -21,16 +21,7 @@ builder.Services.AddScoped<INoteServiceBL, NoteServiceBL>();
 builder.Services.AddScoped<INoteServiceRL, NoteServiceRL>();
 builder.Services.AddScoped<ICollaborationBL, CollaborationBL>();
 builder.Services.AddScoped<ICollaborationRL, CollaborationRL>();
-
-
-
-
-
-
-
 builder.Services.AddScoped<IEmailBL, EmailServiceBL>();
-
-
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddScoped<IEmailRL, EmailServiceRL>();
 
@@ -40,13 +31,6 @@ builder.Services.AddScoped(sp => sp.GetRequiredService<IOptions<EmailSettings>>(
 
 
 
-/*
-builder.Services.AddScoped<IEmailRL, EmailServiceRL>();
-builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
-
-builder.Services.AddScoped(sp => sp.GetRequiredService<IOptions<EmailSettings>>().Value);
-*/
-
 
 
 // Get the secret key from the configuration
@@ -54,6 +38,7 @@ var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSettings:Secret"]);
 
 // Add authentication services with JWT Bearer token validation to the service collection
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+
 
 
     // Add JWT Bearer authentication options
@@ -69,10 +54,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(key),
 
             // Specify whether to validate the issuer of the token (usually set to false for development)
-            ValidateIssuer = false,
+            ValidateIssuer = false,// true, // imade changes 
 
             // Specify whether to validate the audience of the token (usually set to false for development)
-            ValidateAudience = false
+            ValidateAudience = false,// true // i made changes
         };
     });
 
