@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ModelLayer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2892ef88fa9584766f517df8a848c87c913a5574")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+435187b50142a0e5a481d2044df1b7ce709a1c08")]
 [assembly: System.Reflection.AssemblyProductAttribute("ModelLayer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ModelLayer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

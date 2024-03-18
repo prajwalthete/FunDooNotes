@@ -69,9 +69,17 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[7.4.0, )"
+            },
+            "System.Net.Mail.Abstractions": {
+              "target": "Package",
+              "version": "[1.1.21, )"
             }
           },
           "imports": [

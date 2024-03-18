@@ -76,9 +76,17 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[7.4.0, )"
+            },
+            "System.Net.Mail.Abstractions": {
+              "target": "Package",
+              "version": "[1.1.21, )"
             }
           },
           "imports": [
@@ -166,9 +174,17 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[7.4.0, )"
+            },
+            "System.Net.Mail.Abstractions": {
+              "target": "Package",
+              "version": "[1.1.21, )"
             }
           },
           "imports": [
@@ -244,6 +260,10 @@
               "target": "Package",
               "version": "[2.1.35, )"
             },
+            "DocuSign.eSign.dll": {
+              "target": "Package",
+              "version": "[6.8.0, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[8.0.2, )"
@@ -264,9 +284,17 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[7.4.0, )"
+            },
+            "System.Net.Mail.Abstractions": {
+              "target": "Package",
+              "version": "[1.1.21, )"
             }
           },
           "imports": [

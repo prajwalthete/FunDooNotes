@@ -59,6 +59,19 @@
           }
         }
       },
+      "BouncyCastle.Cryptography/2.2.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/BouncyCastle.Cryptography.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/BouncyCastle.Cryptography.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Dapper/2.1.35": {
         "type": "package",
         "compile": {
@@ -69,6 +82,43 @@
         "runtime": {
           "lib/net7.0/Dapper.dll": {
             "related": ".xml"
+          }
+        }
+      },
+      "DocuSign.eSign.dll/6.8.0": {
+        "type": "package",
+        "dependencies": {
+          "BouncyCastle.Cryptography": "2.2.1",
+          "Microsoft.CSharp": "4.5.0",
+          "Microsoft.IdentityModel.Protocols": "5.4.0",
+          "Newtonsoft.Json": "13.0.1",
+          "System.ComponentModel.Annotations": "4.5.0",
+          "System.IdentityModel.Tokens.Jwt": "5.4.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/DocuSign.eSign.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/DocuSign.eSign.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "MailKit/3.2.0": {
+        "type": "package",
+        "dependencies": {
+          "MimeKit": "3.2.0"
+        },
+        "compile": {
+          "lib/net6.0/MailKit.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/MailKit.dll": {
+            "related": ".pdb;.xml"
           }
         }
       },
@@ -582,33 +632,40 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection/2.2.0": {
+      "Microsoft.Extensions.DependencyInjection/6.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.2.0"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "6.0.0",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0"
         },
         "compile": {
-          "lib/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.dll": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.dll": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.dll": {
             "related": ".xml"
           }
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
-      "Microsoft.Extensions.DependencyInjection.Abstractions/2.2.0": {
+      "Microsoft.Extensions.DependencyInjection.Abstractions/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+          "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
             "related": ".xml"
           }
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
       "Microsoft.Extensions.DependencyModel/2.1.0": {
@@ -899,7 +956,37 @@
           }
         }
       },
-      "Newtonsoft.Json/11.0.2": {
+      "MimeKit/3.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Portable.BouncyCastle": "1.9.0",
+          "System.Security.Cryptography.Pkcs": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/MimeKit.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/MimeKit.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "NETCore.MailKit/2.1.0": {
+        "type": "package",
+        "dependencies": {
+          "MailKit": "3.2.0",
+          "Microsoft.Extensions.DependencyInjection": "6.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/NETCore.MailKit.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/NETCore.MailKit.dll": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
@@ -908,6 +995,19 @@
         },
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Portable.BouncyCastle/1.9.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
             "related": ".xml"
           }
         }
@@ -1074,6 +1174,22 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Dynamic.Runtime.dll": {}
+        }
+      },
+      "System.Formats.Asn1/6.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/System.Formats.Asn1.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/System.Formats.Asn1.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
         }
       },
       "System.Globalization/4.0.11": {
@@ -1248,6 +1364,15 @@
           "lib/netstandard2.0/System.Memory.Data.dll": {
             "related": ".xml"
           }
+        }
+      },
+      "System.Net.Mail.Abstractions/1.1.21": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/System.Net.Mail.Abstractions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Net.Mail.Abstractions.dll": {}
         }
       },
       "System.Numerics.Vectors/4.5.0": {
@@ -1543,6 +1668,31 @@
           }
         }
       },
+      "System.Security.Cryptography.Pkcs/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Formats.Asn1": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/System.Security.Cryptography.Pkcs.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/System.Security.Cryptography.Pkcs.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/netcoreapp3.1/_._": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net6.0/System.Security.Cryptography.Pkcs.dll": {
+            "assetType": "runtime",
+            "rid": "win"
+          }
+        }
+      },
       "System.Security.Cryptography.ProtectedData/8.0.0": {
         "type": "package",
         "compile": {
@@ -1668,7 +1818,9 @@
           "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0",
           "Microsoft.Data.SqlClient": "5.2.0",
           "Microsoft.Extensions.Configuration": "8.0.0",
-          "System.IdentityModel.Tokens.Jwt": "7.4.0"
+          "NETCore.MailKit": "2.1.0",
+          "System.IdentityModel.Tokens.Jwt": "7.4.0",
+          "System.Net.Mail.Abstractions": "1.1.21"
         },
         "compile": {
           "bin/placeholder/ModelLayer.dll": {}
@@ -1683,13 +1835,16 @@
         "dependencies": {
           "BCrypt.Net": "0.1.0",
           "Dapper": "2.1.35",
+          "DocuSign.eSign.dll": "6.8.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.2",
           "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.Mvc.Formatters.Json": "2.2.0",
           "Microsoft.Data.SqlClient": "5.2.0",
           "Microsoft.Extensions.Configuration": "8.0.0",
           "ModelLayer": "1.0.0",
-          "System.IdentityModel.Tokens.Jwt": "7.4.0"
+          "NETCore.MailKit": "2.1.0",
+          "System.IdentityModel.Tokens.Jwt": "7.4.0",
+          "System.Net.Mail.Abstractions": "1.1.21"
         },
         "compile": {
           "bin/placeholder/RepositoryLayer.dll": {}
@@ -1756,6 +1911,26 @@
         "lib/net35/BCrypt.Net.dll"
       ]
     },
+    "BouncyCastle.Cryptography/2.2.1": {
+      "sha512": "A6Zr52zVqJKt18ZBsTnX0qhG0kwIQftVAjLmszmkiR/trSp8H+xj1gUOzk7XHwaKgyREMSV1v9XaKrBUeIOdvQ==",
+      "type": "package",
+      "path": "bouncycastle.cryptography/2.2.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "bouncycastle.cryptography.2.2.1.nupkg.sha512",
+        "bouncycastle.cryptography.nuspec",
+        "lib/net461/BouncyCastle.Cryptography.dll",
+        "lib/net461/BouncyCastle.Cryptography.xml",
+        "lib/net6.0/BouncyCastle.Cryptography.dll",
+        "lib/net6.0/BouncyCastle.Cryptography.xml",
+        "lib/netstandard2.0/BouncyCastle.Cryptography.dll",
+        "lib/netstandard2.0/BouncyCastle.Cryptography.xml",
+        "packageIcon.png"
+      ]
+    },
     "Dapper/2.1.35": {
       "sha512": "YKRwjVfrG7GYOovlGyQoMvr1/IJdn+7QzNXJxyMh0YfFF5yvDmTYaJOVYWsckreNjGsGSEtrMTpnzxTUq/tZQw==",
       "type": "package",
@@ -1775,6 +1950,57 @@
         "lib/netstandard2.0/Dapper.dll",
         "lib/netstandard2.0/Dapper.xml",
         "readme.md"
+      ]
+    },
+    "DocuSign.eSign.dll/6.8.0": {
+      "sha512": "vTrCCzxKxWDLccQoS71jzsn6q5HNOYuai8qFCail401U6tzxSS+ATjeJ/kXTTJvVT1JII1rCyACizjG0ybIdkQ==",
+      "type": "package",
+      "path": "docusign.esign.dll/6.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "docusign.esign.dll.6.8.0.nupkg.sha512",
+        "docusign.esign.dll.nuspec",
+        "lib/net462/DocuSign.eSign.dll",
+        "lib/net462/DocuSign.eSign.xml",
+        "lib/netstandard2.0/DocuSign.eSign.dll",
+        "lib/netstandard2.0/DocuSign.eSign.xml"
+      ]
+    },
+    "MailKit/3.2.0": {
+      "sha512": "5MTpTqmjqT7HPvYbP3HozRZMth5vSaT0ReN0iM3rAM4CgLI/R1qqtLDDNWGnFFIlcNzeJkZQRJJMkv8cgzWBbA==",
+      "type": "package",
+      "path": "mailkit/3.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icons/mailkit-50.png",
+        "lib/net452/MailKit.dll",
+        "lib/net452/MailKit.pdb",
+        "lib/net452/MailKit.xml",
+        "lib/net461/MailKit.dll",
+        "lib/net461/MailKit.pdb",
+        "lib/net461/MailKit.xml",
+        "lib/net47/MailKit.dll",
+        "lib/net47/MailKit.pdb",
+        "lib/net47/MailKit.xml",
+        "lib/net48/MailKit.dll",
+        "lib/net48/MailKit.pdb",
+        "lib/net48/MailKit.xml",
+        "lib/net5.0/MailKit.dll",
+        "lib/net5.0/MailKit.pdb",
+        "lib/net5.0/MailKit.xml",
+        "lib/net6.0/MailKit.dll",
+        "lib/net6.0/MailKit.pdb",
+        "lib/net6.0/MailKit.xml",
+        "lib/netstandard2.0/MailKit.dll",
+        "lib/netstandard2.0/MailKit.pdb",
+        "lib/netstandard2.0/MailKit.xml",
+        "lib/netstandard2.1/MailKit.dll",
+        "lib/netstandard2.1/MailKit.pdb",
+        "lib/netstandard2.1/MailKit.xml",
+        "mailkit.3.2.0.nupkg.sha512",
+        "mailkit.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
@@ -2304,34 +2530,54 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection/2.2.0": {
-      "sha512": "MZtBIwfDFork5vfjpJdG5g8wuJFt7d/y3LOSVVtDK/76wlbtz6cjltfKHqLx2TKVqTj5/c41t77m1+h20zqtPA==",
+    "Microsoft.Extensions.DependencyInjection/6.0.0": {
+      "sha512": "k6PWQMuoBDGGHOQTtyois2u4AwyVcIwL2LaSLlTZQm2CYcJ1pxbt6jfAnpWmzENA/wfrYRI/X9DTLoUkE4AsLw==",
       "type": "package",
-      "path": "microsoft.extensions.dependencyinjection/2.2.0",
+      "path": "microsoft.extensions.dependencyinjection/6.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.targets",
+        "buildTransitive/netcoreapp3.1/_._",
         "lib/net461/Microsoft.Extensions.DependencyInjection.dll",
         "lib/net461/Microsoft.Extensions.DependencyInjection.xml",
-        "lib/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.dll",
-        "lib/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.xml",
+        "lib/net6.0/Microsoft.Extensions.DependencyInjection.dll",
+        "lib/net6.0/Microsoft.Extensions.DependencyInjection.xml",
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.dll",
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.xml",
-        "microsoft.extensions.dependencyinjection.2.2.0.nupkg.sha512",
-        "microsoft.extensions.dependencyinjection.nuspec"
+        "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.dll",
+        "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.xml",
+        "microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.nuspec",
+        "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.Extensions.DependencyInjection.Abstractions/2.2.0": {
-      "sha512": "f9hstgjVmr6rmrfGSpfsVOl2irKAgr1QjrSi3FgnS7kulxband50f2brRLwySAQTADPZeTdow0mpSMcoAdadCw==",
+    "Microsoft.Extensions.DependencyInjection.Abstractions/6.0.0": {
+      "sha512": "xlzi2IYREJH3/m6+lUrQlujzX8wDitm4QGnUu6kUXTQAWPuZY8i+ticFJbzfqaetLA6KR/rO6Ew/HuYD+bxifg==",
       "type": "package",
-      "path": "microsoft.extensions.dependencyinjection.abstractions/2.2.0",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/6.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.Abstractions.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net461/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
         "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
-        "microsoft.extensions.dependencyinjection.abstractions.2.2.0.nupkg.sha512",
-        "microsoft.extensions.dependencyinjection.abstractions.nuspec"
+        "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.dll",
+        "lib/netstandard2.1/Microsoft.Extensions.DependencyInjection.Abstractions.xml",
+        "microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+        "microsoft.extensions.dependencyinjection.abstractions.nuspec",
+        "useSharedDesignerContext.txt"
       ]
     },
     "Microsoft.Extensions.DependencyModel/2.1.0": {
@@ -2696,10 +2942,58 @@
         "microsoft.sqlserver.server.nuspec"
       ]
     },
-    "Newtonsoft.Json/11.0.2": {
-      "sha512": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
+    "MimeKit/3.2.0": {
+      "sha512": "l9YHMBhBUwY7qQHUp8fw0EvjcbmhN4Iggz6MdjqIShBf42+0nJTa5gu0kuupCOPuiARc9ZaS9c9f0gKz4OnxKw==",
       "type": "package",
-      "path": "newtonsoft.json/11.0.2",
+      "path": "mimekit/3.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icons/mimekit-50.png",
+        "lib/net452/MimeKit.dll",
+        "lib/net452/MimeKit.pdb",
+        "lib/net452/MimeKit.xml",
+        "lib/net461/MimeKit.dll",
+        "lib/net461/MimeKit.pdb",
+        "lib/net461/MimeKit.xml",
+        "lib/net47/MimeKit.dll",
+        "lib/net47/MimeKit.pdb",
+        "lib/net47/MimeKit.xml",
+        "lib/net48/MimeKit.dll",
+        "lib/net48/MimeKit.pdb",
+        "lib/net48/MimeKit.xml",
+        "lib/net5.0/MimeKit.dll",
+        "lib/net5.0/MimeKit.pdb",
+        "lib/net5.0/MimeKit.xml",
+        "lib/net6.0/MimeKit.dll",
+        "lib/net6.0/MimeKit.pdb",
+        "lib/net6.0/MimeKit.xml",
+        "lib/netstandard2.0/MimeKit.dll",
+        "lib/netstandard2.0/MimeKit.pdb",
+        "lib/netstandard2.0/MimeKit.xml",
+        "lib/netstandard2.1/MimeKit.dll",
+        "lib/netstandard2.1/MimeKit.pdb",
+        "lib/netstandard2.1/MimeKit.xml",
+        "mimekit.3.2.0.nupkg.sha512",
+        "mimekit.nuspec"
+      ]
+    },
+    "NETCore.MailKit/2.1.0": {
+      "sha512": "+1C0sg4YJQczp/2RVrVbKLIntg7Mou7Ie5M01UBiAsxmIarjfBRlCgKK4sEbPyGask52VRKV29/Zi+41B6LPXA==",
+      "type": "package",
+      "path": "netcore.mailkit/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.1/NETCore.MailKit.dll",
+        "netcore.mailkit.2.1.0.nupkg.sha512",
+        "netcore.mailkit.nuspec"
+      ]
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2718,12 +3012,24 @@
         "lib/netstandard1.3/Newtonsoft.Json.xml",
         "lib/netstandard2.0/Newtonsoft.Json.dll",
         "lib/netstandard2.0/Newtonsoft.Json.xml",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
-        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.11.0.2.nupkg.sha512",
-        "newtonsoft.json.nuspec"
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "Portable.BouncyCastle/1.9.0": {
+      "sha512": "eZZBCABzVOek+id9Xy04HhmgykF0wZg9wpByzrWN7q8qEI0Qen9b7tfd7w8VA3dOeesumMG7C5ZPy0jk7PSRHw==",
+      "type": "package",
+      "path": "portable.bouncycastle/1.9.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/BouncyCastle.Crypto.dll",
+        "lib/net40/BouncyCastle.Crypto.xml",
+        "lib/netstandard2.0/BouncyCastle.Crypto.dll",
+        "lib/netstandard2.0/BouncyCastle.Crypto.xml",
+        "portable.bouncycastle.1.9.0.nupkg.sha512",
+        "portable.bouncycastle.nuspec"
       ]
     },
     "runtime.native.System/4.0.0": {
@@ -3214,6 +3520,29 @@
         "system.dynamic.runtime.nuspec"
       ]
     },
+    "System.Formats.Asn1/6.0.0": {
+      "sha512": "T6fD00dQ3NTbPDy31m4eQUwKW84s03z0N2C8HpOklyeaDgaJPa/TexP4/SkORMSOwc7WhKifnA6Ya33AkzmafA==",
+      "type": "package",
+      "path": "system.formats.asn1/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Formats.Asn1.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/System.Formats.Asn1.dll",
+        "lib/net461/System.Formats.Asn1.xml",
+        "lib/net6.0/System.Formats.Asn1.dll",
+        "lib/net6.0/System.Formats.Asn1.xml",
+        "lib/netstandard2.0/System.Formats.Asn1.dll",
+        "lib/netstandard2.0/System.Formats.Asn1.xml",
+        "system.formats.asn1.6.0.0.nupkg.sha512",
+        "system.formats.asn1.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.Globalization/4.0.11": {
       "sha512": "B95h0YLEL2oSnwF/XjqSWKnwKOy/01VWkNlsCeMTFJLLabflpGV26nK164eRs5GiaRSBGpOxQ3pKoSnnyZN5pg==",
       "type": "package",
@@ -3702,6 +4031,18 @@
         "lib/netstandard2.0/System.Memory.Data.xml",
         "system.memory.data.1.0.2.nupkg.sha512",
         "system.memory.data.nuspec"
+      ]
+    },
+    "System.Net.Mail.Abstractions/1.1.21": {
+      "sha512": "ai5VFcfdYVmOciq3AUD5i9oy7LE2zZFUouWDBHlFufzkUXsw9xnEW4DgtJNbmMVqHV9Mt5aJKoHRdie7+bNi5w==",
+      "type": "package",
+      "path": "system.net.mail.abstractions/1.1.21",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/System.Net.Mail.Abstractions.dll",
+        "system.net.mail.abstractions.1.1.21.nupkg.sha512",
+        "system.net.mail.abstractions.nuspec"
       ]
     },
     "System.Numerics.Vectors/4.5.0": {
@@ -4671,6 +5012,43 @@
         "version.txt"
       ]
     },
+    "System.Security.Cryptography.Pkcs/6.0.0": {
+      "sha512": "elM3x+xSRhzQysiqo85SbidJJ2YbZlnvmh+53TuSZHsD7dNuuEWser+9EFtY+rYupBwkq2avc6ZCO3/6qACgmg==",
+      "type": "package",
+      "path": "system.security.cryptography.pkcs/6.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/netcoreapp2.0/System.Security.Cryptography.Pkcs.targets",
+        "buildTransitive/netcoreapp3.1/_._",
+        "lib/net461/System.Security.Cryptography.Pkcs.dll",
+        "lib/net461/System.Security.Cryptography.Pkcs.xml",
+        "lib/net6.0/System.Security.Cryptography.Pkcs.dll",
+        "lib/net6.0/System.Security.Cryptography.Pkcs.xml",
+        "lib/netcoreapp3.1/System.Security.Cryptography.Pkcs.dll",
+        "lib/netcoreapp3.1/System.Security.Cryptography.Pkcs.xml",
+        "lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll",
+        "lib/netstandard2.0/System.Security.Cryptography.Pkcs.xml",
+        "lib/netstandard2.1/System.Security.Cryptography.Pkcs.dll",
+        "lib/netstandard2.1/System.Security.Cryptography.Pkcs.xml",
+        "runtimes/win/lib/net461/System.Security.Cryptography.Pkcs.dll",
+        "runtimes/win/lib/net461/System.Security.Cryptography.Pkcs.xml",
+        "runtimes/win/lib/net6.0/System.Security.Cryptography.Pkcs.dll",
+        "runtimes/win/lib/net6.0/System.Security.Cryptography.Pkcs.xml",
+        "runtimes/win/lib/netcoreapp3.1/System.Security.Cryptography.Pkcs.dll",
+        "runtimes/win/lib/netcoreapp3.1/System.Security.Cryptography.Pkcs.xml",
+        "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.Pkcs.dll",
+        "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.Pkcs.xml",
+        "runtimes/win/lib/netstandard2.1/System.Security.Cryptography.Pkcs.dll",
+        "runtimes/win/lib/netstandard2.1/System.Security.Cryptography.Pkcs.xml",
+        "system.security.cryptography.pkcs.6.0.0.nupkg.sha512",
+        "system.security.cryptography.pkcs.nuspec",
+        "useSharedDesignerContext.txt"
+      ]
+    },
     "System.Security.Cryptography.ProtectedData/8.0.0": {
       "sha512": "+TUFINV2q2ifyXauQXRwy4CiBhqvDEDZeVJU7qfxya4aRYOKzVBpN+4acx25VcPB9ywUN6C0n8drWl110PhZEg==",
       "type": "package",
@@ -5072,8 +5450,10 @@
       "Microsoft.Data.SqlClient >= 5.2.0",
       "Microsoft.Extensions.Configuration >= 8.0.0",
       "ModelLayer >= 1.0.0",
+      "NETCore.MailKit >= 2.1.0",
       "RepositoryLayer >= 1.0.0",
-      "System.IdentityModel.Tokens.Jwt >= 7.4.0"
+      "System.IdentityModel.Tokens.Jwt >= 7.4.0",
+      "System.Net.Mail.Abstractions >= 1.1.21"
     ]
   },
   "packageFolders": {
@@ -5151,9 +5531,17 @@
             "target": "Package",
             "version": "[8.0.0, )"
           },
+          "NETCore.MailKit": {
+            "target": "Package",
+            "version": "[2.1.0, )"
+          },
           "System.IdentityModel.Tokens.Jwt": {
             "target": "Package",
             "version": "[7.4.0, )"
+          },
+          "System.Net.Mail.Abstractions": {
+            "target": "Package",
+            "version": "[1.1.21, )"
           }
         },
         "imports": [

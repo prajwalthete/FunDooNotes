@@ -94,16 +94,42 @@ namespace RepositoryLayer.Services
         public async Task<NoteResponse> UpdateNoteAsync(int noteId, int userId, CreateNoteRequest updatedNote)
         {
 
-            var selectQuery = "SELECT NoteId, Description, Title, Colour FROM Notes WHERE UserId = @UserId AND NoteId = @NoteId";
+            // var selectQuery = "SELECT NoteId, Description, Title, Colour FROM Notes WHERE UserId = @UserId AND NoteId = @NoteId";
+            var selectQuery = @"SELECT * FROM Notes 
+                                     WHERE (UserId = @userId OR NoteId IN (
+                                     SELECT NoteId 
+                                     FROM Collaboration 
+                                     WHERE CollaboratorEmail = (SELECT Email FROM Users WHERE UserId=@userId)
+                                    )) AND NoteId = @noteId;";
+
+            //var updateQuery = @"
+            //    UPDATE Notes 
+            //    SET Description = @Description, 
+            //        Title = @Title, 
+            //        Colour = @Colour 
+            //    WHERE UserId = @UserId AND NoteId = @NoteId;
+            //";
+
+            var updateQuery = @" UPDATE N
+                                        SET 
+                                          Title = @title, 
+                                          Description = @description, 
+                                          Colour = @colour 
+                                          FROM Notes N
+                                          JOIN Collaboration C ON N.NoteId = C.NoteId
+                                WHERE 
+                                        N.NoteId = @noteId AND N.UserId = @userId) OR
+
+                                        (N.NoteId = @noteId AND C.CollaboratorEmail = (
+
+                                        SELECT Email FROM Users WHERE UserId = @userId
+                                         ));     ";
 
 
-            var updateQuery = @"
-                UPDATE Notes 
-                SET Description = @Description, 
-                    Title = @Title, 
-                    Colour = @Colour 
-                WHERE UserId = @UserId AND NoteId = @NoteId;
-            ";
+
+
+
+
 
             string prevTitle, prevDescription, prevColour;
 
@@ -172,7 +198,15 @@ namespace RepositoryLayer.Services
 
         public async Task<bool> DeleteNoteAsync(int noteId, int userId)
         {
-            var deleteQuery = "DELETE FROM Notes WHERE NoteId = @NoteId AND UserId = @UserId";
+            //var deleteQuery = "DELETE FROM Notes WHERE NoteId = @NoteId AND UserId = @UserId";
+
+            var deleteQuery = @"DELETE FROM Notes 
+                                 WHERE NoteId = @noteId AND (UserId = @userId OR NoteId IN (
+                                 SELECT NoteId 
+                                 FROM Collaborators 
+                                 WHERE CollaboratorEmail = (SELECT Email FROM Users WHERE UserId=@userId)
+                                  ));";
+
 
             try
             {
@@ -196,9 +230,17 @@ namespace RepositoryLayer.Services
 
         public async Task<IEnumerable<NoteResponse>> GetAllNoteAsync(int userId)
         {
-            var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId AND IsDeleted = 0 AND IsArchived = 0";
+            // var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId AND IsDeleted = 0 AND IsArchived = 0";
 
             // var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId ";
+
+            var selectQuery = @"SELECT N.*
+                                         FROM Notes N
+                                         LEFT JOIN Collaboration C ON N.NoteId = C.NoteId
+                                         WHERE N.UserId = @userId OR C.CollaboratorEmail = 
+                                        (SELECT Email FROM Users U WHERE U.UserId = @userId);
+                                         ";
+
 
             using (var connection = _Context.CreateConnection())
             {

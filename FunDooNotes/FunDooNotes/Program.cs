@@ -1,8 +1,10 @@
 using BusinessLayer.Interfaces;
 using BusinessLayer.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ModelLayer.Models.Email;
 using RepositoryLayer.Context;
 using RepositoryLayer.Interfaces;
 using RepositoryLayer.Services;
@@ -19,6 +21,33 @@ builder.Services.AddScoped<INoteServiceBL, NoteServiceBL>();
 builder.Services.AddScoped<INoteServiceRL, NoteServiceRL>();
 builder.Services.AddScoped<ICollaborationBL, CollaborationBL>();
 builder.Services.AddScoped<ICollaborationRL, CollaborationRL>();
+
+
+
+
+
+
+
+builder.Services.AddScoped<IEmailBL, EmailServiceBL>();
+
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddScoped<IEmailRL, EmailServiceRL>();
+
+// Change the injection to use IOptions<EmailSettings>
+builder.Services.AddScoped(sp => sp.GetRequiredService<IOptions<EmailSettings>>().Value);
+
+
+
+
+/*
+builder.Services.AddScoped<IEmailRL, EmailServiceRL>();
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
+builder.Services.AddScoped(sp => sp.GetRequiredService<IOptions<EmailSettings>>().Value);
+*/
+
+
 
 // Get the secret key from the configuration
 var key = Encoding.ASCII.GetBytes(builder.Configuration["JwtSettings:Secret"]);
@@ -49,6 +78,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 
 builder.Services.AddControllers();
+
 
 // Configure Swagger/OpenAPI
 // Configure Swagger generation options
