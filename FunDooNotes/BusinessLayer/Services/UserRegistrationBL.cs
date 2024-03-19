@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interfaces;
 using ModelLayer.Models;
+using ModelLayer.Models.Note;
 using RepositoryLayer.Interfaces;
 
 namespace BusinessLayer.Services
@@ -13,9 +14,9 @@ namespace BusinessLayer.Services
             _userRegistrationRl = userRegistrationRl;
         }
 
-        public Task<bool> ForgetPassword(string email)
+        public Task<string> ForgetPassword(ForgetPasswordModel forgetPasswordModel)
         {
-            return _userRegistrationRl.ForgetPassword(email);
+            return _userRegistrationRl.ForgetPassword(forgetPasswordModel);
         }
 
         public Task<bool> RegisterUser(UserRegistrationModel userRegistrationModel)
@@ -24,9 +25,9 @@ namespace BusinessLayer.Services
             return _userRegistrationRl.RegisterUser(userRegistrationModel);
         }
 
-        public Task<bool> ResetPassword(string newPassWord, int UserId)
+        public Task<bool> ResetPassword(string NewPassword, int UserId)
         {
-            return _userRegistrationRl.ResetPassword(newPassWord, UserId);
+            return _userRegistrationRl.ResetPassword(NewPassword, UserId);
         }
 
         public Task<string> UserLogin(UserLoginModel userLogin)

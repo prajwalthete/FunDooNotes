@@ -10,6 +10,7 @@ namespace RepositoryLayer.Interfaces
         Task<IEnumerable<NoteResponse>> GetAllNoteAsync(int userId);
         Task<bool> IsArchivedAsync(int UserId, int NoteId);
         Task<bool> MoveToTrashAsync(int UserId, int NoteId);
+        Task<NoteResponse> GetNoteByIdAsync(int NoteId, int UserId);
 
     }
 }

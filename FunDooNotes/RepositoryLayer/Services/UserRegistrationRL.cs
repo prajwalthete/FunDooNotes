@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using ModelLayer.Models;
+using ModelLayer.Models.Note;
 using RepositoryLayer.Context;
 using RepositoryLayer.Entities;
 using RepositoryLayer.GlobleExceptionhandler;
@@ -99,7 +100,6 @@ namespace RepositoryLayer.Services
         }
 
 
-
         public async Task<string> UserLogin(UserLoginModel userLogin)
         {
 
@@ -126,7 +126,6 @@ namespace RepositoryLayer.Services
                 {
                     throw new InvalidPasswordException($"User with Password '{userLogin.Password}' not Found.");
                 }
-                Console.WriteLine(user.UserId);
 
                 //if password enterd from user and password in db match then generate Token 
                 var token = _authService.GenerateJwtToken(user);
@@ -142,10 +141,10 @@ namespace RepositoryLayer.Services
             return Regex.IsMatch(email, pattern);
         }
 
-        public async Task<bool> ForgetPassword(string email)
+        public async Task<string> ForgetPassword(ForgetPasswordModel forgetPasswordModel)
         {
             var parameters = new DynamicParameters();
-            parameters.Add("Email", email);
+            parameters.Add("Email", forgetPasswordModel.Email);
 
 
             string query = @"
@@ -160,23 +159,25 @@ namespace RepositoryLayer.Services
 
                 if (user == null)
                 {
-                    throw new NotFoundException($"User with email '{email}' not found.");
+                    throw new NotFoundException($"User with email '{forgetPasswordModel.Email}' not found.");
                 }
                 //if password enterd from user and password in db match then generate Token 
                 var _token = _authService.GenerateJwtToken(user);
 
                 // Generate password reset link
                 var Url = $"https://localhost:7258/api/User/ResetPassword?token={_token}";
+                // var Url = $"https://localhost:7258/api/User/ResetPassword";
 
 
-                return await _emailService.SendEmailAsync(email, "Reset Password", Url);
+                await _emailService.SendEmailAsync(forgetPasswordModel.Email, "Reset Password ", Url);
 
+                return _token;
             }
         }
 
 
 
-        public async Task<bool> ResetPassword(string newPassword, int userId)
+        public async Task<bool> ResetPassword(string NewPassword, int UserId)
         {
             try
             {
@@ -188,15 +189,16 @@ namespace RepositoryLayer.Services
 
                 using (var connection = _Context.CreateConnection())
                 {
-                    var user = await connection.QueryFirstOrDefaultAsync<UserRegistrationModel>(query, new { UserId = userId });
+
+                    var user = await connection.QueryFirstOrDefaultAsync<UserRegistrationModel>(query, new { UserId = UserId });
 
                     if (user == null)
                     {
-                        throw new NotFoundException($"User with ID '{userId}' not found.");
+                        throw new NotFoundException($"User with ID '{UserId}' not found.");
                     }
 
 
-                    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(newPassword);
+                    string hashedPassword = BCrypt.Net.BCrypt.HashPassword(NewPassword);
 
 
                     user.Password = hashedPassword;
@@ -209,7 +211,7 @@ namespace RepositoryLayer.Services
                                          WHERE UserId = @UserId;
                                           ";
 
-                    await connection.ExecuteAsync(updateQuery, new { Password = hashedPassword, UserId = userId });
+                    await connection.ExecuteAsync(updateQuery, new { Password = hashedPassword, UserId = UserId });
 
                     return true;
                 }

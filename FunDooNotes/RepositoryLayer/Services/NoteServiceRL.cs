@@ -243,16 +243,12 @@ namespace RepositoryLayer.Services
                         throw new NotFoundException($"Note with NoteId '{NoteId}' does not exist for User with UserId '{UserId} to Archive beacuse it is trashed'.");
                     }
 
-
-
                     var wasArchived = await connection.ExecuteScalarAsync<bool?>(selectQuery, new { UserId = UserId, NoteId = NoteId });
 
                     if (wasArchived == null)
                     {
                         throw new NotFoundException($"Note with NoteId '{NoteId}' does not exist for User with UserId '{UserId}'.");
                     }
-
-
 
                     var rowsAffected = await connection.ExecuteAsync(toggleQuery, new { UserId = UserId, NoteId = NoteId });
 
@@ -309,6 +305,30 @@ namespace RepositoryLayer.Services
             }
         }
 
+        public async Task<NoteResponse> GetNoteByIdAsync(int NoteId, int UserId)
+        {
+            var selectQuery = "SELECT * FROM Notes WHERE NoteId = @NoteId AND UserId = @UserId";
+
+            using (var connection = _Context.CreateConnection())
+            {
+                try
+                {
+                    var note = await connection.QuerySingleOrDefaultAsync<NoteResponse>(selectQuery, new { UserId = UserId, NoteId = NoteId });
+
+                    if (note == null)
+                    {
+                        throw new NotFoundException($"Note with NoteId '{NoteId}' does not exist for User with UserId '{UserId}'.");
+                    }
+
+                    return note;
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception("An error occurred while retriving note to from database.", ex);
+                }
+
+            }
+        }
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using ModelLayer.Models;
+using ModelLayer.Models.Note;
 
 namespace RepositoryLayer.Interfaces
 {
@@ -8,9 +9,9 @@ namespace RepositoryLayer.Interfaces
 
         public Task<string> UserLogin(UserLoginModel userLogin);
 
-        public Task<bool> ForgetPassword(string email);
+        public Task<string> ForgetPassword(ForgetPasswordModel forgetPasswordModel);
 
-        public Task<bool> ResetPassword(string newPassWord, int UserId);
+        public Task<bool> ResetPassword(string NewPassword, int UserId);
 
 
 

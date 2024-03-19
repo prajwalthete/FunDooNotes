@@ -34,7 +34,7 @@ namespace FunDooNotes.Controllers
 
                 var response = new ResponseModel<string>
                 {
-                    StatusCode = 200,
+
                     Message = "Collaboration Successfull",
 
                 };
@@ -46,8 +46,7 @@ namespace FunDooNotes.Controllers
             {
                 var response = new ResponseModel<string>
                 {
-                    StatusCode = 404,
-                    IsSuccess = false,
+                    Success = false,
                     Message = ex.Message,
                     Data = null
                 };
@@ -57,8 +56,7 @@ namespace FunDooNotes.Controllers
             {
                 var response = new ResponseModel<string>
                 {
-                    IsSuccess = false,
-                    StatusCode = 500,
+                    Success = false,
                     Message = ex.Message,
 
                 };
@@ -77,10 +75,8 @@ namespace FunDooNotes.Controllers
 
                 var response = new ResponseModel<IEnumerable<CollaborationInfoModel>>
                 {
-                    StatusCode = 200,
                     Message = "Collaborators Fetched Successfully",
                     Data = collaborators
-
                 };
                 return Ok(response);
 
@@ -89,13 +85,11 @@ namespace FunDooNotes.Controllers
             {
                 var response = new ResponseModel<string>
                 {
-                    IsSuccess = false,
-                    StatusCode = 500,
+                    Success = false,
                     Message = ex.Message,
 
                 };
                 return Ok(response);
-
 
             }
 
@@ -115,7 +109,6 @@ namespace FunDooNotes.Controllers
 
                 var response = new ResponseModel<string>
                 {
-                    StatusCode = 200,
                     Message = "Collaborator removed successfully",
                     Data = null
                 };
@@ -125,8 +118,7 @@ namespace FunDooNotes.Controllers
             {
                 var response = new ResponseModel<string>
                 {
-                    StatusCode = 400,
-                    IsSuccess = false,
+                    Success = false,
                     Message = ex.Message,
                     Data = null
                 };
@@ -136,8 +128,7 @@ namespace FunDooNotes.Controllers
             {
                 var response = new ResponseModel<string>
                 {
-                    StatusCode = 404,
-                    IsSuccess = false,
+                    Success = false,
                     Message = ex.Message,
                     Data = null
                 };
@@ -147,8 +138,7 @@ namespace FunDooNotes.Controllers
             {
                 var response = new ResponseModel<string>
                 {
-                    StatusCode = 500,
-                    IsSuccess = false,
+                    Success = false,
                     Message = "An error occurred while removing the collaborator",
                     Data = null
                 };

@@ -46,5 +46,10 @@ namespace BusinessLayer.Services
         {
             return _noteServiceRL.MoveToTrashAsync(UserId, NoteId);
         }
+
+        public Task<NoteResponse> GetNoteByIdAsync(int NoteId, int UserId)
+        {
+            return _noteServiceRL.GetNoteByIdAsync(NoteId, UserId);
+        }
     }
 }

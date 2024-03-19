@@ -34,7 +34,6 @@ namespace FunDooNotes.Controllers
 
                 var response = new ResponseModel<IEnumerable<NoteResponse>>
                 {
-                    StatusCode = 200,
                     Message = "Note Created Successfully",
                     Data = note
                 };
@@ -46,7 +45,7 @@ namespace FunDooNotes.Controllers
             {
                 var response = new ResponseModel<IEnumerable<NoteResponse>>
                 {
-                    StatusCode = 500,
+                    Success = false,
                     Message = ex.Message,
 
                 };
@@ -71,7 +70,7 @@ namespace FunDooNotes.Controllers
 
                 var response = new ResponseModel<NoteResponse>
                 {
-                    StatusCode = 200,
+
                     Message = "Note updated successfully",
                     Data = updatedNoteResponse
 
@@ -83,7 +82,7 @@ namespace FunDooNotes.Controllers
             {
                 var response = new ResponseModel<string>
                 {
-                    StatusCode = 404,
+                    Success = false,
                     Message = ex.Message
                 };
                 return NotFound(response);
@@ -92,7 +91,7 @@ namespace FunDooNotes.Controllers
             {
                 var response = new ResponseModel<string>
                 {
-                    StatusCode = 500,
+                    Success = false,
                     Message = ex.Message
                 };
                 return StatusCode(500, response);
@@ -101,7 +100,7 @@ namespace FunDooNotes.Controllers
             {
                 var response = new ResponseModel<string>
                 {
-                    StatusCode = 500,
+                    Success = false,
                     Message = ex.Message
                 };
                 return StatusCode(500, response);
@@ -110,7 +109,7 @@ namespace FunDooNotes.Controllers
             {
                 var response = new ResponseModel<string>
                 {
-                    StatusCode = 500,
+                    Success = false,
                     Message = "An unexpected error occurred: " + ex.Message
                 };
                 return StatusCode(500, response);
@@ -137,7 +136,7 @@ namespace FunDooNotes.Controllers
                 {
                     return Ok(new ResponseModel<string>
                     {
-                        StatusCode = 200,
+
                         Message = "Note deleted  successfully",
                         Data = null,
 
@@ -147,7 +146,7 @@ namespace FunDooNotes.Controllers
                 {
                     return NotFound(new ResponseModel<string>
                     {
-                        StatusCode = 404,
+                        Success = false,
                         Message = "Note not found",
                         Data = null
                     });
@@ -157,7 +156,7 @@ namespace FunDooNotes.Controllers
             {
                 return NotFound(new ResponseModel<string>
                 {
-                    StatusCode = 404,
+                    Success = false,
                     Message = ex.Message,
                     Data = null
                 });
@@ -166,7 +165,7 @@ namespace FunDooNotes.Controllers
             {
                 return StatusCode(500, new ResponseModel<string>
                 {
-                    StatusCode = 500,
+                    Success = false,
                     Message = $"An error occurred: {ex.Message}",
                     Data = null
                 });
@@ -187,7 +186,6 @@ namespace FunDooNotes.Controllers
 
                 return Ok(new ResponseModel<IEnumerable<NoteResponse>>
                 {
-                    StatusCode = 200,
                     Message = notes != null && notes.Any() ? "Notes retrieved successfully" : "No notes found",
                     Data = notes
                 });
@@ -198,7 +196,7 @@ namespace FunDooNotes.Controllers
                 {
                     return StatusCode(500, new ResponseModel<string>
                     {
-                        StatusCode = 500,
+                        Success = false,
                         Message = "An error occurred while retrieving notes from the database.",
                         Data = null
                     });
@@ -207,14 +205,76 @@ namespace FunDooNotes.Controllers
                 {
                     return StatusCode(500, new ResponseModel<string>
                     {
-                        StatusCode = 500,
-                        IsSuccess = false,
+                        Success = false,
                         Message = "An error occurred.",
                         Data = null
                     });
                 }
             }
         }
+
+        [Authorize]
+        [HttpGet("GetNoteById")]
+        public async Task<IActionResult> GetNoteById(int NoteId)
+        {
+            try
+            {
+                var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                int UserId = Convert.ToInt32(userIdClaim);
+                var notes = await noteServiceBL.GetNoteByIdAsync(NoteId, UserId);
+
+                if (notes != null)
+                {
+                    return Ok(new ResponseModel<NoteResponse>
+                    {
+                        Message = "Note retrieved successfully",
+                        Data = notes
+                    });
+                }
+                else
+                {
+                    return NotFound(new ResponseModel<NoteResponse>
+                    {
+                        Success = false,
+                        Message = "No note found",
+                        Data = null
+                    });
+                }
+            }
+            catch (NotFoundException ex)
+            {
+                var response = new ResponseModel<string>
+                {
+                    Success = false,
+                    Message = $"Error sending email: {ex.Message}",
+                    Data = null
+                };
+                return StatusCode(500, response);
+            }
+            catch (SqlException ex)
+            {
+                return StatusCode(500, new ResponseModel<string>
+                {
+                    Success = false,
+                    Message = "An error occurred while retrieving note from the database.",
+                    Data = null
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResponseModel<string>
+                {
+
+                    Success = false,
+                    Message = "An error occurred.",
+                    Data = null
+                });
+            }
+        }
+
+
+
+
 
         [Authorize]
         [HttpPatch("IsArchived")]
@@ -241,8 +301,7 @@ namespace FunDooNotes.Controllers
             {
                 return NotFound(new ResponseModel<string>
                 {
-                    IsSuccess = false,
-                    StatusCode = 404,
+                    Success = false,
                     Message = ex.Message,
                     Data = null
                 });
@@ -251,8 +310,7 @@ namespace FunDooNotes.Controllers
             {
                 return StatusCode(500, new ResponseModel<string>
                 {
-                    IsSuccess = false,
-                    StatusCode = 500,
+                    Success = false,
                     Message = "An error occurred while Archiving note in database.",
                     Data = null
                 });
@@ -261,8 +319,7 @@ namespace FunDooNotes.Controllers
             {
                 return StatusCode(500, new ResponseModel<string>
                 {
-                    IsSuccess = false,
-                    StatusCode = 500,
+                    Success = false,
                     Message = "An error occurred while archiving the Note",
                     Data = null
                 });
@@ -287,7 +344,7 @@ namespace FunDooNotes.Controllers
 
                 return Ok(new ResponseModel<string>
                 {
-                    StatusCode = 200,
+
                     Message = message,
                     Data = null
                 });
@@ -296,8 +353,7 @@ namespace FunDooNotes.Controllers
             {
                 return NotFound(new ResponseModel<string>
                 {
-                    IsSuccess = false,
-                    StatusCode = 404,
+                    Success = false,
                     Message = ex.Message,
                     Data = null
                 });
@@ -306,8 +362,7 @@ namespace FunDooNotes.Controllers
             {
                 return StatusCode(500, new ResponseModel<string>
                 {
-                    IsSuccess = false,
-                    StatusCode = 500,
+                    Success = false,
                     Message = "An error occurred while Trashing note in database.",
                     Data = null
                 });
@@ -316,8 +371,7 @@ namespace FunDooNotes.Controllers
             {
                 return StatusCode(500, new ResponseModel<string>
                 {
-                    IsSuccess = false,
-                    StatusCode = 500,
+                    Success = false,
                     Message = "An error occurred while Trashing the Note",
                     Data = null
                 });
