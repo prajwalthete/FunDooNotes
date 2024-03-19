@@ -164,17 +164,39 @@ namespace RepositoryLayer.Services
                 //if password enterd from user and password in db match then generate Token 
                 var _token = _authService.GenerateJwtToken(user);
 
+
                 // Generate password reset link
-                var Url = $"https://localhost:7258/api/User/ResetPassword?token={_token}";
-                // var Url = $"https://localhost:7258/api/User/ResetPassword";
+                var resetPasswordUrl = $"https://localhost:7258/api/User/ResetPassword?token={_token}";
+
+                var emailBody = $@"
+                            <html>
+                                 <head>
+                                         <style>
+                                              .reset-link {{
+                                              color: blue;
+                                              font-weight: bold;
+                                              }}
+                                         </style>
+                                 </head>
+                            <body>
+                                        <p>Hello,</p>
+                                        <p>Please click on the following link to reset your password:</p>
+                                         <p>
+                                         <a href=""{resetPasswordUrl}"" class=""reset-link"">{resetPasswordUrl} </a>
+                                         </p>
+                                         <p>Thank you!</p>
+                            </body>
+                            </html>
+                                   ";
 
 
-                await _emailService.SendEmailAsync(forgetPasswordModel.Email, "Reset Password ", Url);
+                // Send email with HTML body
+                await _emailService.SendEmailAsync(forgetPasswordModel.Email, "Reset Password", emailBody);
 
                 return _token;
+
             }
         }
-
 
 
         public async Task<bool> ResetPassword(string NewPassword, int UserId)
