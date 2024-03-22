@@ -20,7 +20,7 @@ namespace FunDooNotes.Controllers
 
         public NoteController(INoteServiceBL noteServiceBL, IDistributedCache distributedCache)
         {
-            this._noteServiceBL = noteServiceBL;
+            _noteServiceBL = noteServiceBL;
             _distributedCache = distributedCache;
         }
 
@@ -177,6 +177,7 @@ namespace FunDooNotes.Controllers
         }
 
 
+
         [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllNotes()
@@ -249,65 +250,108 @@ namespace FunDooNotes.Controllers
 
         [Authorize]
         [HttpGet("GetNoteById")]
-        public async Task<IActionResult> GetNoteById(int NoteId)
+        public async Task<IActionResult> GetNoteById(int noteId)
         {
             try
             {
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                int UserId = Convert.ToInt32(userIdClaim);
-                var notes = await _noteServiceBL.GetNoteByIdAsync(NoteId, UserId);
+                int userId = Convert.ToInt32(userIdClaim);
 
-                if (notes != null)
+                var cacheKey = $"User_{userId}";
+
+                var cachedNotes = await _distributedCache.GetAsync(cacheKey);
+                Dictionary<int, NoteResponse> notes;
+
+                if (cachedNotes != null)
                 {
-                    return Ok(new ResponseModel<NoteResponse>
+                    // If notes are found in the cache, deserialize and return them
+                    notes = JsonSerializer.Deserialize<Dictionary<int, NoteResponse>>(cachedNotes);
+
+                    if (notes.ContainsKey(noteId))
                     {
-                        Message = "Note retrieved successfully",
-                        Data = notes
-                    });
+                        // If the note with the given ID is found, return it
+                        var note = notes[noteId];
+                        return Ok(new ResponseModel<NoteResponse>
+                        {
+                            Message = "Note retrieved successfully from caching",
+                            Data = note
+                        });
+                    }
+                    else
+                    {
+                        // If the note with the given ID is not found, return not found
+                        return NotFound(new ResponseModel<NoteResponse>
+                        {
+                            Success = false,
+                            Message = "Note not found",
+                            Data = null
+                        });
+                    }
                 }
                 else
                 {
-                    return NotFound(new ResponseModel<NoteResponse>
+                    // If notes are not found in the cache, fetch from the service layer
+                    var allNotes = await _noteServiceBL.GetAllNoteAsync(userId);
+
+                    if (allNotes != null && allNotes.Any())
                     {
-                        Success = false,
-                        Message = "No note found",
-                        Data = null
-                    });
+                        // Convert the notes into a dictionary with note ID as key
+                        notes = allNotes.ToDictionary(note => note.NoteId);
+
+                        // Cache the fetched notes
+                        var options = new DistributedCacheEntryOptions();
+                        await _distributedCache.SetAsync(cacheKey, JsonSerializer.SerializeToUtf8Bytes(notes), options);
+
+                        if (notes.ContainsKey(noteId))
+                        {
+                            // If the note with the given ID is found, return it
+                            var note = notes[noteId];
+                            return Ok(new ResponseModel<NoteResponse>
+                            {
+                                Message = "Note retrieved successfully from Db",
+                                Data = note
+                            });
+                        }
+                        else
+                        {
+                            // If the note with the given ID is not found, return not found
+                            return NotFound(new ResponseModel<NoteResponse>
+                            {
+                                Success = false,
+                                Message = "Note not found",
+                                Data = null
+                            });
+                        }
+                    }
+                    else
+                    {
+                        return Ok(new ResponseModel<IEnumerable<NoteResponse>>
+                        {
+                            Message = "No notes found",
+                            Data = Enumerable.Empty<NoteResponse>()
+                        });
+                    }
                 }
             }
-            catch (NotFoundException ex)
-            {
-                var response = new ResponseModel<string>
-                {
-                    Success = false,
-                    Message = $"Error sending email: {ex.Message}",
-                    Data = null
-                };
-                return StatusCode(500, response);
-            }
-            catch (SqlException ex)
+            catch (SqlException)
             {
                 return StatusCode(500, new ResponseModel<string>
                 {
                     Success = false,
-                    Message = "An error occurred while retrieving note from the database.",
+                    Message = "An error occurred while retrieving notes from the database.",
                     Data = null
                 });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, new ResponseModel<string>
                 {
-
                     Success = false,
                     Message = "An error occurred.",
                     Data = null
                 });
             }
         }
-
-
-
 
 
         [Authorize]

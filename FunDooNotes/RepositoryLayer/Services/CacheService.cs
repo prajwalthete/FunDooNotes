@@ -72,5 +72,20 @@ namespace RepositoryLayer.Services
         }
 
 
+        public bool TryGetValue(string key, out byte[] value)
+        {
+            var redisValue = _cache.StringGet(key);
+            if (redisValue.HasValue)
+            {
+                value = redisValue;
+                return true;
+            }
+            else
+            {
+                value = null;
+                return false;
+            }
+        }
+
     }
 }
