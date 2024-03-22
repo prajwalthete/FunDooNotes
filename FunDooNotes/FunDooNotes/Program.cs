@@ -1,6 +1,7 @@
 using BusinessLayer.Interfaces;
 using BusinessLayer.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -24,13 +25,13 @@ builder.Services.AddScoped<ICollaborationRL, CollaborationRL>();
 builder.Services.AddScoped<IEmailBL, EmailServiceBL>();
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.AddScoped<IEmailRL, EmailServiceRL>();
-
-// Change the injection to use IOptions<EmailSettings>
 builder.Services.AddScoped(sp => sp.GetRequiredService<IOptions<EmailSettings>>().Value);
 
-
-
-
+builder.Services.AddSingleton<IDistributedCache>(sp =>
+{
+    var redisConfiguration = builder.Configuration.GetSection("Redis")["ConnectionString"];
+    return new CacheService(redisConfiguration);
+});
 
 
 // Get the secret key from the configuration

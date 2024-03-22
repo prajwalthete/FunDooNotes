@@ -86,3 +86,5 @@ E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNote
 E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\System.Net.Mail.Abstractions.dll
 E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NETCore.MailKit.dll
 E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\StackExchange.Redis.dll

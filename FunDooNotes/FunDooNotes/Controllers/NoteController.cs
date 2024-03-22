@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Caching.Distributed;
 using ModelLayer.Models;
 using ModelLayer.Models.Note;
 using RepositoryLayer.GlobleExceptionhandler;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace FunDooNotes.Controllers
 {
@@ -13,11 +15,13 @@ namespace FunDooNotes.Controllers
     [ApiController]
     public class NoteController : ControllerBase
     {
-        private readonly INoteServiceBL noteServiceBL;
+        private readonly INoteServiceBL _noteServiceBL;
+        private readonly IDistributedCache _distributedCache;
 
-        public NoteController(INoteServiceBL noteServiceBL)
+        public NoteController(INoteServiceBL noteServiceBL, IDistributedCache distributedCache)
         {
-            this.noteServiceBL = noteServiceBL;
+            this._noteServiceBL = noteServiceBL;
+            _distributedCache = distributedCache;
         }
 
         [Authorize]
@@ -30,7 +34,7 @@ namespace FunDooNotes.Controllers
 
                 int userId = Convert.ToInt32(userIdClaim);
 
-                var note = await noteServiceBL.CreateNoteAndGetNotesAsync(createNoteRequest, userId);
+                var note = await _noteServiceBL.CreateNoteAndGetNotesAsync(createNoteRequest, userId);
 
                 var response = new ResponseModel<IEnumerable<NoteResponse>>
                 {
@@ -65,7 +69,7 @@ namespace FunDooNotes.Controllers
 
                 int userId = Convert.ToInt32(userIdClaim);
 
-                var updatedNoteResponse = await noteServiceBL.UpdateNoteAsync(noteId, userId, updatedNote);
+                var updatedNoteResponse = await _noteServiceBL.UpdateNoteAsync(noteId, userId, updatedNote);
 
 
                 var response = new ResponseModel<NoteResponse>
@@ -130,7 +134,7 @@ namespace FunDooNotes.Controllers
                 int userId = Convert.ToInt32(userIdClaim);
 
 
-                bool isDeleted = await noteServiceBL.DeleteNoteAsync(noteId, userId);
+                bool isDeleted = await _noteServiceBL.DeleteNoteAsync(noteId, userId);
 
                 if (isDeleted)
                 {
@@ -179,37 +183,67 @@ namespace FunDooNotes.Controllers
         {
             try
             {
-
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 int userId = Convert.ToInt32(userIdClaim);
-                var notes = await noteServiceBL.GetAllNoteAsync(userId);
+                var cacheKey = $"Notes_{userId}";
 
-                return Ok(new ResponseModel<IEnumerable<NoteResponse>>
+                var cachedNotes = await _distributedCache.GetAsync(cacheKey);
+                IEnumerable<NoteResponse> notes;
+
+                if (cachedNotes != null)
                 {
-                    Message = notes != null && notes.Any() ? "Notes retrieved successfully" : "No notes found",
-                    Data = notes
-                });
-            }
-            catch (Exception ex)
-            {
-                if (ex is SqlException)
-                {
-                    return StatusCode(500, new ResponseModel<string>
+                    // If notes are found in the cache, deserialize and return them
+                    notes = JsonSerializer.Deserialize<IEnumerable<NoteResponse>>(cachedNotes);
+                    return Ok(new ResponseModel<IEnumerable<NoteResponse>>
                     {
-                        Success = false,
-                        Message = "An error occurred while retrieving notes from the database.",
-                        Data = null
+                        Message = "Notes retrieved successfully from caching",
+                        Data = notes
                     });
                 }
                 else
                 {
-                    return StatusCode(500, new ResponseModel<string>
+                    // If notes are not found in the cache, fetch from the service layer
+                    notes = await _noteServiceBL.GetAllNoteAsync(userId);
+
+                    if (notes != null && notes.Any())
                     {
-                        Success = false,
-                        Message = "An error occurred.",
-                        Data = null
-                    });
+                        // Cache the fetched notes
+                        var options = new DistributedCacheEntryOptions();
+                        await _distributedCache.SetAsync(cacheKey, JsonSerializer.SerializeToUtf8Bytes(notes), options);
+
+                        return Ok(new ResponseModel<IEnumerable<NoteResponse>>
+                        {
+                            Message = "Notes retrieved successfully from Db",
+                            Data = notes
+                        });
+                    }
+                    else
+                    {
+                        return Ok(new ResponseModel<IEnumerable<NoteResponse>>
+                        {
+                            Message = "No notes found",
+                            Data = Enumerable.Empty<NoteResponse>()
+                        });
+                    }
                 }
+            }
+            catch (SqlException)
+            {
+                return StatusCode(500, new ResponseModel<string>
+                {
+                    Success = false,
+                    Message = "An error occurred while retrieving notes from the database.",
+                    Data = null
+                });
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new ResponseModel<string>
+                {
+                    Success = false,
+                    Message = "An error occurred.",
+                    Data = null
+                });
             }
         }
 
@@ -221,7 +255,7 @@ namespace FunDooNotes.Controllers
             {
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 int UserId = Convert.ToInt32(userIdClaim);
-                var notes = await noteServiceBL.GetNoteByIdAsync(NoteId, UserId);
+                var notes = await _noteServiceBL.GetNoteByIdAsync(NoteId, UserId);
 
                 if (notes != null)
                 {
@@ -285,7 +319,7 @@ namespace FunDooNotes.Controllers
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 int userId = Convert.ToInt32(userIdClaim);
 
-                var result = await noteServiceBL.IsArchivedAsync(userId, NoteId);
+                var result = await _noteServiceBL.IsArchivedAsync(userId, NoteId);
 
                 // Check if the note was moved to trash or restored
                 string message = result ? "Note Archived successfully" : "Note UnArchived successfully";
@@ -338,7 +372,7 @@ namespace FunDooNotes.Controllers
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 int userId = Convert.ToInt32(userIdClaim);
 
-                var result = await noteServiceBL.MoveToTrashAsync(userId, NoteId);
+                var result = await _noteServiceBL.MoveToTrashAsync(userId, NoteId);
 
                 string message = result ? "Note Trashed successfully" : "Note Untrashed successfully";
 
