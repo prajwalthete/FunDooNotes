@@ -36,6 +36,7 @@ namespace RepositoryLayer.Services
                                 VALUES (@Description, @Title, @Colour, @IsArchived, @IsDeleted, @UserId);
                                ";
 
+            var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId ";
 
             using (var connection = _Context.CreateConnection())
             {
@@ -75,10 +76,10 @@ namespace RepositoryLayer.Services
                 // if the table exists then only Execute SELECT query
                 if (tableExists)
                 {
-                    //var notes = await connection.QueryAsync<NoteResponse>(selectQuery, parameters);
-                    // return notes.Reverse().ToList();
+                    var notes = await connection.QueryAsync<NoteResponse>(selectQuery, parameters);
+                    return notes.Reverse().ToList();
 
-                    return await GetAllNoteAsync(UserId);
+                    // return await GetAllNoteAsync(UserId);
 
                 }
                 else

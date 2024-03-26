@@ -24,6 +24,46 @@ namespace FunDooNotes.Controllers
             _distributedCache = distributedCache;
         }
 
+        //[Authorize]
+        //[HttpPost]
+        //public async Task<IActionResult> AddNote(CreateNoteRequest createNoteRequest)
+        //{
+        //    try
+        //    {
+        //        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //        int userId = Convert.ToInt32(userIdClaim);
+
+        //        // Create the note and get the list of all notes
+        //        var allNotes = await _noteServiceBL.CreateNoteAndGetNotesAsync(createNoteRequest, userId);
+
+        //        // Update cache for GetAllNotes method
+        //        var getAllNotesCacheKey = $"Notes_{userId}";
+        //        var options = new DistributedCacheEntryOptions();
+        //        await _distributedCache.SetAsync(getAllNotesCacheKey, JsonSerializer.SerializeToUtf8Bytes(allNotes), options);
+
+        //        // Prepare response with the updated list of all notes
+        //        var response = new ResponseModel<IEnumerable<NoteResponse>>
+        //        {
+        //            Message = "Note Created Successfully",
+        //            Data = allNotes
+        //        };
+
+        //        return Ok(response);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var response = new ResponseModel<IEnumerable<NoteResponse>>
+        //        {
+        //            Success = false,
+        //            Message = ex.Message,
+        //            Data = null // Ensure Data is null in case of error
+        //        };
+        //        return Ok(response);
+        //    }
+        //}
+
+
+
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddNote(CreateNoteRequest createNoteRequest)
@@ -66,18 +106,50 @@ namespace FunDooNotes.Controllers
             try
             {
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
                 int userId = Convert.ToInt32(userIdClaim);
+
+                var cacheKey = $"User_{userId}_Notes";
+                var cachedNotes = await _distributedCache.GetAsync(cacheKey);
+                Dictionary<int, NoteResponse> notes;
+
+                if (cachedNotes != null)
+                {
+                    notes = JsonSerializer.Deserialize<Dictionary<int, NoteResponse>>(cachedNotes);
+
+                    if (notes.ContainsKey(noteId))
+                    {
+                        // Update the note in cache
+                        notes[noteId].Title = updatedNote.Title;
+                        notes[noteId].Description = updatedNote.Description;
+                        notes[noteId].Colour = updatedNote.Colour;
+
+                    }
+                    else
+                    {
+                        notes = new Dictionary<int, NoteResponse>();
+                    }
+                }
+                else
+                {
+                    notes = new Dictionary<int, NoteResponse>();
+                }
 
                 var updatedNoteResponse = await _noteServiceBL.UpdateNoteAsync(noteId, userId, updatedNote);
 
+                // Update the note in cache
+                notes[noteId] = updatedNoteResponse;
+
+                var optionsForCache = new DistributedCacheEntryOptions();
+                await _distributedCache.SetAsync(cacheKey, JsonSerializer.SerializeToUtf8Bytes(notes), optionsForCache);
+
+                // Update the cache for GetAllNotes as well
+                var getAllNotesCacheKey = $"Notes_{userId}";
+                await _distributedCache.RemoveAsync(getAllNotesCacheKey);
 
                 var response = new ResponseModel<NoteResponse>
                 {
-
                     Message = "Note updated successfully",
                     Data = updatedNoteResponse
-
                 };
 
                 return Ok(response);
@@ -127,23 +199,44 @@ namespace FunDooNotes.Controllers
         {
             try
             {
-
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-
                 int userId = Convert.ToInt32(userIdClaim);
 
+                // Fetch all notes from cache
+                var cacheKey = $"User_{userId}_Notes";
+                var cachedNotes = await _distributedCache.GetAsync(cacheKey);
+                Dictionary<int, NoteResponse> notes;
 
+                if (cachedNotes != null)
+                {
+                    // Deserialize cached notes
+                    notes = JsonSerializer.Deserialize<Dictionary<int, NoteResponse>>(cachedNotes);
+
+                    // Check if the note to be deleted exists in the cache
+                    if (notes.ContainsKey(noteId))
+                    {
+                        // Remove the note from the cache
+                        notes.Remove(noteId);
+
+                        // Update the cache for GetAllNotes
+                        var getAllNotesCacheKey = $"Notes_{userId}";
+                        await _distributedCache.RemoveAsync(getAllNotesCacheKey);
+
+                        // Update the cache for individual note
+                        var options = new DistributedCacheEntryOptions();
+                        await _distributedCache.SetAsync(cacheKey, JsonSerializer.SerializeToUtf8Bytes(notes), options);
+                    }
+                }
+
+                // Delete the note
                 bool isDeleted = await _noteServiceBL.DeleteNoteAsync(noteId, userId);
 
                 if (isDeleted)
                 {
                     return Ok(new ResponseModel<string>
                     {
-
-                        Message = "Note deleted  successfully",
-                        Data = null,
-
+                        Message = "Note deleted successfully",
+                        Data = null
                     });
                 }
                 else
@@ -193,8 +286,12 @@ namespace FunDooNotes.Controllers
 
                 if (cachedNotes != null)
                 {
-                    // If notes are found in the cache, deserialize and return them
+                    // If notes are found in the cache, deserialize and filter out archived and Trashed notes
                     notes = JsonSerializer.Deserialize<IEnumerable<NoteResponse>>(cachedNotes);
+
+                    // Filter out archived notes
+                    notes = notes.Where(note => !note.IsDeleted && !note.IsDeleted);
+
                     return Ok(new ResponseModel<IEnumerable<NoteResponse>>
                     {
                         Message = "Notes retrieved successfully from caching",
@@ -208,6 +305,9 @@ namespace FunDooNotes.Controllers
 
                     if (notes != null && notes.Any())
                     {
+                        // Filter out archived notes
+                        notes = notes.Where(note => !note.IsDeleted);
+
                         // Cache the fetched notes
                         var options = new DistributedCacheEntryOptions();
                         await _distributedCache.SetAsync(cacheKey, JsonSerializer.SerializeToUtf8Bytes(notes), options);
@@ -248,6 +348,9 @@ namespace FunDooNotes.Controllers
             }
         }
 
+
+
+
         [Authorize]
         [HttpGet("GetNoteById")]
         public async Task<IActionResult> GetNoteById(int noteId)
@@ -260,77 +363,63 @@ namespace FunDooNotes.Controllers
                 var cacheKey = $"User_{userId}";
 
                 var cachedNotes = await _distributedCache.GetAsync(cacheKey);
-                Dictionary<int, NoteResponse> notes;
+                Dictionary<int, NoteResponse> notes = null; // Initialize notes
 
                 if (cachedNotes != null)
                 {
                     // If notes are found in the cache, deserialize and return them
                     notes = JsonSerializer.Deserialize<Dictionary<int, NoteResponse>>(cachedNotes);
+                }
 
-                    if (notes.ContainsKey(noteId))
+                // Check if the note with the given ID is found in the cache
+                if (notes != null && notes.ContainsKey(noteId))
+                {
+                    // If the note with the given ID is found in the cache, fetch the note from the database to compare
+                    var cachedNote = notes[noteId];
+                    var noteFromDb = await _noteServiceBL.GetNoteByIdAsync(noteId, userId);
+
+                    if (noteFromDb != null && IsNoteDifferent(cachedNote, noteFromDb))
                     {
-                        // If the note with the given ID is found, return it
-                        var note = notes[noteId];
+                        // If the note in the cache is different from the one in the database, remove the old note from the cache
+                        notes.Remove(noteId);
+                    }
+                    else
+                    {
+                        // If the note in the cache matches the one in the database, return it from the cache
                         return Ok(new ResponseModel<NoteResponse>
                         {
                             Message = "Note retrieved successfully from caching",
-                            Data = note
-                        });
-                    }
-                    else
-                    {
-                        // If the note with the given ID is not found, return not found
-                        return NotFound(new ResponseModel<NoteResponse>
-                        {
-                            Success = false,
-                            Message = "Note not found",
-                            Data = null
+                            Data = cachedNote
                         });
                     }
                 }
+
+                // If note not found in cache or cache is not present, fetch from the service layer
+                var note = await _noteServiceBL.GetNoteByIdAsync(noteId, userId);
+
+                if (note != null)
+                {
+                    // Update cache with the fetched note
+                    notes ??= new Dictionary<int, NoteResponse>(); // Initialize notes if null
+                    notes[noteId] = note;
+
+                    var options = new DistributedCacheEntryOptions();
+                    await _distributedCache.SetAsync(cacheKey, JsonSerializer.SerializeToUtf8Bytes(notes), options);
+
+                    return Ok(new ResponseModel<NoteResponse>
+                    {
+                        Message = "Note retrieved successfully from Db",
+                        Data = note
+                    });
+                }
                 else
                 {
-                    // If notes are not found in the cache, fetch from the service layer
-                    var allNotes = await _noteServiceBL.GetAllNoteAsync(userId);
-
-                    if (allNotes != null && allNotes.Any())
+                    return NotFound(new ResponseModel<NoteResponse>
                     {
-                        // Convert the notes into a dictionary with note ID as key
-                        notes = allNotes.ToDictionary(note => note.NoteId);
-
-                        // Cache the fetched notes
-                        var options = new DistributedCacheEntryOptions();
-                        await _distributedCache.SetAsync(cacheKey, JsonSerializer.SerializeToUtf8Bytes(notes), options);
-
-                        if (notes.ContainsKey(noteId))
-                        {
-                            // If the note with the given ID is found, return it
-                            var note = notes[noteId];
-                            return Ok(new ResponseModel<NoteResponse>
-                            {
-                                Message = "Note retrieved successfully from Db",
-                                Data = note
-                            });
-                        }
-                        else
-                        {
-                            // If the note with the given ID is not found, return not found
-                            return NotFound(new ResponseModel<NoteResponse>
-                            {
-                                Success = false,
-                                Message = "Note not found",
-                                Data = null
-                            });
-                        }
-                    }
-                    else
-                    {
-                        return Ok(new ResponseModel<IEnumerable<NoteResponse>>
-                        {
-                            Message = "No notes found",
-                            Data = Enumerable.Empty<NoteResponse>()
-                        });
-                    }
+                        Success = false,
+                        Message = "Note not found",
+                        Data = null
+                    });
                 }
             }
             catch (SqlException)
@@ -342,16 +431,28 @@ namespace FunDooNotes.Controllers
                     Data = null
                 });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return StatusCode(500, new ResponseModel<string>
                 {
                     Success = false,
-                    Message = "An error occurred.",
+                    Message = "An error occurred." + ex.Message,
                     Data = null
                 });
             }
         }
+
+        // Method to check if two notes are different
+        private bool IsNoteDifferent(NoteResponse note1, NoteResponse note2)
+        {
+            // Compare relevant properties to determine if the notes are different
+            return note1.Title != note2.Title ||
+                   note1.Description != note2.Description ||
+                   note1.Colour != note2.Colour ||
+                   note1.IsArchived != note2.IsArchived ||
+                   note1.IsDeleted != note2.IsDeleted;
+        }
+
 
 
         [Authorize]
@@ -363,15 +464,56 @@ namespace FunDooNotes.Controllers
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 int userId = Convert.ToInt32(userIdClaim);
 
+                // Fetch all notes from cache
+                var cacheKey = $"User_{userId}_Notes";
+                var cachedNotes = await _distributedCache.GetAsync(cacheKey);
+                Dictionary<int, NoteResponse> notes;
+
+                if (cachedNotes != null)
+                {
+                    // Deserialize cached notes
+                    notes = JsonSerializer.Deserialize<Dictionary<int, NoteResponse>>(cachedNotes);
+
+                    // Check if the note exists in cache
+                    if (notes.ContainsKey(NoteId))
+                    {
+                        // Remove the note from GetAllNotes cache
+                        var getAllNotesCacheKey = $"Notes_{userId}";
+                        await _distributedCache.RemoveAsync(getAllNotesCacheKey);
+
+                        // Update the archive status of the note
+                        var note = notes[NoteId];
+                        bool originalArchivedStatus = note.IsDeleted;
+                        note.IsDeleted = !note.IsArchived; // Toggle the archive status
+
+                        // Cache the updated notes
+                        var options = new DistributedCacheEntryOptions();
+                        await _distributedCache.SetAsync(cacheKey, JsonSerializer.SerializeToUtf8Bytes(notes), options);
+
+                        // Return success response
+                        string message = note.IsDeleted ? "Note Archived successfully" : "Note UnArchived successfully";
+                        return Ok(new ResponseModel<string>
+                        {
+                            StatusCode = 200,
+                            Message = message,
+                            Data = null
+                        });
+                    }
+                }
+
+                // If the note is not found in cache or cache itself is not available, proceed to fetch from the service layer
                 var result = await _noteServiceBL.IsArchivedAsync(userId, NoteId);
 
-                // Check if the note was moved to trash or restored
-                string message = result ? "Note Archived successfully" : "Note UnArchived successfully";
+                // Invalidate the cache for GetAllNotes
+                var getAllNotesKey = $"Notes_{userId}";
+                await _distributedCache.RemoveAsync(getAllNotesKey);
 
+                // Return success response
+                string responseMessage = result ? "Note Archived successfully" : "Note UnArchived successfully";
                 return Ok(new ResponseModel<string>
                 {
                     StatusCode = 200,
-                    Message = message,
+                    Message = responseMessage,
                     Data = null
                 });
             }
@@ -406,24 +548,65 @@ namespace FunDooNotes.Controllers
 
 
 
-
         [Authorize]
         [HttpPatch("MoveToTrash")]
-        public async Task<IActionResult> MoveToTrashAsync(int NoteId)
+        public async Task<IActionResult> MoveToTrashAsync(int noteId)
         {
             try
             {
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
                 int userId = Convert.ToInt32(userIdClaim);
 
-                var result = await _noteServiceBL.MoveToTrashAsync(userId, NoteId);
+                // Fetch all notes from cache
+                var cacheKey = $"User_{userId}_Notes";
+                var cachedNotes = await _distributedCache.GetAsync(cacheKey);
+                Dictionary<int, NoteResponse> notes;
 
-                string message = result ? "Note Trashed successfully" : "Note Untrashed successfully";
+                if (cachedNotes != null)
+                {
+                    // Deserialize cached notes
+                    notes = JsonSerializer.Deserialize<Dictionary<int, NoteResponse>>(cachedNotes);
 
+                    // Check if the note exists in cache
+                    if (notes.ContainsKey(noteId))
+                    {
+                        // Remove the note from GetAllNotes cache
+                        var getAllNotesCacheKey = $"Notes_{userId}";
+                        await _distributedCache.RemoveAsync(getAllNotesCacheKey);
+
+                        // Update the deleted status of the note
+                        var note = notes[noteId];
+                        bool originalDeletedStatus = note.IsDeleted;
+                        note.IsDeleted = !note.IsDeleted; // Toggle the deleted status
+
+                        // Cache the updated notes
+                        var options = new DistributedCacheEntryOptions();
+                        await _distributedCache.SetAsync(cacheKey, JsonSerializer.SerializeToUtf8Bytes(notes), options);
+
+                        // Return success response
+                        string message = note.IsDeleted ? "Note moved to trash successfully" : "Note restored successfully";
+                        return Ok(new ResponseModel<string>
+                        {
+                            StatusCode = 200,
+                            Message = message,
+                            Data = null
+                        });
+                    }
+                }
+
+                // If the note is not found in cache or cache itself is not available, proceed to fetch from the service layer
+                var result = await _noteServiceBL.MoveToTrashAsync(userId, noteId);
+
+                // Invalidate the cache for GetAllNotes
+                var getAllNotesKey = $"Notes_{userId}";
+                await _distributedCache.RemoveAsync(getAllNotesKey);
+
+                // Return success response
+                string responseMessage = result ? "Note moved to trash successfully" : "Note restored successfully";
                 return Ok(new ResponseModel<string>
                 {
-
-                    Message = message,
+                    StatusCode = 200,
+                    Message = responseMessage,
                     Data = null
                 });
             }
@@ -441,20 +624,21 @@ namespace FunDooNotes.Controllers
                 return StatusCode(500, new ResponseModel<string>
                 {
                     Success = false,
-                    Message = "An error occurred while Trashing note in database.",
+                    Message = "An error occurred while trashing note in the database.",
                     Data = null
                 });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, new ResponseModel<string>
                 {
                     Success = false,
-                    Message = "An error occurred while Trashing the Note",
+                    Message = "An error occurred while trashing the note.",
                     Data = null
                 });
             }
         }
+
 
     }
 
