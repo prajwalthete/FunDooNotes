@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net" Version="0.1.0" />
+    <PackageReference Include="Confluent.Kafka" Version="2.3.0" />
+    <PackageReference Include="Confluent.SchemaRegistry" Version="2.3.0" />
     <PackageReference Include="Dapper" Version="2.1.35" />
     <PackageReference Include="DocuSign.eSign.dll" Version="6.8.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.2" />

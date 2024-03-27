@@ -1,6 +1,8 @@
-﻿using Dapper;
+﻿using Confluent.Kafka;
+using Dapper;
 using ModelLayer.Models;
 using ModelLayer.Models.Note;
+using Newtonsoft.Json;
 using RepositoryLayer.Context;
 using RepositoryLayer.Entities;
 using RepositoryLayer.GlobleExceptionhandler;
@@ -16,88 +18,140 @@ namespace RepositoryLayer.Services
         private readonly DapperContext _Context;
         private readonly IAuthService _authService;
         private readonly IEmailRL _emailService;
+        private readonly IProducer<string, string> _producer;
+        private readonly IConsumer<string, string> _consumer;
 
-        public UserRegistrationRL(DapperContext context, IAuthService authService, IEmailRL emailService)
+
+        public UserRegistrationRL(DapperContext context, IAuthService authService, IEmailRL emailService, IProducer<string, string> producer, IConsumer<string, string> consumer)
         {
             _Context = context;
             _authService = authService;
             _emailService = emailService;
+            _producer = producer;
+            _consumer = consumer;
         }
 
-        public async Task<bool> RegisterUser(UserRegistrationModel userRegModel)
+
+        public async Task<bool> RegisterUser(UserRegistrationModel userRegistrationDto)
         {
 
-            var parametersToCheckEmailIsValid = new DynamicParameters();
-            parametersToCheckEmailIsValid.Add("Email", userRegModel.Email, DbType.String);
-
-            var querytoCheckEmailIsNotDuplicate = @"
-                SELECT COUNT(*)
-                FROM Users
-                WHERE Email = @Email;
-            ";
-
-
-            var query = @"
-                          INSERT INTO Users (FirstName, LastName, Email, Password)
-                          VALUES (@FirstName, @LastName, @Email, @Password);
-                        ";
-
-            var parameters = new DynamicParameters();
-            parameters.Add("FirstName", userRegModel.FirstName, DbType.String);
-            parameters.Add("LastName", userRegModel.LastName, DbType.String);
-
-            //Check Emailformat Using Regex
-            if (!IsValidEmail(userRegModel.Email))
+            if (!IsValidEmail(userRegistrationDto.Email))
             {
                 throw new InvalidEmailFormatException("Invalid email format");
             }
 
-            parameters.Add("Email", userRegModel.Email, DbType.String);
+            // Hash the password
+            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(userRegistrationDto.Password);
 
-            //convert Plain Password into crytpographic String 
-            string hashedPassword = BCrypt.Net.BCrypt.HashPassword(userRegModel.Password);
+            // Prepare parameters for database query
+            var parameters = new DynamicParameters();
+            parameters.Add("firstName", userRegistrationDto.FirstName, DbType.String);
+            parameters.Add("lastName", userRegistrationDto.LastName, DbType.String);
+            parameters.Add("email", userRegistrationDto.Email, DbType.String);
+            parameters.Add("password", hashedPassword, DbType.String);
 
-            parameters.Add("Password", hashedPassword, DbType.String);
+            // SQL query to insert user into the database and retrieve the generated UserId
+            var insertQuery = @"
+                             INSERT INTO Users (FirstName, LastName, Email, Password)
+                             VALUES (@firstName, @lastName, @email, @password);
+                             SELECT CAST(SCOPE_IDENTITY() as int);";
 
+            // Create a database connection
             using (var connection = _Context.CreateConnection())
             {
-
-                // Check if table exists
+                // Check if the Users table exists, create it if necessary
                 bool tableExists = await connection.QueryFirstOrDefaultAsync<bool>(
-                    @"
-                    SELECT COUNT(*)
-                    FROM INFORMATION_SCHEMA.TABLES
-                    WHERE TABLE_NAME = 'Users';
-                     "
-                );
+                    "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Users'");
 
-                // Create table if it doesn't exist
                 if (!tableExists)
                 {
-                    await connection.ExecuteAsync(
-                                                    @" CREATE TABLE Users (
-                                                             UserId INT IDENTITY(1, 1) PRIMARY KEY,
-                                                             FirstName NVARCHAR(100) NOT NULL,
-                                                             LastName NVARCHAR(100) NOT NULL,
-                                                             Email NVARCHAR(100) UNIQUE NOT NULL,
-                                                             Password NVARCHAR(100) UNIQUE NOT NULL )"
-                                                 );
+                    await connection.ExecuteAsync(@"
+                CREATE TABLE Users (
+                    UserId INT PRIMARY KEY IDENTITY(1,1),
+                    FirstName VARCHAR(100) NOT NULL,
+                    LastName VARCHAR(100) NOT NULL,
+                    Email VARCHAR(100) UNIQUE NOT NULL,
+                    Password VARCHAR(100) NOT NULL
+                );");
                 }
 
-                // Check if email already exists
-                bool emailExists = await connection.QueryFirstOrDefaultAsync<bool>(querytoCheckEmailIsNotDuplicate, parametersToCheckEmailIsValid);
+                // Check if the email already exists in the database
+                int emailExistsCount = await connection.QueryFirstOrDefaultAsync<int>(
+                    "SELECT COUNT(*) FROM Users WHERE Email = @email", parameters);
 
-                if (emailExists)
+                if (emailExistsCount > 0)
                 {
                     throw new DuplicateEmailException("Email address is already in use");
                 }
 
-                // Insert new user
-                await connection.ExecuteAsync(query, parameters);
-            }
+                // Insert the user into the database and retrieve the result
+                bool insertionResult = await connection.QuerySingleAsync<bool>(insertQuery, parameters);
 
-            return true;
+                if (!insertionResult)
+                {
+                    throw new Exception("Error occurred while inserting data into the database");
+                }
+
+                // Produce user registration event to Kafka topic
+                var userEventData = new
+                {
+                    FirstName = userRegistrationDto.FirstName,
+                    LastName = userRegistrationDto.LastName,
+                    Email = userRegistrationDto.Email
+                };
+                await _producer.ProduceAsync("user-registration-topic", new Message<string, string> { Value = JsonConvert.SerializeObject(userEventData) });
+
+                // Subscribe to the Kafka topic for sending registration emails
+                _consumer.Subscribe("user-registration-topic");
+
+                // Handle incoming Kafka messages to send registration emails asynchronously
+                _ = Task.Run(async () =>
+                {
+                    while (true)
+                    {
+                        try
+                        {
+                            var message = _consumer.Consume();
+
+                            // Extract user registration data from Kafka message
+                            var eventData = JsonConvert.DeserializeObject<UserRegistrationModel>(message.Value);
+
+                            // Prepare email body
+                            var htmlBody = $@"
+                        <!DOCTYPE html>
+                        <html lang='en'>
+                        <head>
+                            <meta charset='UTF-8'>
+                            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                            <title>Registration Successful</title>
+                        </head>
+                        <body>
+                            <h1>Registration Successful</h1>
+                            <p>Hello, {eventData.FirstName}</p>
+                            <p>Your registration was successful. You can now login to your account.</p>
+                            <p>Best regards,<br>Your Application Team</p>
+                        </body>
+                        </html>";
+
+                            // Send registration email
+                            await _emailService.SendEmailAsync(eventData.Email, "Registration Successful", htmlBody);
+
+                            // Log success message
+                            // Console.WriteLine($"Email sent for user registration: {eventData.Email}");
+                        }
+                        catch (ConsumeException e)
+                        {
+                            Console.WriteLine($"Error occurred while consuming Kafka message: {e.Error.Reason}");
+                            throw; // Rethrow
+                        }
+                    }
+                });
+
+                // Return the result of the database insertion
+                return insertionResult;
+            }
         }
+
 
 
         public async Task<string> UserLogin(UserLoginModel userLogin)

@@ -1,5 +1,6 @@
 using BusinessLayer.Interfaces;
 using BusinessLayer.Services;
+using Confluent.Kafka;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Options;
@@ -32,6 +33,60 @@ builder.Services.AddSingleton<IDistributedCache>(sp =>
     var redisConfiguration = builder.Configuration.GetSection("Redis")["ConnectionString"];
     return new CacheService(redisConfiguration);
 });
+
+
+
+// Register Kafka producer config
+builder.Services.AddSingleton<ProducerConfig>(sp =>
+{
+    // Configure Kafka producer properties
+    return new ProducerConfig
+    {
+        BootstrapServers = "localhost:9092", // Kafka broker address
+        ClientId = "my-producer" // Client ID for the producer
+    };
+});
+
+// Register Kafka consumer config
+builder.Services.AddSingleton<ConsumerConfig>(sp =>
+{
+    // Configure Kafka consumer properties
+    var consumerConfig = new ConsumerConfig
+    {
+        BootstrapServers = "localhost:9092", // Kafka broker address
+        GroupId = "my-consumer-group", // Consumer group ID
+        AutoOffsetReset = AutoOffsetReset.Earliest, // Reset offset to beginning
+                                                    // Adjust the maximum poll interval (in milliseconds) to a higher value
+                                                    // MaxPollIntervalMs = 600000 // Set to 10 minutes (600,000 milliseconds)
+    };
+
+    return consumerConfig;
+});
+
+// Register Kafka producer
+builder.Services.AddSingleton(sp =>
+{
+    // Retrieve the registered ProducerConfig service
+    var producerConfig = sp.GetRequiredService<ProducerConfig>();
+
+    // Build the producer using the retrieved config
+    return new ProducerBuilder<string, string>(producerConfig).Build();
+});
+
+// Register Kafka consumer
+builder.Services.AddSingleton(sp =>
+{
+    // Retrieve the registered ConsumerConfig service
+    var consumerConfig = sp.GetRequiredService<ConsumerConfig>();
+
+    // Build the consumer using the retrieved config
+    return new ConsumerBuilder<string, string>(consumerConfig).Build();
+});
+
+
+
+
+
 
 
 // Get the secret key from the configuration
@@ -105,6 +160,12 @@ builder.Services.AddSwaggerGen(c =>
 
 
 var app = builder.Build();
+
+// Set up Kafka producer and consumer
+var producer = new ProducerBuilder<string, string>(app.Services.GetRequiredService<ProducerConfig>()).Build();
+var consumer = new ConsumerBuilder<string, string>(app.Services.GetRequiredService<ConsumerConfig>()).Build();
+
+
 
 // Enable middleware to serve generated Swagger as JSON endpoint
 app.UseSwagger();
