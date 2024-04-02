@@ -102,50 +102,50 @@ namespace RepositoryLayer.Services
                 await _producer.ProduceAsync("user-registration-topic", new Message<string, string> { Value = JsonConvert.SerializeObject(userEventData) });
 
                 // Subscribe to the Kafka topic for sending registration emails
-                _consumer.Subscribe("user-registration-topic");
+                //_consumer.Subscribe("user-registration-topic");
 
-                // Handle incoming Kafka messages to send registration emails asynchronously
-                _ = Task.Run(async () =>
-                {
-                    while (true)
-                    {
-                        try
-                        {
-                            var message = _consumer.Consume();
+                //// Handle incoming Kafka messages to send registration emails asynchronously
+                //_ = Task.Run(async () =>
+                //{
+                //    while (true)
+                //    {
+                //        try
+                //        {
+                //            var message = _consumer.Consume();
 
-                            // Extract user registration data from Kafka message
-                            var eventData = JsonConvert.DeserializeObject<UserRegistrationModel>(message.Value);
+                //            // Extract user registration data from Kafka message
+                //            var eventData = JsonConvert.DeserializeObject<UserRegistrationModel>(message.Value);
 
-                            // Prepare email body
-                            var htmlBody = $@"
-                        <!DOCTYPE html>
-                        <html lang='en'>
-                        <head>
-                            <meta charset='UTF-8'>
-                            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                            <title>Registration Successful</title>
-                        </head>
-                        <body>
-                            <h1>Registration Successful</h1>
-                            <p>Hello, {eventData.FirstName}</p>
-                            <p>Your registration was successful. You can now login to your account.</p>
-                            <p>Best regards,<br>Your Application Team</p>
-                        </body>
-                        </html>";
+                //            // Prepare email body
+                //            var htmlBody = $@"
+                //        <!DOCTYPE html>
+                //        <html lang='en'>
+                //        <head>
+                //            <meta charset='UTF-8'>
+                //            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                //            <title>Registration Successful</title>
+                //        </head>
+                //        <body>
+                //            <h1>Registration Successful</h1>
+                //            <p>Hello, {eventData.FirstName}</p>
+                //            <p>Your registration was successful. You can now login to your account.</p>
+                //            <p>Best regards,<br>Your Application Team</p>
+                //        </body>
+                //        </html>";
 
-                            // Send registration email
-                            await _emailService.SendEmailAsync(eventData.Email, "Registration Successful", htmlBody);
+                //            // Send registration email
+                //            await _emailService.SendEmailAsync(eventData.Email, "Registration Successful", htmlBody);
 
-                            // Log success message
-                            // Console.WriteLine($"Email sent for user registration: {eventData.Email}");
-                        }
-                        catch (ConsumeException e)
-                        {
-                            Console.WriteLine($"Error occurred while consuming Kafka message: {e.Error.Reason}");
-                            throw; // Rethrow
-                        }
-                    }
-                });
+                //            // Log success message
+                //            // Console.WriteLine($"Email sent for user registration: {eventData.Email}");
+                //        }
+                //        catch (ConsumeException e)
+                //        {
+                //            Console.WriteLine($"Error occurred while consuming Kafka message: {e.Error.Reason}");
+                //            throw; // Rethrow
+                ////        }
+                //    }
+                //});
 
                 // Return the result of the database insertion
                 return insertionResult;
