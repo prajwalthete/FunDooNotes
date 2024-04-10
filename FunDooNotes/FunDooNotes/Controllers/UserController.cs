@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using ModelLayer.Models;
 using ModelLayer.Models.Note;
@@ -11,6 +12,7 @@ namespace FunDooNotes.Controllers
 {
     [Route("api/user")]
     [ApiController]
+    [EnableCors]
     public class UserController : ControllerBase
     {
         private readonly IUserRegistrationBL _registrationBL;

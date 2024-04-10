@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Caching.Distributed;
@@ -13,6 +14,7 @@ namespace FunDooNotes.Controllers
 {
     [Route("api/note")]
     [ApiController]
+    [EnableCors]
     public class NoteController : ControllerBase
     {
         private readonly INoteServiceBL _noteServiceBL;

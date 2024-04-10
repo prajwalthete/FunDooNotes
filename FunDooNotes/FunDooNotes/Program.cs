@@ -36,6 +36,7 @@ builder.Services.AddSingleton<IDistributedCache>(sp =>
 
 
 
+
 // Register Kafka producer config
 builder.Services.AddSingleton<ProducerConfig>(sp =>
 {
@@ -83,7 +84,16 @@ builder.Services.AddSingleton(sp =>
     return new ConsumerBuilder<string, string>(consumerConfig).Build();
 });
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:4200", "https://localhost:7178")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
 
 
 
@@ -161,6 +171,8 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
+app.UseCors("AllowSpecificOrigin");
+
 // Set up Kafka producer and consumer
 var producer = new ProducerBuilder<string, string>(app.Services.GetRequiredService<ProducerConfig>()).Build();
 var consumer = new ConsumerBuilder<string, string>(app.Services.GetRequiredService<ConsumerConfig>()).Build();
@@ -180,8 +192,13 @@ app.UseSwaggerUI(c =>
     c.OAuthAppName("Swagger UI");
 });
 
+app.UseCors("AllowSpecificOrigin");
+
 // Configure the HTTP request pipeline
 app.UseHttpsRedirection();
+
+//app.UseCors("AllowOrigin");
+
 
 // Enable authentication middleware
 app.UseAuthentication();

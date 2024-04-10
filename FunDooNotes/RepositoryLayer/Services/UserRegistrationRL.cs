@@ -2,7 +2,6 @@
 using Dapper;
 using ModelLayer.Models;
 using ModelLayer.Models.Note;
-using Newtonsoft.Json;
 using RepositoryLayer.Context;
 using RepositoryLayer.Entities;
 using RepositoryLayer.GlobleExceptionhandler;
@@ -61,22 +60,25 @@ namespace RepositoryLayer.Services
             {
                 // Check if the Users table exists, create it if necessary
                 bool tableExists = await connection.QueryFirstOrDefaultAsync<bool>(
+
                     "SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Users'");
 
                 if (!tableExists)
                 {
                     await connection.ExecuteAsync(@"
-                CREATE TABLE Users (
-                    UserId INT PRIMARY KEY IDENTITY(1,1),
-                    FirstName VARCHAR(100) NOT NULL,
-                    LastName VARCHAR(100) NOT NULL,
-                    Email VARCHAR(100) UNIQUE NOT NULL,
-                    Password VARCHAR(100) NOT NULL
-                );");
+                                                 CREATE TABLE Users (
+                                                                 UserId INT PRIMARY KEY IDENTITY(1,1),
+                                                                 FirstName VARCHAR(100) NOT NULL,
+                                                                 LastName VARCHAR(100) NOT NULL,
+                                                                 Email VARCHAR(100) UNIQUE NOT NULL,
+                                                                 Password VARCHAR(100) NOT NULL
+                                                                 );"
+                                                  );
                 }
 
                 // Check if the email already exists in the database
                 int emailExistsCount = await connection.QueryFirstOrDefaultAsync<int>(
+
                     "SELECT COUNT(*) FROM Users WHERE Email = @email", parameters);
 
                 if (emailExistsCount > 0)
@@ -99,7 +101,7 @@ namespace RepositoryLayer.Services
                     LastName = userRegistrationDto.LastName,
                     Email = userRegistrationDto.Email
                 };
-                await _producer.ProduceAsync("user-registration-topic", new Message<string, string> { Value = JsonConvert.SerializeObject(userEventData) });
+                // await _producer.ProduceAsync("user-registration-topic", new Message<string, string> { Value = JsonConvert.SerializeObject(userEventData) });
 
                 // Subscribe to the Kafka topic for sending registration emails
                 //_consumer.Subscribe("user-registration-topic");
@@ -190,7 +192,6 @@ namespace RepositoryLayer.Services
 
         public bool IsValidEmail(string email)
         {
-            // string pattern = @"^[a-zA-Z]([\w]|\.[\w]+)\@[a-zA-Z0-9]+\.[a-z]{2,3}$";
             string pattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
             return Regex.IsMatch(email, pattern);
         }
