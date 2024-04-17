@@ -26,46 +26,6 @@ namespace FunDooNotes.Controllers
             _distributedCache = distributedCache;
         }
 
-        //[Authorize]
-        //[HttpPost]
-        //public async Task<IActionResult> AddNote(CreateNoteRequest createNoteRequest)
-        //{
-        //    try
-        //    {
-        //        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //        int userId = Convert.ToInt32(userIdClaim);
-
-        //        // Create the note and get the list of all notes
-        //        var allNotes = await _noteServiceBL.CreateNoteAndGetNotesAsync(createNoteRequest, userId);
-
-        //        // Update cache for GetAllNotes method
-        //        var getAllNotesCacheKey = $"Notes_{userId}";
-        //        var options = new DistributedCacheEntryOptions();
-        //        await _distributedCache.SetAsync(getAllNotesCacheKey, JsonSerializer.SerializeToUtf8Bytes(allNotes), options);
-
-        //        // Prepare response with the updated list of all notes
-        //        var response = new ResponseModel<IEnumerable<NoteResponse>>
-        //        {
-        //            Message = "Note Created Successfully",
-        //            Data = allNotes
-        //        };
-
-        //        return Ok(response);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        var response = new ResponseModel<IEnumerable<NoteResponse>>
-        //        {
-        //            Success = false,
-        //            Message = ex.Message,
-        //            Data = null // Ensure Data is null in case of error
-        //        };
-        //        return Ok(response);
-        //    }
-        //}
-
-
-
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddNote(CreateNoteRequest createNoteRequest)
@@ -73,19 +33,24 @@ namespace FunDooNotes.Controllers
             try
             {
                 var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
                 int userId = Convert.ToInt32(userIdClaim);
 
-                var note = await _noteServiceBL.CreateNoteAndGetNotesAsync(createNoteRequest, userId);
+                // Create the note and get the list of all notes
+                var allNotes = await _noteServiceBL.CreateNoteAndGetNotesAsync(createNoteRequest, userId);
 
+                // Update cache for GetAllNotes method
+                var getAllNotesCacheKey = $"Notes_{userId}";
+                var options = new DistributedCacheEntryOptions();
+                await _distributedCache.SetAsync(getAllNotesCacheKey, JsonSerializer.SerializeToUtf8Bytes(allNotes), options);
+
+                // Prepare response with the updated list of all notes
                 var response = new ResponseModel<IEnumerable<NoteResponse>>
                 {
                     Message = "Note Created Successfully",
-                    Data = note
+                    Data = allNotes
                 };
+
                 return Ok(response);
-
-
             }
             catch (Exception ex)
             {
@@ -93,12 +58,47 @@ namespace FunDooNotes.Controllers
                 {
                     Success = false,
                     Message = ex.Message,
-
+                    Data = null // Ensure Data is null in case of error
                 };
                 return Ok(response);
-
             }
         }
+
+
+
+        //[Authorize]
+        //[HttpPost]
+        //public async Task<IActionResult> AddNote(CreateNoteRequest createNoteRequest)
+        //{
+        //    try
+        //    {
+        //        var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        //        int userId = Convert.ToInt32(userIdClaim);
+
+        //        var note = await _noteServiceBL.CreateNoteAndGetNotesAsync(createNoteRequest, userId);
+
+        //        var response = new ResponseModel<IEnumerable<NoteResponse>>
+        //        {
+        //            Message = "Note Created Successfully",
+        //            Data = note
+        //        };
+        //        return Ok(response);
+
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        var response = new ResponseModel<IEnumerable<NoteResponse>>
+        //        {
+        //            Success = false,
+        //            Message = ex.Message,
+
+        //        };
+        //        return Ok(response);
+
+        //    }
+        //}
 
 
         [Authorize]
@@ -292,7 +292,7 @@ namespace FunDooNotes.Controllers
                     notes = JsonSerializer.Deserialize<IEnumerable<NoteResponse>>(cachedNotes);
 
                     // Filter out archived notes
-                    notes = notes.Where(note => !note.IsDeleted && !note.IsDeleted);
+                    //notes = notes.Where(note => !note.IsDeleted && !note.IsArchived);
 
                     return Ok(new ResponseModel<IEnumerable<NoteResponse>>
                     {
@@ -308,7 +308,7 @@ namespace FunDooNotes.Controllers
                     if (notes != null && notes.Any())
                     {
                         // Filter out archived notes
-                        notes = notes.Where(note => !note.IsDeleted);
+                        // notes = notes.Where(note => !note.IsDeleted);
 
                         // Cache the fetched notes
                         var options = new DistributedCacheEntryOptions();
@@ -645,7 +645,6 @@ namespace FunDooNotes.Controllers
     }
 
 }
-
 
 
 

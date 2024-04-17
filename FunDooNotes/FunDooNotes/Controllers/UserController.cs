@@ -16,12 +16,16 @@ namespace FunDooNotes.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRegistrationBL _registrationBL;
+        private readonly ILogger<UserController> _logger;
 
-        public UserController(IUserRegistrationBL registrationBL)
+        public UserController(IUserRegistrationBL registrationBL, ILogger<UserController> logger)
         {
             _registrationBL = registrationBL;
-
+            _logger = logger;
+            _logger.LogDebug("Nlog is integrated to User Controller");
         }
+
+
 
         [HttpPost]
         public async Task<IActionResult> UserRegistration(UserRegistrationModel user)
@@ -29,6 +33,7 @@ namespace FunDooNotes.Controllers
             try
             {
                 var addedUser = await _registrationBL.RegisterUser(user);
+
                 if (addedUser)
                 {
                     var response = new ResponseModel<UserRegistrationModel>
@@ -40,13 +45,14 @@ namespace FunDooNotes.Controllers
                 }
                 else
                 {
-
                     return BadRequest("invalid input");
                 }
             }
             catch (Exception ex)
             {
-                if (ex is DuplicateEmailException)
+                _logger.LogError(ex.Message);
+
+                if (ex is DuplicateEmailException || ex is InvalidEmailFormatException)
                 {
                     var response = new ResponseModel<UserRegistrationModel>
                     {
@@ -54,18 +60,6 @@ namespace FunDooNotes.Controllers
                         Message = ex.Message
                     };
                     return BadRequest(response);
-
-
-                }
-                else if (ex is InvalidEmailFormatException)
-                {
-                    var response = new ResponseModel<UserRegistrationModel>
-                    {
-                        Success = false,
-                        Message = ex.Message
-                    };
-                    return BadRequest(response);
-
                 }
                 else
                 {
@@ -73,7 +67,6 @@ namespace FunDooNotes.Controllers
                 }
             }
         }
-
         [HttpPost("login")]
         public async Task<IActionResult> UserLogin(UserLoginModel userLogin)
         {

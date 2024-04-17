@@ -24,7 +24,7 @@ namespace FunDooNotes.Controllers
 
 
         [Authorize]
-        [HttpPost]
+        [HttpPost("{NoteId}")]
         public async Task<IActionResult> AddCollaborator(int NoteId, [FromBody] CollaborationRequestModel request)
         {
             try
@@ -99,7 +99,9 @@ namespace FunDooNotes.Controllers
 
 
         [Authorize]
-        [HttpDelete("RemoveCollaborator")]
+        // [HttpDelete("RemoveCollaborator")]
+        [HttpDelete("{NoteId}")]
+
         public async Task<IActionResult> RemoveCollaborator(int NoteId, [FromBody] CollaborationRequestModel request)
         {
             try

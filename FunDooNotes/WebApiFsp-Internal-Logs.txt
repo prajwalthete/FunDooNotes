@@ -1,0 +1,126 @@
+2024-04-15 08:53:36.5860 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-15 08:53:36.6154 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-15 08:53:36.6154 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-15 08:53:36.6319 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-15 08:53:36.6547 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-15 08:53:36.6803 Info Configuration initialized.
+2024-04-16 10:44:20.5071 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-16 10:44:20.5746 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-16 10:44:20.5746 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-16 10:44:20.5924 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-16 10:44:20.6141 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-16 10:44:20.6359 Info Configuration initialized.
+2024-04-16 10:45:11.6313 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-16 10:45:11.6621 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-16 10:45:11.6621 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-16 10:45:11.6746 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-16 10:45:11.6933 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-16 10:45:11.7135 Info Configuration initialized.
+2024-04-17 10:43:34.3832 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 10:43:34.5396 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 10:43:34.6536 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 10:43:35.0565 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 10:43:35.2212 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 10:43:35.5569 Info Configuration initialized.
+2024-04-17 10:50:35.1263 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 10:50:35.1462 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 10:50:35.1462 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 10:50:35.1616 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 10:50:35.1779 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 10:50:35.1965 Info Configuration initialized.
+2024-04-17 10:51:15.3887 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 10:51:15.4106 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 10:51:15.4106 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 10:51:15.4225 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 10:51:15.4392 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 10:51:15.4580 Info Configuration initialized.
+2024-04-17 10:55:35.9418 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 10:55:35.9621 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 10:55:35.9621 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 10:55:35.9753 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 10:55:35.9954 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 10:55:36.0195 Info Configuration initialized.
+2024-04-17 11:35:25.8987 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 11:35:25.9827 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 11:35:26.0005 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 11:35:26.0489 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 11:35:26.1169 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 11:35:26.2249 Info Configuration initialized.
+2024-04-17 11:58:26.6423 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 11:58:26.6618 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 11:58:26.6618 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 11:58:26.6755 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 11:58:26.6913 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 11:58:26.7104 Info Configuration initialized.
+2024-04-17 12:06:50.9678 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 12:06:51.0048 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 12:06:51.0048 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 12:06:51.0233 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 12:06:51.0551 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 12:06:51.0851 Info Configuration initialized.
+2024-04-17 12:31:44.9310 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 12:31:44.9531 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 12:31:44.9531 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 12:31:44.9531 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 12:31:44.9801 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 12:31:44.9976 Info Configuration initialized.
+2024-04-17 12:36:30.1076 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 12:36:30.1279 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 12:36:30.1279 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 12:36:30.1411 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 12:36:30.1574 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 12:36:30.1775 Info Configuration initialized.
+2024-04-17 12:41:23.0525 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 12:41:23.0718 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 12:41:23.0718 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 12:41:23.0860 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 12:41:23.1053 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 12:41:23.1290 Info Configuration initialized.
+2024-04-17 12:44:21.3898 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 12:44:21.4211 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 12:44:21.4211 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 12:44:21.4211 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 12:44:21.4563 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 12:44:21.4869 Info Configuration initialized.
+2024-04-17 12:50:34.2827 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 12:50:34.3150 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 12:50:34.3150 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 12:50:34.3150 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 12:50:34.3510 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 12:50:34.3766 Info Configuration initialized.
+2024-04-17 12:52:45.7702 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 12:52:45.7954 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 12:52:45.7967 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 12:52:45.7967 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 12:52:45.8259 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 12:52:45.8446 Info Configuration initialized.
+2024-04-17 12:54:48.3425 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 12:54:48.6346 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 12:54:48.6346 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 12:54:48.7304 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 12:54:49.1309 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 12:54:49.1814 Info Configuration initialized.
+2024-04-17 13:00:19.0400 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 13:00:19.0755 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 13:00:19.0773 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 13:00:19.0773 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 13:00:19.1147 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 13:00:19.1378 Info Configuration initialized.
+2024-04-17 13:03:59.4390 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 13:03:59.4627 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 13:03:59.4627 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 13:03:59.4731 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 13:03:59.4918 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 13:03:59.5125 Info Configuration initialized.
+2024-04-17 13:04:58.5252 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 13:04:58.5454 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 13:04:58.5465 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 13:04:58.5465 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 13:04:58.5746 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 13:04:58.5946 Info Configuration initialized.
+2024-04-17 13:11:20.9703 Info Registered target NLog.Targets.FileTarget(Name=allfile)
+2024-04-17 13:11:20.9937 Info Registered target NLog.Targets.FileTarget(Name=ownFile-web)
+2024-04-17 13:11:20.9937 Info Registered target NLog.Targets.ConsoleTarget(Name=lifetimeConsole)
+2024-04-17 13:11:21.0090 Info NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c. File version: 5.2.8.2366. Product version: 5.2.8+f586f1341c46fa38aaaff4c641e7f0fa7e813943. GlobalAssemblyCache: False
+2024-04-17 13:11:21.0260 Info Validating config: TargetNames=allfile, lifetimeConsole, ownFile-web, ConfigItems=71, FilePath=E:\.NET WORKSPACE-1\Websites1\2023\2024\GOOGLE-KEEP-CLONE\FunDooNotes\FunDooNotes\FunDooNotes\bin\Debug\net8.0\NLog.config
+2024-04-17 13:11:21.0459 Info Configuration initialized.

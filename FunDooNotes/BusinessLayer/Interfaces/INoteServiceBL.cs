@@ -13,5 +13,7 @@ namespace BusinessLayer.Interfaces
         Task<NoteResponse> GetNoteByIdAsync(int NoteId, int UserId);
 
 
+
+
     }
 }

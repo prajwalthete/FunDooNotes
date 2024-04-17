@@ -11,6 +11,8 @@ namespace RepositoryLayer.Interfaces
         Task<bool> IsArchivedAsync(int UserId, int NoteId);
         Task<bool> MoveToTrashAsync(int UserId, int NoteId);
         Task<NoteResponse> GetNoteByIdAsync(int NoteId, int UserId);
+        // NEW 
+
 
     }
 }

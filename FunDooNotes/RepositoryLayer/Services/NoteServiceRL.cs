@@ -196,9 +196,16 @@ namespace RepositoryLayer.Services
 
         public async Task<IEnumerable<NoteResponse>> GetAllNoteAsync(int userId)
         {
-            var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId AND IsDeleted = 0 AND IsArchived = 0";
+            // var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId AND IsDeleted = 0 AND IsArchived = 0";
 
-            // var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId ";
+            var selectQuery = "SELECT * FROM Notes WHERE UserId = @UserId ";
+
+            //var selectQuery = @"SELECT DISTINCT N.*
+            //        FROM Notes N
+            //        LEFT JOIN Collaboration C ON N.NoteId = C.NoteId
+            //        WHERE N.UserId = @userId OR C.CollaboratorEmail = 
+            //            (SELECT Email FROM Users U WHERE U.UserId = @userId);
+            //        ";
 
 
 
@@ -332,7 +339,6 @@ namespace RepositoryLayer.Services
         }
     }
 }
-
 
 
 

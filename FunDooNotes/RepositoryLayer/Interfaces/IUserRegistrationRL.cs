@@ -13,7 +13,5 @@ namespace RepositoryLayer.Interfaces
 
         public Task<bool> ResetPassword(string NewPassword, int UserId);
 
-
-
     }
 }
